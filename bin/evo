@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'commander'
+require 'evo'
+
+program :version, Evo::VERSION
+program :description, 'Evo CMS'
+ 
+command :init do |c|
+  c.syntax = 'evo init [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.when_called do |args, options|
+    # Do something or c.when_called Evo::Commands::Init
+  end
+end
+
+command :migrate do |c|
+  c.syntax = 'evo migrate [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.when_called do |args, options|
+    # Do something or c.when_called Evo::Commands::Migrate
+  end
+end
+
