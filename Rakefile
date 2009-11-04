@@ -1,7 +1,7 @@
 
 $:.unshift 'lib'
-require 'evo'
 require 'rubygems'
+require 'evo'
 require 'rake'
 require 'echoe'
 
@@ -15,6 +15,11 @@ Echoe.new 'Evo', Evo::VERSION do |p|
   p.runtime_dependencies << 'formz'
   p.runtime_dependencies << 'tagz'
   p.runtime_dependencies << 'sinatra >=0.9.4'
-  p.runtime_dependencies << 'dm-more >=0.9.11'
+  p.runtime_dependencies << 'dm-core >=0.9.11'
+  p.runtime_dependencies << 'dm-migrations >=0.9.11'
+  p.runtime_dependencies << 'dm-timestamps >=0.9.11'
+  p.runtime_dependencies << 'dm-validations >=0.9.11'
+  p.runtime_dependencies << 'dm-serializer >=0.9.11'
+  p.runtime_dependencies << 'dm-types >=0.9.11'
   p.runtime_dependencies << 'dm-pager'
 end

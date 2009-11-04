@@ -21,4 +21,18 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
+$:.unshift '/Users/tjholowaychuk/Scripts/gems/rext/lib' 
+$:.unshift '/Users/tjholowaychuk/Scripts/gems/formz/lib' 
+
+require 'sinatra'
+require 'dm-core'
+require 'dm-migrations'
+require 'dm-timestamps'
+require 'dm-validations'
+require 'dm-serializer'
+require 'dm-pager'
+require 'dm-types'
+require 'haml'
+require 'formz'
+require 'tagz'
 require 'evo/version'
