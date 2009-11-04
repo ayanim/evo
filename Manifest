@@ -1,0 +1,12 @@
+History.md
+Rakefile
+Readme.md
+lib/evo.rb
+lib/evo/version.rb
+spec/GEM_spec.rb
+spec/spec.opts
+spec/spec_helper.rb
+tasks/docs.rake
+tasks/gemspec.rake
+tasks/spec.rake
+Manifest
