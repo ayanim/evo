@@ -1,11 +1,15 @@
 #!/usr/bin/env ruby
 
+$:.unshift File.dirname(__FILE__) + '/../lib' 
 require 'rubygems'
-require 'commander'
+require 'commander/import'
 require 'evo'
 
 program :version, Evo::VERSION
-program :description, 'Evo CMS'
+program :name, 'Evolution Content Management System'
+program :description, 'This executable is designed to assist existing Evolution
+    deployments, initialize new applications, install packages,
+    and much more.'
  
 command :init do |c|
   c.syntax = 'evo init [options]'
