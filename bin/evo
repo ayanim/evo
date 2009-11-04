@@ -11,25 +11,18 @@ program :description, 'This executable is designed to assist existing Evolution
     deployments, initialize new applications, install packages,
     and much more.'
  
-command :init do |c|
-  c.syntax = 'evo init [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
-  c.when_called do |args, options|
-    # Do something or c.when_called Evo::Commands::Init
+command :'db migrate' do |c|
+  c.syntax = 'evo db migrate [options]'
+  c.description = 'Auto-migrate the database (destroys data)'
+  c.action do |args, options|
+    
   end
 end
 
-command :migrate do |c|
-  c.syntax = 'evo migrate [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
-  c.when_called do |args, options|
-    # Do something or c.when_called Evo::Commands::Migrate
+command :'db upgrade' do |c|
+  c.syntax = 'evo db upgrade [options]'
+  c.description = 'Auto-upgrade the database (preserves data)'
+  c.action do |args, options|
+    
   end
 end
-
