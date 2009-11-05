@@ -2,15 +2,31 @@
 describe "system" do
   describe "get /:package/*" do
     it "should transfer a file when it is present" do
-      get '/foo/style.css'
+      get '/foo/foo.txt'
       last_response.should be_ok
-      last_response.should have_content_type('text/css')
-      last_response.body.should match('super cool')
+      last_response.should have_content_type('text/plain')
+      last_response.body.should include('super cool')
     end
     
     it "should pass when not present" do
       get '/foo/something.png'
       last_response.should_not be_ok
+    end
+  end
+  
+  describe "get /:package/*.css" do
+    it "should pass regular css through" do
+      get '/foo/style.css'
+      last_response.should be_ok
+      last_response.should have_content_type('text/css')
+      last_response.body.should include('body {')
+    end
+    
+    it "should compile sass files" do
+      get '/foo/print.sass'
+      last_response.should be_ok
+      last_response.should have_content_type('text/css')
+      last_response.body.should include('body {')
     end
   end
 end
