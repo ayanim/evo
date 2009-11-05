@@ -3,6 +3,53 @@
 
   Ruby Content Management System
   
+## Goals
+
+  * True modularity
+  * Background workers
+  * Unified APIs
+  * Rich Interaction
+  * Super-sexy default theme
+  * Pluggable themes
+  
+## Modularity
+
+Evolution employs the concept of modularity via "Packages". A package
+is simply a directory structure which is familiar to Evolution. Each page
+may contain the following:
+
+  * Specs
+  * Routes
+  * Public Files
+  * Assiting Libraries
+
+Local packages (in your app) have the ability to override core functionality
+without altering core. This same practice may be used with themes as well,
+so if you do not like the image 'themes/chrome/images/add.png' simply create
+a new image with the same path structure in your local application.
+
+## Background Workers
+
+Evolution plans on providing core background worker functionality,
+supported through the Moneta library so that several key/value stores
+may be used to queue jobs.
+
+## Unified APIs
+
+A major problem with Rails applications, and others a-like, is simply
+that everyone has their own way of doing things. Although this is necessary
+in some situations, large content management systems such as Drupal have proven
+that when the community comes together on a single unified project the results
+are astonishing.
+
+By everyone working together on these APIs we can assure that each package
+will work flawlessly with core, ideally with no configuration at all (or provided via UI).
+
+## Rich Interaction
+
+One of Evolution's primary goal is to be rich with user interaction and usibility. This 
+includes functionality such as inline searching, editing, and batch processing.
+  
 ## Libraries
 
 Below are the main libraries currently utilized by Evolution.
