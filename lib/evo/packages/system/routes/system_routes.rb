@@ -1,4 +1,11 @@
 
+get '/:package/*.css' do |name, path|
+  require_package name
+  require_package_path :public / "#{path}.sass"
+  content_type :css
+  sass File.read(@path)
+end
+
 ##
 # Transfer :package specific public file.
 

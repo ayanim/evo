@@ -23,7 +23,7 @@ describe "system" do
     end
     
     it "should compile sass files" do
-      get '/foo/print.sass'
+      get '/foo/print.css'
       last_response.should be_ok
       last_response.should have_content_type('text/css')
       last_response.body.should include('body {')
