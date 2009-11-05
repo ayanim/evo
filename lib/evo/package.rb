@@ -2,6 +2,13 @@
 class Evo
   class Package
     
+    #--
+    # Exceptions
+    #++
+    
+    Error = Class.new StandardError
+    InvalidPackageError = Class.new Error
+    
     ##
     # Package name symbol.
     
@@ -13,26 +20,49 @@ class Evo
     attr_reader :path
     
     ##
+    # Package weight.
+    
+    attr_accessor :weight
+    
+    ##
     # Initialize with _path_ to the package.
     
     def initialize path
-      @path = path
+      @path, @weight = path, 0
       @name = File.basename(path).to_sym
     end
     
     ##
     # Load the package:
     #
+    #  * Loads <package>/<package>.yml
     #  * Loads <package>/lib
     #  * Loads <package>/models
     #  * Loads <package>/routes
     #
     
     def load
+      load_yaml
       load_directory :lib
       load_directory :models
       load_directory :routes
       self
+    end
+    
+    ##
+    # Load YAML configuration file.
+    #
+    # === Options
+    # 
+    #   :weight    Package weight; lower weights are loaded first, defaults to 0
+    # 
+    
+    def load_yaml
+      if has_file? "#{name}.yml"
+        YAML.load_file(path / "#{name}.yml").each do |key, val|
+          send :"#{key}=", val
+        end
+      end
     end
     
     ##

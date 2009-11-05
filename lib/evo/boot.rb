@@ -105,7 +105,7 @@ class Evo
   def self.packages
     @packages ||= package_paths.map do |dir|
       Evo::Package.new dir
-    end
+    end.sort_by(&:weight)
   end
   
   ##
