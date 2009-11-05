@@ -42,6 +42,14 @@ class Evo
     end
     
     ##
+    # Check if this package has a regular file
+    # with the given _name_.
+    
+    def has_file? name
+      File.file? path / name
+    end
+    
+    ##
     # Return array of files in directory _name_
     # matching the given _pattern_ which defaults
     # to recursing and selecting every file.
