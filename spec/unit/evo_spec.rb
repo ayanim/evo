@@ -47,7 +47,7 @@ describe Evo do
   describe "#load_packages" do
     it "should load packages" do
       Evo.load_packages
-      $LOADED_FEATURES.should contain('foo/routes/foo_routes.rb')
+      $LOADED_FEATURES.should contain('foo/routes/foo.rb')
     end
     
     it "should populate #loaded_packages" do

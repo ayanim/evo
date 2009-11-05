@@ -10,13 +10,13 @@ describe Evo::Package do
     it "should check if a directory exists" do
       @package.should have_directory(:spec)
       @package.should_not have_directory(:bar)
-      @package.should_not have_directory('routes/foo_routes.rb')
+      @package.should_not have_directory('routes/foo.rb')
     end
   end
   
   describe "#has_file?" do
     it "should check if a file exists" do
-      @package.should have_file('routes/foo_routes.rb')
+      @package.should have_file('routes/foo.rb')
       @package.should_not have_file(:routes)
     end
   end
