@@ -11,10 +11,10 @@ class Evo
       end
       
       ##
-      # Set @path to @package's _path_ or pass.
+      # Set @path to @package's _dir_ matching _glob_ or pass.
       
-      def require_package_path path
-        pass unless @path = @package.path_to(path)
+      def require_package_path dir, glob
+        pass unless @path = @package.replaceable_path_to(dir, glob)
       end
       
       ##

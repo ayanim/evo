@@ -105,6 +105,10 @@ class Evo
       end.flatten
     end
     
+    def replaceable_path_to dir, glob
+      replaceable_paths_to(dir, glob).first
+    end
+    
     ##
     # Return all paths to _view_ which disregards engine suffix.
     

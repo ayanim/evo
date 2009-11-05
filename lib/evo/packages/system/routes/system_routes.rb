@@ -4,7 +4,7 @@
 
 get '/:package/*.css' do |name, path|
   require_package name
-  require_package_path :public / "#{path}.sass"
+  require_package_path :public, "#{path}.sass"
   content_type :css
   sass File.read(@path)
 end
@@ -14,6 +14,6 @@ end
 
 get '/:package/*' do |name, path|
   require_package name
-  require_package_path :public / path
+  require_package_path :public, path
   send_file @path
 end
