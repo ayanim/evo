@@ -9,6 +9,7 @@ end
 
 configure :test do
   enable :raise_errors
+  enable :sessions
   disable :run
   disable :logging
   DataMapper.setup :default, 'sqlite3::memory:'

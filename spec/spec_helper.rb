@@ -51,6 +51,8 @@ Spec::Runner.configure do |c|
     
     def mock_app &block
       subclass = Class.new Evo
+      subclass.enable :sessions
+      subclass.set :environment, :not_test
       subclass.instance_eval &block
       @app = subclass.new
     end
