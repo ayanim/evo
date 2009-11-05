@@ -1,0 +1,62 @@
+
+describe Job do
+  describe ".process" do
+    before :each do
+      @foo = Job.create :type => :mine, :data => ['foo']  
+      @bar = Job.create :type => :mine, :data => ['bar']
+      @baz = Job.create :type => :mine, :data => ['baz'], :status => :failure
+      @boo = Job.create :type => :mine, :data => ['boo'], :status => :complete
+    end
+    
+    it "should accept a block, passing an inactive job" do
+      Job.process { |job| job.should == @foo }
+    end
+    
+    it "should filter by type when a symbol is passed" do
+      Job.process(:mine) { |job| job.should == @foo }
+    end
+    
+    it "should accept an object responding to #call" do
+      job_processor = lambda { |job| job.should == @foo }
+      Job.process job_processor
+    end
+    
+    it "should accept an object responding to #call as well as a symbol to filter type" do
+      job_processor = lambda { |job| job.should == @foo }
+      Job.process :mine, job_processor
+    end
+    
+    it "should mark the job as a failure when an error is raised" do
+      Job.process { raise 'foo' }
+      Job.process { raise 'foo' }
+      @foo.reload.status.should == :failure
+      @bar.reload.status.should == :failure
+      @foo.message.should == 'foo'
+      @bar.message.should == 'foo'
+    end
+    
+    it "should mark the job as complete when each process call completes" do
+      Job.process {}
+      Job.process {}
+      @foo.reload.status.should == :complete
+      @bar.reload.status.should == :complete
+    end
+    
+    it "should mark the job as active while processing" do
+      Job.process { |job| job.status.should == :active }
+    end
+    
+    it "should process high priority jobs first" do
+      a = Job.create :type => :foo, :priority => 1
+      b = Job.create :type => :foo, :priority => 8
+      c = Job.create :type => :foo, :priority => 2
+      d = Job.create :type => :foo, :priority => -5
+      e = Job.create :type => :foo, :priority => 0
+      Job.process { |job| job.should == b }
+      Job.process { |job| job.should == c }
+      Job.process { |job| job.should == a }
+      Job.process { |job| job.should == e }
+      Job.process { |job| job.should == d }
+    end
+  end
+end
