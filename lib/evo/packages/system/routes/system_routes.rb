@@ -3,10 +3,7 @@
 # Transfer :package specific public file.
 
 get '/:package/*' do |name, path|
-  if package = Evo::Package.get(name)
-    if path = package.path_to(:public / path)
-      send_file path
-    end
-  end
-  pass
+  require_package name
+  require_package_path :public / path
+  send_file @path
 end
