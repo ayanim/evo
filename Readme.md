@@ -1,7 +1,7 @@
 
-# NAME
+# Evolution
 
-  DESCRIPTION
+  Ruby Content Management System
 
 ## License
 
