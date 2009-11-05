@@ -12,6 +12,14 @@ describe "system" do
       get '/foo/something.png'
       last_response.should_not be_ok
     end
+    
+    it "should be overridable" do
+      get '/system/javascripts/jquery.js'
+      last_response.should be_ok
+      get '/system/javascripts/jquery.ui.js'
+      last_response.should be_ok
+      last_response.body.should include('overriden!')
+    end
   end
   
   describe "get /:package/*.css" do
