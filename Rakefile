@@ -5,7 +5,7 @@ require 'evo'
 require 'rake'
 require 'echoe'
 
-Echoe.new 'Evo', Evo::VERSION do |p|
+Echoe.new 'evo', Evo::VERSION do |p|
   p.author = "TJ Holowaychuk"
   p.email = "tj@vision-media.ca"
   p.summary = "Evolution Content Management System"
