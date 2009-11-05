@@ -4,6 +4,7 @@ configure do
   enable :run
   enable :sessions
   enable :methodoverride
+  disable :static
 end
 
 configure :test do
