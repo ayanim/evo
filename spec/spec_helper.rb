@@ -20,7 +20,6 @@ Spec::Runner.configure do |c|
   c.include Webrat::Methods
   c.include Webrat::Matchers
   
-  ##
   # Rack::Test
   
   c.include Rack::Test::Methods
@@ -40,7 +39,15 @@ Spec::Runner.configure do |c|
     # App for Rack::Test
     
     def app
-      Evo
+      @app || Evo
+    end
+    
+    # Mock app based on _block_.
+    
+    def mock_app &block
+      subclass = Class.new Evo
+      subclass.instance_eval &block
+      @app = subclass.new
     end
     
     # Array containing a string matching _val_

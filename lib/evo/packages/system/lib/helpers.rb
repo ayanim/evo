@@ -17,6 +17,13 @@ class Evo
         pass unless @path = @package.path_to(path)
       end
       
+      ##
+      # Message queue.
+      
+      def messages
+        session[:messages] ||= Evo::MessageQueue.new
+      end
+      
     end
   end
 end
