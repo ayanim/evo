@@ -2,10 +2,12 @@
 $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'evo'
+require 'rack/test'
 
 # Sinatra
 
 configure do
+  set :root, File.dirname(__FILE__) + '/fixtures/app'
   set :environment, :test
   set :run, false
   set :raise_errors, true
@@ -21,6 +23,11 @@ DataMapper.setup :default, 'sqlite3::memory:'
 Spec::Runner.configure do |c|
   
   ##
+  # Rack::Test
+  
+  c.include Rack::Test::Methods
+  
+  ##
   # Reset database
   
   c.before :each do
@@ -30,9 +37,9 @@ Spec::Runner.configure do |c|
   ##
   # Helpers
   
-  c.include do
+  c.include Module.new {
     def app
       Sinatra::Application
     end
-  end
+  }
 end
