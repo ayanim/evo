@@ -68,6 +68,20 @@ class Evo
     end
     
     ##
+    # Return all paths to _file_ which exist.
+    
+    def paths_to file
+      Evo.paths_to :packages / name / file
+    end
+    
+    ##
+    # Return first path to _file_.
+    
+    def path_to file
+      paths_to(file).first
+    end
+    
+    ##
     # Find package(s) by _name_.
     
     def self.find_by_name name

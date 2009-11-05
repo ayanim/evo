@@ -45,6 +45,18 @@ describe Evo::Package do
     end
   end
   
+  describe "#paths_to" do
+    it "should return paths available" do
+      @package.paths_to(:public / 'style.css').should contain('foo/public/style.css')
+    end
+  end
+  
+  describe "#path_to" do
+    it "should return the first available path" do
+      @package.path_to(:public / 'style.css').should include('foo/public/style.css')
+    end
+  end
+    
   describe ".find_by_name" do
     it "should find packages by name" do
       Evo::Package.find_by_name(:foo).first.should be_a(Evo::Package)
