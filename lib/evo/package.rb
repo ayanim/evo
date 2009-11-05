@@ -204,7 +204,7 @@ class Evo
     ##
     # Current package.
     
-    class << self; attr_accessor :current end
+    cattr_accessor :current
     
   end
 end
