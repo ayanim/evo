@@ -41,7 +41,7 @@ describe Evo do
   describe "#load_packages!" do
     it "should load packages" do
       Evo.load_packages!
-      $LOADED_FEATURES.any? { |p| p.match('foo/foo.rb') }.should be_true
+      $LOADED_FEATURES.should contain('foo/foo.rb')
     end
     
     it "should populate #loaded_packages" do

@@ -35,8 +35,19 @@ Spec::Runner.configure do |c|
   # Helpers
   
   c.include Module.new {
+    
+    # App for Rack::Test
+    
     def app
       Evo
+    end
+    
+    # Array containing a string matching _val_
+    
+    def contain val
+      simple_matcher "to contain a string matching #{val.inspect}" do |actual|
+        actual.any? { |str| str.include?(val) }
+      end
     end
   }
 end
