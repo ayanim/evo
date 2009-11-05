@@ -3,7 +3,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Evo::Package do
   before :each do
-    @package = Evo::Package.new File.dirname(__FILE__) + '/../fixtures/app/packages/foo'  
+    @package = Evo::Package.new File.dirname(__FILE__) + '/../fixtures/app/packages/foo'
+    @jobqueue = Evo::Package.new Evo.core_root + '/packages/jobqueue'
   end
   
   describe "#has_directory?" do
@@ -54,6 +55,21 @@ describe Evo::Package do
   describe "#path_to" do
     it "should return the first available path" do
       @package.path_to(:public / 'style.css').should include('foo/public/style.css')
+    end
+    
+    it "should check packages in the load path first" do
+      @jobqueue.paths_to_view(:job).length.should == 2
+      @jobqueue.paths_to_view(:job).first.should include('foo/views/jobqueue/job.haml')
+    end
+    
+    it "should check packages in the load path first disregarding engine suffix" do
+      @jobqueue.paths_to_view(:jobs).length.should == 2
+      @jobqueue.paths_to_view(:jobs).first.should include('foo/views/jobqueue/jobs.erb')
+    end
+    
+    it "should result to returning the original view path" do
+      @jobqueue.paths_to_view(:worker).length.should == 1
+      @jobqueue.paths_to_view(:worker).first.should include('jobqueue/views/jobqueue/worker.haml')
     end
   end
   
