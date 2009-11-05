@@ -2,6 +2,24 @@
 require File.dirname(__FILE__) + '/queue'
 
 class Evo
+  
+  ##
+  # = JavaScriptQueue
+  #
+  # An Evo::JavaScriptQueue handles the inclusion of
+  # <script> tags, both with inline javascript and
+  # files referenced by the 'src' attribute.
+  #
+  # === Examples
+  #
+  #   javascript = Evo::JavaScriptQueue.new
+  #   javascript.add 'http://foo.com/jquery.js'
+  #   javascript.add '/jquery.js', :weight => -5
+  #   javascript.add 'foo = "bar"'
+  #   javascript << 'foo = "bar"'
+  #   javascript.to_html // => markup
+  #
+  
   class JavaScriptQueue < Queue
 
     ##
@@ -9,7 +27,7 @@ class Evo
     #
     # === Options
     # 
-    #   :weight   unsigned integer representing the output weight. Defaults to 0
+    #   :weight   int representing the output weight. Defaults to 0
     # 
     # === Examples
     #

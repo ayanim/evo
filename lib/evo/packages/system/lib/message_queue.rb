@@ -2,6 +2,23 @@
 require File.dirname(__FILE__) + '/queue'
 
 class Evo
+  
+  ##
+  # = MessageQueue
+  #
+  # An Evo::MessageQueue is essentially the same
+  # as a 'flash' message, which spans sessions until
+  # the message(s) have been rendered.
+  #
+  # === Examples
+  #
+  #   messages = Evo::MessageQueue.new
+  #   messages.add 'You have mail', :info
+  #   messages.info 'You have mail'
+  #   messages.error "Failed to authenticate *#{user}*"
+  #   messages.to_html // => markup
+  #
+  
   class MessageQueue < Queue
 
     ##

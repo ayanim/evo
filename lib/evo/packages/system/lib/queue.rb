@@ -1,5 +1,13 @@
 
 class Evo
+  
+  ##
+  # = Queue
+  #
+  # An Evo::Queue is a readable alternative
+  # to managing keyed hashes. For examples see
+  # Evo::MessageQueue and Evo::JavaScriptQueue.
+  
   class Queue
 
     ##
