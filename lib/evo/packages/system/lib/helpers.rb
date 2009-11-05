@@ -3,6 +3,9 @@ class Evo
   module System
     module Helpers
       
+      ##
+      # Set current package when evaluating a route _block_.
+      
       def route_eval &block
         Evo::Package.current = Evo::Package.map[block.__id__]
         super
