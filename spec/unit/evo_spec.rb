@@ -45,8 +45,7 @@ describe Evo do
     end
     
     it "should populate #loaded_packages" do
-      require 'pp'
-      pp Evo.loaded_packages
+      Evo.loaded_packages.first.should be_a(Evo::Package)
     end
   end
 end
