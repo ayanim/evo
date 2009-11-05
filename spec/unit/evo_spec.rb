@@ -15,4 +15,18 @@ describe Evo do
       Evo.package_load_path.last.should include('evo/packages')
     end
   end
+  
+  describe "#path_to" do
+    it "should return the first matching path" do
+      Evo.path_to('config/environment.rb').should include('app/config/environment.rb')
+    end
+  end
+  
+  describe "#paths_to" do
+    it "should return all matching paths" do
+      paths = Evo.paths_to 'config/environment.rb'
+      paths.first.should include('app/config/environment.rb')
+      paths.last.should include('evo/config/environment.rb')
+    end
+  end
 end
