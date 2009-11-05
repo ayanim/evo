@@ -56,4 +56,13 @@ class Evo
       Package.new(dir).load
     end
   end
+  
+  ##
+  # Load all package specs.
+  
+  def self.spec!
+    loaded_packages.each do |package|
+      package.load_directory :spec
+    end
+  end
 end

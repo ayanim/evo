@@ -49,5 +49,18 @@ Spec::Runner.configure do |c|
         actual.any? { |str| str.include?(val) }
       end
     end
+    
+    # Content-Type matching _type_
+    
+    def have_content_type type
+      simple_matcher "to have Content-Type of #{type.inspect}" do |actual|
+        actual['Content-Type'] == type
+      end
+    end
   }
 end
+
+# Run package specs
+
+Evo.load_packages
+Evo.spec!

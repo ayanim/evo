@@ -44,4 +44,13 @@ describe Evo::Package do
       $LOADED_FEATURES.should contain('foo/spec/nested/nested_foo_spec.rb')
     end
   end
+  
+  describe ".find_by_name" do
+    it "should find packages by name" do
+      Evo::Package.find_by_name(:foo).first.should be_a(Evo::Package)
+      Evo::Package.find_by_name(:foo).length.should == 1
+      Evo::Package.find_by_name('foo').length.should == 1
+      Evo::Package.find_by_name(:system).length.should == 2
+    end
+  end
 end
