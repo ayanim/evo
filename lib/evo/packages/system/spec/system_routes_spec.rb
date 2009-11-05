@@ -19,6 +19,7 @@ describe "system" do
       get '/system/javascripts/jquery.ui.js'
       last_response.should be_ok
       last_response.body.should include('overriden!')
+      last_response.should have_content_type('application/javascript')
     end
   end
   
