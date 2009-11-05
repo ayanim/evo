@@ -56,8 +56,34 @@ describe Evo do
   end
   
   describe "#parse_options" do
-    it "should lock the app when -x is passed" do
-      Evo.lock?.should be_false
+    describe "-x" do
+      it "should lock the application" do
+        Evo.lock?.should be_false
+        Evo.parse_options ['-x']
+        Evo.lock?.should be_true
+      end
+    end
+    
+    describe "-p port" do
+      it "should set the port number" do
+        Evo.port.should == 3000
+        Evo.parse_options ['-p', '8888']
+        Evo.port.should == 8888
+      end
+    end
+    
+    describe "-s server" do
+      it "should set the server" do
+        Evo.parse_options ['-s', 'unicorn']
+        Evo.server.should == 'unicorn'
+      end
+    end
+    
+    describe "-e env" do
+      it "should set the environment" do
+        Evo.parse_options ['-e', 'production']
+        Evo.environment.should == :production
+      end
     end
   end
 end
