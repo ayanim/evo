@@ -23,11 +23,13 @@ class Evo
     ##
     # Load the package:
     #
+    #  * Loads <package>/lib
     #  * Loads <package>/models
     #  * Loads <package>/routes
     #
     
     def load
+      load_directory :lib
       load_directory :models
       load_directory :routes
       self

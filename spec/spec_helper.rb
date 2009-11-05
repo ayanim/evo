@@ -2,6 +2,7 @@
 $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'evo'
+require 'webrat'
 require 'rack/test'
 
 # Sinatra
@@ -18,6 +19,11 @@ end
 # Spec configuration
 
 Spec::Runner.configure do |c|
+  
+  # Webrat
+  
+  c.include Webrat::Methods
+  c.include Webrat::Matchers
   
   ##
   # Rack::Test
