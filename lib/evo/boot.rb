@@ -17,4 +17,8 @@ class Evo
       path / file if File.exists? path / file
     end.compact
   end
+  
+  def self.package_paths
+    paths_to :packages
+  end
 end

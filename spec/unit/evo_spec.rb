@@ -29,4 +29,10 @@ describe Evo do
       paths.last.should include('evo/config/environment.rb')
     end
   end
+  
+  describe "#package_paths" do
+    it "should return array of paths to all packages" do
+      p Evo.package_paths
+    end
+  end
 end
