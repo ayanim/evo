@@ -5,10 +5,12 @@ require 'evo'
 
 # Sinatra
 
-Sinatra::Base.set :environment, :test
-Sinatra::Base.set :run, false
-Sinatra::Base.set :raise_errors, true
-Sinatra::Base.set :logging, false
+configure do
+  set :environment, :test
+  set :run, false
+  set :raise_errors, true
+  set :logging, false
+end
 
 # DataMapper
 
