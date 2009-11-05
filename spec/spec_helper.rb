@@ -10,9 +10,9 @@ require 'rack/test'
 configure do
   set :root, File.dirname(__FILE__) + '/fixtures/app'
   set :environment, :test
-  set :run, false
-  set :raise_errors, true
-  set :logging, false
+  enable :raise_errors
+  disable :run
+  disable :logging
   DataMapper.setup :default, 'sqlite3::memory:'
 end
 
