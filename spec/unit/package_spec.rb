@@ -67,12 +67,14 @@ describe Evo::Package do
     
     it "should check packages in the load path first" do
       @jobqueue.paths_to_view(:job).length.should == 2
-      @jobqueue.paths_to_view(:job).first.should include('foo/views/jobqueue/job.haml')
+      @jobqueue.paths_to_view(:job)[0].should include('foo/views/jobqueue/job.haml')
+      @jobqueue.paths_to_view(:job)[1].should include('jobqueue/views/jobqueue/job.haml')
     end
     
     it "should check packages in the load path first disregarding engine suffix" do
       @jobqueue.paths_to_view(:jobs).length.should == 2
-      @jobqueue.paths_to_view(:jobs).first.should include('foo/views/jobqueue/jobs.erb')
+      @jobqueue.paths_to_view(:jobs)[0].should include('foo/views/jobqueue/jobs.erb')
+      @jobqueue.paths_to_view(:jobs)[1].should include('jobqueue/views/jobqueue/jobs.haml')
     end
     
     it "should result to returning the original view path" do
