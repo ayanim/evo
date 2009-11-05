@@ -1,4 +1,3 @@
 
-module Evo
-  VERSION = '0.0.1'
-end
+Evo = Sinatra::Application
+Evo::VERSION = '0.0.1'

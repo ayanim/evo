@@ -1,10 +1,10 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Class do
-  describe "#method" do
+describe Evo do
+  describe "#boot!" do
     it "should description" do
-      p app.root
+      
     end
   end
 end

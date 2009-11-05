@@ -39,7 +39,7 @@ Spec::Runner.configure do |c|
   
   c.include Module.new {
     def app
-      Sinatra::Application
+      Evo
     end
   }
 end
