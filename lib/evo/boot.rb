@@ -118,7 +118,7 @@ class Evo
   def self.load_packages
     @loaded_packages = packages.map do |package|
       Evo::Package.current = package and package.load
-    end
+    end.sort_by(&:natural_weight)
   end
   
   ##
