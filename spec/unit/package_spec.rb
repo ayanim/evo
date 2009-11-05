@@ -56,6 +56,14 @@ describe Evo::Package do
     it "should return the first available path" do
       @package.path_to(:public / 'style.css').should include('foo/public/style.css')
     end
+  end
+  
+  describe "#paths_to_view" do
+    it "should return paths available" do
+      @package.paths_to_view(:bar).length.should == 2
+      @package.paths_to_view(:baz).length.should == 1
+      @package.paths_to_view(:hey).length.should == 0
+    end
     
     it "should check packages in the load path first" do
       @jobqueue.paths_to_view(:job).length.should == 2
@@ -70,14 +78,6 @@ describe Evo::Package do
     it "should result to returning the original view path" do
       @jobqueue.paths_to_view(:worker).length.should == 1
       @jobqueue.paths_to_view(:worker).first.should include('jobqueue/views/jobqueue/worker.haml')
-    end
-  end
-  
-  describe "#paths_to_view" do
-    it "should return paths available" do
-      @package.paths_to_view(:bar).length.should == 2
-      @package.paths_to_view(:baz).length.should == 1
-      @package.paths_to_view(:hey).length.should == 0
     end
   end
   

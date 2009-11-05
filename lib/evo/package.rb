@@ -73,7 +73,9 @@ class Evo
     # Return all paths to _view_ which disregards engine suffix.
     
     def paths_to_view view
-      Evo.paths_to :packages / name / :views / name / "#{view}.*"
+      Evo.loaded_packages.map do |package|
+        Dir[package.path / :views / name / "#{view}.*"]
+      end.flatten
     end
     
     ##
