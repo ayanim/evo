@@ -1,7 +1,7 @@
 
 # Evolution
 
-  Ruby Content Management System
+  Ruby Content Management System.
   
 ## Goals
 

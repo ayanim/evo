@@ -14,6 +14,7 @@ Echoe.new 'evo', Evo::VERSION do |p|
   p.runtime_dependencies << 'haml'
   p.runtime_dependencies << 'formz'
   p.runtime_dependencies << 'tagz'
+  p.runtime_dependencies << 'daemon-spawn'
   p.runtime_dependencies << 'sinatra >=0.9.4'
   p.runtime_dependencies << 'dm-core >=0.9.11'
   p.runtime_dependencies << 'dm-migrations >=0.9.11'
