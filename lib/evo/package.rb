@@ -33,5 +33,10 @@ class Evo
       require file
       self
     end
+    
+    def has_directory? name
+      File.directory? path / name
+    end
+    
   end
 end
