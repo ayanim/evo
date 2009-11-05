@@ -12,11 +12,8 @@ configure do
   set :run, false
   set :raise_errors, true
   set :logging, false
+  DataMapper.setup :default, 'sqlite3::memory:'
 end
-
-# DataMapper
-
-DataMapper.setup :default, 'sqlite3::memory:'
 
 # Spec configuration
 
