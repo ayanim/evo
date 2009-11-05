@@ -2,7 +2,7 @@
 describe Job do
   describe ".process" do
     before :each do
-      @foo = Job.create :type => :mine, :data => ['foo']  
+      @foo = Job.create :type => :mine, :data => ['foo']
       @bar = Job.create :type => :mine, :data => ['bar']
       @baz = Job.create :type => :mine, :data => ['baz'], :status => :failure
       @boo = Job.create :type => :mine, :data => ['boo'], :status => :complete
@@ -24,6 +24,17 @@ describe Job do
     it "should accept an object responding to #call as well as a symbol to filter type" do
       job_processor = lambda { |job| job.should == @foo }
       Job.process :mine, job_processor
+    end
+    
+    it "should process by priority" do
+      order = []
+      a = Job.create :type => :priority, :priority => -5
+      b = Job.create :type => :priority, :priority => 5
+      c = Job.create :type => :priority
+      Job.process(:priority) { |job| order << job }
+      Job.process(:priority) { |job| order << job }
+      Job.process(:priority) { |job| order << job }
+      order.should == [b, c, a]
     end
     
     it "should mark the job as a failure when an error is raised" do
