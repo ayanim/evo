@@ -24,11 +24,16 @@ Spec::Runner.configure do |c|
   
   c.include Rack::Test::Methods
   
-  ##
   # Reset database
   
   c.before :each do
     DataMapper.auto_migrate!
+  end
+  
+  # Reset app
+  
+  c.after :each do
+    @app = nil
   end
   
   ##
