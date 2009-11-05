@@ -56,18 +56,5 @@ describe Job do
     it "should mark the job as active while processing" do
       Job.process { |job| job.status.should == :active }
     end
-    
-    it "should process high priority jobs first" do
-      a = Job.create :type => :foo, :priority => 1
-      b = Job.create :type => :foo, :priority => 8
-      c = Job.create :type => :foo, :priority => 2
-      d = Job.create :type => :foo, :priority => -5
-      e = Job.create :type => :foo, :priority => 0
-      Job.process { |job| job.should == b }
-      Job.process { |job| job.should == c }
-      Job.process { |job| job.should == a }
-      Job.process { |job| job.should == e }
-      Job.process { |job| job.should == d }
-    end
   end
 end
