@@ -22,7 +22,19 @@ class Evo
     options.each { |k, v| send(:"#{k}=", v) if respond_to? :"#{k}=" }
     load_packages
     load_config
-    run self if run?
+    if run?
+      if ARGV.any?
+        require 'optparse'
+        OptionParser.new do |op|
+          op.on('-x')        {     set :lock, true }
+          op.on('-e env')    { |v| set :environment, v.to_sym }
+          op.on('-s server') { |v| set :server, v }
+          op.on('-p port')   { |v| set :port, v.to_i }
+          op.on('--help')    { abort "usage: application.rb [-x] [-e env] [-s server] [-p port]" }
+        end.parse! ARGV.dup
+      end
+      run self
+    end
     puts "== Evolution/#{VERSION}"
   end
   
