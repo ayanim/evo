@@ -24,10 +24,13 @@ class Evo
     end.flatten
   end
   
+  def self.loaded_packages
+    @loaded_packages
+  end
+  
   def self.load_packages!
-    package_paths.each do |dir|
-      file = dir / File.basename(dir) + '.rb'
-      load file if File.exists? file
+    @loaded_packages = package_paths.map do |dir|
+      Package.new(dir).load!
     end
   end
 end

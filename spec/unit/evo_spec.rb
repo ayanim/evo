@@ -43,5 +43,10 @@ describe Evo do
       Evo.load_packages!
       PackageFooLoaded.should be_true
     end
+    
+    it "should populate #loaded_packages" do
+      require 'pp'
+      pp Evo.loaded_packages
+    end
   end
 end
