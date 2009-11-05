@@ -1,6 +1,7 @@
 
 configure do
   set :port, 3000
+  enable :run
   enable :sessions
   enable :methodoverride
 end

@@ -10,7 +10,6 @@ class Evo
   # === Options
   # 
   #   :root      (required) Application root
-  #   :verbose   Defaults to false; outputs verbose boot info to stdout
   #   ...        All other options set attr_writter's
   # 
   # === Examples
@@ -23,7 +22,8 @@ class Evo
     options.each { |k, v| send(:"#{k}=", v) if respond_to? :"#{k}=" }
     load_packages
     load_config
-    puts "Evolution #{VERSION} started at #{host}:#{port}" if options[:verbose]
+    run self if run?
+    puts "== Evolution/#{VERSION}"
   end
   
   ##
