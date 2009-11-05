@@ -1,4 +1,7 @@
 
+##
+# Compile and transfer :package's sass files.
+
 get '/:package/*.css' do |name, path|
   require_package name
   require_package_path :public / "#{path}.sass"
