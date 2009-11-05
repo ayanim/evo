@@ -51,9 +51,9 @@ class Evo
   # Load all packages within the #load_path's
   # visibility. Populates #loaded_packages.
   
-  def self.load_packages!
+  def self.load_packages
     @loaded_packages = package_paths.map do |dir|
-      Package.new(dir).load!
+      Package.new(dir).load
     end
   end
 end

@@ -29,7 +29,7 @@ class Evo
     ##
     # Load the package.
     
-    def load!
+    def load
       require file
       self
     end

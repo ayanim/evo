@@ -38,9 +38,9 @@ describe Evo do
     end
   end
   
-  describe "#load_packages!" do
+  describe "#load_packages" do
     it "should load packages" do
-      Evo.load_packages!
+      Evo.load_packages
       $LOADED_FEATURES.should contain('foo/foo.rb')
     end
     
