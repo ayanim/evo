@@ -10,7 +10,15 @@ program :name, 'Evolution Content Management System'
 program :description, 'This executable is designed to assist existing Evolution
     deployments, initialize new applications, install packages,
     and much more.'
- 
+
+command :console do |c|
+  c.syntax = 'evo console [options]'
+  c.description = 'Start interactive evo shell'
+  c.action do |args, options|
+    # system 'irb', '-I lib', "-r application.rb", '--simple-prompt'
+  end
+end
+
 command :'db migrate' do |c|
   c.syntax = 'evo db migrate [options]'
   c.description = 'Auto-migrate the database (destroys data)'
