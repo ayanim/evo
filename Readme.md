@@ -3,6 +3,43 @@
 
   Ruby Content Management System
   
+## Libraries
+
+Below are the main libraries currently utilized by Evolution.
+
+  * javascript:   jQuery
+  * framework:    Sinatra
+  * extensions:   Rext
+  * executable:   Commander
+  * orm:          DataMapper
+  * jobs:         Moneta
+  * specs:        RSpec
+  * js specs:     JSpec
+  
+### jQuery & Plugins
+
+Currently the following plugins are included in core:
+
+  * jQuery core
+  * jQuery UI
+  * Floating table headers (keeps headers in sight with long pages)
+  * Inline search (for filtering tables, lists, etc)
+  * REST ($.create, $.read, $.update, $.destroy, etc)
+  * Goodies (Ruby-like iterators)
+  * Table select 
+  
+## Executable
+
+Commander is used to create our executable `evo`, which replaces
+the need for localized `rake` or similar programs. For more information
+run:
+
+    $ evo help
+    
+or for a specific command:
+
+    $ evo help init
+
 ## License
 
 (The MIT License)
