@@ -64,6 +64,12 @@ describe Evo::Package do
       @package.paths_to_view(:hey).length.should == 0
     end
   end
+  
+  describe "#path_to_view" do
+    it "should return the first available path" do
+      @package.path_to_view(:bar).should include('bar.erb')
+    end
+  end
     
   describe ".find" do
     it "should find packages by name" do

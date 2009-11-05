@@ -69,8 +69,18 @@ class Evo
       end
     end
     
+    ##
+    # Return all paths to _view_ which disregards engine suffix.
+    
     def paths_to_view view
       Evo.paths_to :packages / name / :views / name / "#{view}.*"
+    end
+    
+    ##
+    # Return first path to _view_ which disregards engine suffix.
+    
+    def path_to_view view
+      paths_to_view(view).first
     end
     
     ##
