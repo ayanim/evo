@@ -37,4 +37,11 @@ describe Evo do
       Evo.package_paths.any? { |p| p.match('evo/packages/system') }.should be_true
     end
   end
+  
+  describe "#load_packages!" do
+    it "should load packages" do
+      Evo.load_packages!
+      PackageFooLoaded.should be_true
+    end
+  end
 end

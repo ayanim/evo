@@ -1,0 +1,2 @@
+
+PackageFooLoaded = true

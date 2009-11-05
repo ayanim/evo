@@ -23,4 +23,11 @@ class Evo
       Dir[dir / '*']
     end.flatten
   end
+  
+  def self.load_packages!
+    package_paths.each do |dir|
+      file = dir / File.basename(dir) + '.rb'
+      load file if File.exists? file
+    end
+  end
 end
