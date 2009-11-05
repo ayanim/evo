@@ -21,7 +21,11 @@ class Evo
     end
     
     ##
-    # Load the package.
+    # Load the package:
+    #
+    #  * Loads <package>/models
+    #  * Loads <package>/routes
+    #
     
     def load
       load_directory :models
