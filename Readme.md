@@ -28,6 +28,11 @@ without altering core. This same practice may be used with themes as well,
 so if you do not like the image 'themes/chrome/images/add.png' simply create
 a new image with the same path structure in your local application.
 
+Packages are located via **Evo.load_paths** which starts looking for package(s) 
+and their related files at the *application root*, and then follow on to *evo's root*.
+This simple feature allows for vendorized packages, gem-based packages, overriding of
+core or contrib packages via load path precedence and much more.
+
 ## Background Workers
 
 Evolution plans on providing core background worker functionality,
