@@ -26,23 +26,25 @@ class Evo
     
     ##
     # Initialize with _path_ to the package.
+    #
+    # * Loads <package>/<package>.yml
+    #
     
     def initialize path
       @path, @weight = path, 0
       @name = File.basename(path).to_sym
+      load_yaml
     end
     
     ##
     # Load the package:
     #
-    #  * Loads <package>/<package>.yml
     #  * Loads <package>/lib
     #  * Loads <package>/models
     #  * Loads <package>/routes
     #
     
     def load
-      load_yaml
       load_directory :lib
       load_directory :models
       load_directory :routes
