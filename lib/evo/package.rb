@@ -105,6 +105,10 @@ class Evo
       end.flatten
     end
     
+    ##
+    # Return first replaceable path to _dir_ with the 
+    # given file _glob_ pattern.
+    
     def replaceable_path_to dir, glob
       replaceable_paths_to(dir, glob).first
     end
