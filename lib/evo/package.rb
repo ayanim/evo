@@ -92,5 +92,12 @@ class Evo
       end
     end
     
+    ##
+    # Get first package by _name_.
+    
+    def self.get name
+      find(name).first
+    end
+    
   end
 end

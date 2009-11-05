@@ -65,4 +65,12 @@ describe Evo::Package do
       Evo::Package.find(:system).length.should == 2
     end
   end
+  
+  describe ".get" do
+    it "should find the first package by name" do
+      Evo::Package.get(:foo).should be_a(Evo::Package)
+      Evo::Package.get('foo').should be_a(Evo::Package)
+      Evo::Package.get(:system).should be_a(Evo::Package)
+    end
+  end
 end
