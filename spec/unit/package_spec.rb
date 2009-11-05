@@ -84,6 +84,7 @@ describe Evo::Package do
   describe "#path_to_view" do
     it "should return the first available path" do
       @package.path_to_view(:bar).should include('bar.erb')
+      @jobqueue.path_to_view(:jobs).should include('foo/views/jobqueue/jobs.erb')
     end
   end
     
