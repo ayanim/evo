@@ -165,17 +165,17 @@ class Evo
     end
     
     ##
-    # Return all paths to _file_ which exist.
+    # Return all paths to _glob_ which exist.
     
-    def paths_to file
-      Evo.paths_to :packages / name / file
+    def paths_to glob
+      Evo.paths_to :packages / name / glob
     end
     
     ##
-    # Return first path to _file_.
+    # Return first path to _glob_.
     
-    def path_to file
-      paths_to(file).first
+    def path_to glob
+      paths_to(glob).first
     end
     
     ##
@@ -201,9 +201,10 @@ class Evo
       @map ||= {}
     end
     
-    class << self
-      attr_accessor :current
-    end
+    ##
+    # Current package.
+    
+    class << self; attr_accessor :current end
     
   end
 end
