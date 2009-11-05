@@ -34,8 +34,22 @@ class Evo
       self
     end
     
+    ##
+    # Check if this package has a directory with
+    # the given _name_.
+    
     def has_directory? name
       File.directory? path / name
+    end
+    
+    def files_in_directory name, pattern = '**' / '*'
+      Dir[path / name / pattern]
+    end
+    
+    def load_directory name
+      files_in_directory(name, '**' / '*.rb').each do |file|
+        require file
+      end
     end
     
   end
