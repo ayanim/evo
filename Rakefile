@@ -22,4 +22,5 @@ Echoe.new 'Evo', Evo::VERSION do |p|
   p.runtime_dependencies << 'dm-serializer >=0.9.11'
   p.runtime_dependencies << 'dm-types >=0.9.11'
   p.runtime_dependencies << 'dm-pager'
+  p.development_dependencies << 'webrat'
 end
