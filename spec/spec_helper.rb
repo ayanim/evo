@@ -3,6 +3,7 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'evo'
 require 'webrat'
+gem 'rack-test', '=0.5.0'
 require 'rack/test'
 
 # Boot evolution
