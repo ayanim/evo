@@ -18,4 +18,19 @@ describe "system" do
       last_response.body.should_not include('<li>User deleted</li>')
     end
   end
+  
+  describe "#regenerate_session" do
+    it "should assign a new session token" do
+      mock_app do
+        get '/' do
+          regenerate_session
+        end
+      end
+      get '/' 
+      a = last_response.body
+      get '/'
+      b = last_response.body
+      a.should_not == b
+    end
+  end
 end
