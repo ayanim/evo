@@ -16,7 +16,7 @@ describe Evo::Package do
   
   describe "#has_file?" do
     it "should check if a file exists" do
-      @package.should have_file('routes/foo.rb')
+      @package.should have_file('routes/foo_routes.rb')
       @package.should_not have_file(:routes)
     end
   end
