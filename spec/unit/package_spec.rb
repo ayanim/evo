@@ -56,6 +56,13 @@ describe Evo::Package do
       @package.path_to(:public / 'style.css').should include('foo/public/style.css')
     end
   end
+  
+  describe "#paths_to_view" do
+    it "should return paths available" do
+      p @package.paths_to_view(:bar)
+      p @package.paths_to_view(:baz)
+    end
+  end
     
   describe ".find" do
     it "should find packages by name" do

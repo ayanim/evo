@@ -69,6 +69,10 @@ class Evo
       end
     end
     
+    def paths_to_view view
+      Evo.paths_to :packages / name / :views / name / "#{view}.*"
+    end
+    
     ##
     # Return all paths to _file_ which exist.
     

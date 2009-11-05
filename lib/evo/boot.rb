@@ -59,19 +59,19 @@ class Evo
   end
   
   ##
-  # Return the first path to _file_.
+  # Return the first path to _glob_.
   
-  def self.path_to file
-    paths_to(file).first
+  def self.path_to glob
+    paths_to(glob).first
   end
   
   ##
-  # Return all paths to _file_ which exist.
+  # Return all paths to _glob_ which exist.
   
-  def self.paths_to file
+  def self.paths_to glob
     load_paths.map do |path|
-      path / file if File.exists? path / file
-    end.compact
+      Dir[path / glob]
+    end.flatten.compact
   end
   
   ##
