@@ -25,6 +25,11 @@ class Evo
     attr_accessor :weight
     
     ##
+    # Natural load weight.
+    
+    attr_accessor :natural_weight
+    
+    ##
     # Initialize with _path_ to the package.
     #
     # * Loads <package>/<package>.yml

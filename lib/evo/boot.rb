@@ -103,8 +103,11 @@ class Evo
   # Return all Evo::Package instances.
   
   def self.packages
+    n = -1
     @packages ||= package_paths.map do |dir|
-      Evo::Package.new dir
+      package = Evo::Package.new dir
+      package.natural_weight = n += 1
+      package 
     end.sort_by(&:weight)
   end
   
