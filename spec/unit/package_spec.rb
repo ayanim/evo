@@ -7,6 +7,13 @@ describe Evo::Package do
     @jobqueue = Evo::Package.new Evo.core_root + '/packages/jobqueue'
   end
   
+  describe "#==" do
+    it "should check if two packages have the same name" do
+      (@package == @package).should be_true
+      (@package == @jobqueue).should be_false
+    end
+  end
+  
   describe "#has_directory?" do
     it "should check if a directory exists" do
       @package.should have_directory(:spec)

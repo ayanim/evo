@@ -70,10 +70,18 @@ class Evo
     end
     
     ##
+    # Check if this package is the same as _other_.
+    
+    def == other
+      name == other.name
+    end
+    
+    ##
     # Return all paths to _view_ which disregards engine suffix.
     
     def paths_to_view view
       Evo.loaded_packages.map do |package|
+        p self == package
         Dir[package.path / :views / name / "#{view}.*"]
       end.flatten
     end
