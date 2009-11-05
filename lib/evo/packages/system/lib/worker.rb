@@ -3,6 +3,44 @@ require 'logger'
 require 'daemon-spawn'
 
 class Evo
+  
+  ##
+  # = Worker
+  #
+  # This abstract worker should be subclassed
+  # in order to inherit logging and job scheduling
+  # functionality.
+  #
+  # === Examples
+  #    
+  #  The example below could be used to reap old
+  #  session records, checking every 10 minutes.
+  #    
+  #   class SessionWorker < Evo::Worker
+  #     def start *args
+  #       every 10.minutes do
+  #         Session.reap
+  #       end
+  #     end
+  #   end
+  #
+  #   SessionWorker.spawn!
+  #
+  # The workers/session.rb script then inherits
+  # the ability to work as the daemon controller:
+  #
+  #   $ ruby workers/session.rb start
+  #   $ ruby workers/session.rb stop
+  #   $ ruby workers/session.rb restart
+  #   $ ruby workers/session.rb status
+  #
+  # === Notes
+  #
+  #  This is a temporary solution, a cleaner DSL
+  #  and integration with the `evo` executable
+  #  is coming!.
+  #
+  
   class Worker < DaemonSpawn::Base
     
     ##
