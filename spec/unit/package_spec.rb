@@ -61,6 +61,8 @@ describe Evo::Package do
   describe "#paths_to_view" do
     it "should return paths available" do
       @package.paths_to_view(:bar).length.should == 2
+      @package.paths_to_view(:bar)[0].should include('foo/views/foo/bar.erb')
+      @package.paths_to_view(:bar)[1].should include('foo/views/foo/bar.haml')
       @package.paths_to_view(:baz).length.should == 1
       @package.paths_to_view(:hey).length.should == 0
     end
