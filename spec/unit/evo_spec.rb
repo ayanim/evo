@@ -32,7 +32,9 @@ describe Evo do
   
   describe "#package_paths" do
     it "should return array of paths to all packages" do
-      p Evo.package_paths
+      Evo.package_paths.any? { |p| p.match('app/packages/foo') }.should be_true
+      Evo.package_paths.any? { |p| p.match('app/packages/system') }.should be_true
+      Evo.package_paths.any? { |p| p.match('evo/packages/system') }.should be_true
     end
   end
 end

@@ -19,6 +19,8 @@ class Evo
   end
   
   def self.package_paths
-    paths_to :packages
+    paths_to(:packages).map do |dir|
+      Dir[dir / '*']
+    end.flatten
   end
 end
