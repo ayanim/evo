@@ -1,10 +1,11 @@
 
-configure do
+configure do |app|
   set :port, 3000
   enable :run
   enable :sessions
   enable :methodoverride
   disable :static
+  DataMapper.setup :default, "sqlite3:///#{app.root}/databases/evo.#{app.environment}.db"
 end
 
 configure :test do
