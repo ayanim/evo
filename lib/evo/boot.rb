@@ -1,12 +1,24 @@
 
 class Evo
   
-  #--
-  # Setting defaults
-  #++
+  ##
+  # Boot Evolution:
+  #
+  #  * Loads packages
+  #  * Loads config/environments.rb
+  # 
+  # === Options
+  # 
+  #   :root      Application root
+  #   :verbose   Defaults to false; outputs verbose boot info to stdout
+  # 
   
-  enable :sessions
-  enable :methodoverride
+  def self.boot! options = {}
+    set :root, options[:root] || raise('application :root is required')
+    load_packages
+    load_config
+    puts "Evolution #{VERSION} started at #{host}:#{port}" if options[:verbose]
+  end
   
   ##
   # Path to Evo's core.
@@ -45,6 +57,15 @@ class Evo
     paths_to(:packages).map do |dir|
       Dir[dir / '*']
     end.flatten
+  end
+  
+  ##
+  # Load all configuration files.
+  
+  def self.load_config
+    paths_to(:config / 'environment.rb').each do |file|
+      require file
+    end
   end
   
   ##
