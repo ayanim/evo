@@ -71,7 +71,7 @@ class Evo
   def self.paths_to glob
     load_paths.map do |path|
       Dir[path / glob]
-    end.flatten.compact
+    end.flatten
   end
   
   ##

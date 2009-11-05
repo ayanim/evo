@@ -59,8 +59,9 @@ describe Evo::Package do
   
   describe "#paths_to_view" do
     it "should return paths available" do
-      p @package.paths_to_view(:bar)
-      p @package.paths_to_view(:baz)
+      @package.paths_to_view(:bar).length.should == 2
+      @package.paths_to_view(:baz).length.should == 1
+      @package.paths_to_view(:hey).length.should == 0
     end
   end
     
