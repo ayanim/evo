@@ -54,4 +54,10 @@ describe Evo do
       Evo.loaded_packages.first.should be_a(Evo::Package)
     end
   end
+  
+  describe "#parse_options" do
+    it "should lock the app when -x is passed" do
+      Evo.lock?.should be_false
+    end
+  end
 end

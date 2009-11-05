@@ -25,9 +25,8 @@ class Evo
     load_config
     if run?
       parse_options
-      run self
+      run self and puts "== Evolution/#{VERSION}"
     end
-    puts "== Evolution/#{VERSION}"
   end
   
   ##
