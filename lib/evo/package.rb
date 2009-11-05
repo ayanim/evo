@@ -81,8 +81,11 @@ class Evo
     
     def paths_to_view view
       Evo.loaded_packages.map do |package|
-        p self == package
-        Dir[package.path / :views / name / "#{view}.*"]
+        if self == package
+          Dir[package.path / :views / "#{view}.*"]
+        else
+          Dir[package.path / :views / name / "#{view}.*"]
+        end
       end.flatten
     end
     
