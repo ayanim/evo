@@ -4,7 +4,17 @@ class Evo
     File.expand_path File.dirname(__FILE__)  
   end
   
-  def self.package_load_path
-    ["#{root}/application/packages", "#{core_root}/packages"]
+  def self.load_paths
+    [root, core_root]
+  end
+  
+  def self.path_to file
+    paths_to(file).first
+  end
+  
+  def self.paths_to file
+    load_paths.map do |path|
+      path / file if File.exists? path / file
+    end.compact
   end
 end

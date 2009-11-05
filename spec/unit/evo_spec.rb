@@ -6,13 +6,13 @@ describe Evo do
     Evo.should == Sinatra::Application
   end
   
-  describe "#package_load_path" do
+  describe "#load_paths" do
     it "should start with the application" do
-      Evo.package_load_path.first.should include('app/application/packages')
+      Evo.load_paths.first.should include('app')
     end
     
     it "should end with core" do
-      Evo.package_load_path.last.should include('evo/packages')
+      Evo.load_paths.last.should include('evo')
     end
   end
   
