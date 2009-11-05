@@ -71,7 +71,7 @@ class Evo
 
     def render_uri queue
       queue.map do |q|
-        %(<script src="#{q[:js]}"></script>)
+        %(<script src="#{q[:js]}" type="text/javascript"></script>)
       end.join "\n"
     end
 
@@ -79,7 +79,7 @@ class Evo
     # Render inline _queue_.
 
     def render_inline queue
-      "<script>\n" + 
+      %(<script type="text/javascript">\n) + 
         queue.map { |q| q[:js] }.join(";\n") + 
       ";\n</script>"
     end

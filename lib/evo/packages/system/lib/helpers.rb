@@ -25,6 +25,13 @@ class Evo
       end
       
       ##
+      # JavaScript queue.
+      
+      def javascripts
+        @javascripts ||= JavaScriptQueue.new
+      end
+      
+      ##
       # Generate urlencoded random token.
       
       def token
