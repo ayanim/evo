@@ -100,12 +100,21 @@ class Evo
   end
   
   ##
+  # Return all Evo::Package instances.
+  
+  def self.packages
+    @packages ||= package_paths.map do |dir|
+      Evo::Package.new dir
+    end
+  end
+  
+  ##
   # Load all packages within the #load_path's
   # visibility. Populates #loaded_packages.
   
   def self.load_packages
-    @loaded_packages = package_paths.map do |dir|
-      Package.new(dir).load
+    @loaded_packages = packages.map do |package|
+      Evo::Package.current = package and package.load
     end
   end
   

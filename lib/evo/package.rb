@@ -53,11 +53,11 @@ class Evo
     
     ##
     # Return array of files in directory _name_
-    # matching the given _pattern_ which defaults
+    # matching the given _glob_ which defaults
     # to recursing and selecting every file.
     
-    def files_in_directory name, pattern = '**' / '*'
-      Dir[path / name / pattern]
+    def files_in_directory name, glob = '**' / '*'
+      Dir[path / name / glob]
     end
     
     ##
@@ -155,6 +155,17 @@ class Evo
     
     def self.get name
       find(name).first
+    end
+    
+    ##
+    # Proc / package map.
+    
+    def self.map
+      @map ||= {}
+    end
+    
+    class << self
+      attr_accessor :current
     end
     
   end

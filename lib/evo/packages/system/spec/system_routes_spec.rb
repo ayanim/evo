@@ -1,5 +1,13 @@
 
 describe "system" do
+  describe "#package" do
+    it "should reference the current package" do
+      get '/foo'
+      last_response.should be_ok
+      last_response.body.should == 'foo'
+    end
+  end
+  
   describe "get /:package/*" do
     it "should transfer a file when it is present" do
       get '/foo/foo.txt'
