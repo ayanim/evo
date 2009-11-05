@@ -42,9 +42,17 @@ class Evo
       File.directory? path / name
     end
     
+    ##
+    # Return array of files in directory _name_
+    # matching the given _pattern_ which defaults
+    # to recursing and selecting every file.
+    
     def files_in_directory name, pattern = '**' / '*'
       Dir[path / name / pattern]
     end
+    
+    ##
+    # Load all ruby files in directory _name_.
     
     def load_directory name
       files_in_directory(name, '**' / '*.rb').each do |file|

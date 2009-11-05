@@ -13,6 +13,22 @@ describe Evo::Package do
     end
   end
   
+  describe "#files_in_directory" do
+    it "should return recursive list of all files by default" do
+      @package.files_in_directory(:spec).should contain('foo_spec.rb')
+      @package.files_in_directory(:spec).should contain('nested_foo_spec.rb')
+    end
+    
+    it "should return an empty array when the directory does not exist" do
+      @package.files_in_directory(:bar).should be_empty
+    end
+    
+    it "should allow a glob pattern to be passed" do
+      @package.files_in_directory(:spec, '*.rb').should contain('foo_spec.rb')
+      @package.files_in_directory(:spec, '*.rb').should_not contain('nested_foo_spec.rb')
+    end
+  end
+  
   describe "#load_directory" do
     it "should load all *.rb files within the directory" do
       @package.load_directory :spec
