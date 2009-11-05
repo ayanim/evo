@@ -2,7 +2,7 @@
 require File.dirname(__FILE__) + '/queue'
 
 class Evo
-  class MessageQueue < Evo::Queue
+  class MessageQueue < Queue
 
     ##
     # Add _message_ of the given _type_. When _message_
