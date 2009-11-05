@@ -6,6 +6,12 @@ describe Evo do
     Evo.should == Sinatra::Application
   end
   
+  describe "VERSION" do
+    it "should be a triple" do
+      Evo::VERSION.should be_a_valid_version
+    end
+  end
+  
   describe "#load_paths" do
     it "should start with the application" do
       Evo.load_paths.first.should include('app')

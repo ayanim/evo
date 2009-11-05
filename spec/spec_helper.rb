@@ -63,6 +63,14 @@ Spec::Runner.configure do |c|
         actual['Content-Type'] == type
       end
     end
+    
+    # String matching n.n.n
+    
+    def be_a_valid_version
+      simple_matcher "to be a valid version matching n.n.n" do |actual|
+        actual =~ /\A\d+\.\d+\.\d+\Z/
+      end
+    end
   }
 end
 
