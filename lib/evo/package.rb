@@ -77,16 +77,39 @@ class Evo
     end
     
     ##
+    # Return all replaceable paths to _dir_ with the
+    # given file _glob_ pattern. 
+    #
+    # This method allows other packages to override 
+    # views, stylesheets, javascript, and other files
+    # while defaulting back to the origin package.
+    #
+    # === Examples
+    # 
+    # Lets say that package 'user' contains 'user/views/user.haml',
+    # a contib package may create 'foo/views/user/user.haml' or use
+    # a different template engine suffix such as 'foo/views/user/user.erb'
+    # which will take precedence.
+    #
+    #  user.replaceable_paths_to(:view, "user.*")
+    #  # => '<application>/packages/foo/views/user/user.erb'
+    #
+    
+    def replaceable_paths_to dir, glob
+      Evo.loaded_packages.map do |package|
+        if self == package
+          Dir[package.path / dir / glob]
+        else
+          Dir[package.path / dir / name / glob]
+        end
+      end.flatten
+    end
+    
+    ##
     # Return all paths to _view_ which disregards engine suffix.
     
     def paths_to_view view
-      Evo.loaded_packages.map do |package|
-        if self == package
-          Dir[package.path / :views / "#{view}.*"]
-        else
-          Dir[package.path / :views / name / "#{view}.*"]
-        end
-      end.flatten
+      replaceable_paths_to :views, "#{view}.*"
     end
     
     ##
