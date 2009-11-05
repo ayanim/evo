@@ -6,6 +6,7 @@ class Evo
   #
   #  * Loads packages
   #  * Loads config/environments.rb
+  #  * Runs when #run? is true
   # 
   # === Options
   # 
@@ -23,19 +24,25 @@ class Evo
     load_packages
     load_config
     if run?
-      if ARGV.any?
-        require 'optparse'
-        OptionParser.new do |op|
-          op.on('-x')        {     set :lock, true }
-          op.on('-e env')    { |v| set :environment, v.to_sym }
-          op.on('-s server') { |v| set :server, v }
-          op.on('-p port')   { |v| set :port, v.to_i }
-          op.on('--help')    { abort "usage: application.rb [-x] [-e env] [-s server] [-p port]" }
-        end.parse! ARGV.dup
-      end
+      parse_options
       run self
     end
     puts "== Evolution/#{VERSION}"
+  end
+  
+  ##
+  # Parse options from _args_.
+  
+  def self.parse_options args = ARGV.dup
+    return if args.empty?
+    require 'optparse'
+    OptionParser.new do |op|
+      op.on('-x')        {     set :lock, true }
+      op.on('-e env')    { |v| set :environment, v.to_sym }
+      op.on('-s server') { |v| set :server, v }
+      op.on('-p port')   { |v| set :port, v.to_i }
+      op.on('--help')    { abort "usage: application.rb [-x] [-e env] [-s server] [-p port]" }
+    end.parse! args
   end
   
   ##
