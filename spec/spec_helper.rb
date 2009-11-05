@@ -5,16 +5,10 @@ require 'evo'
 require 'webrat'
 require 'rack/test'
 
-# Sinatra
+# Boot evolution
 
-configure do
-  set :root, File.dirname(__FILE__) + '/fixtures/app'
-  set :environment, :test
-  enable :raise_errors
-  disable :run
-  disable :logging
-  DataMapper.setup :default, 'sqlite3::memory:'
-end
+Evo.boot! :environment => :test, 
+          :root => File.dirname(__FILE__) + '/fixtures/app'
 
 # Spec configuration
 
@@ -76,5 +70,4 @@ end
 
 # Run package specs
 
-Evo.load_packages
 Evo.spec!
