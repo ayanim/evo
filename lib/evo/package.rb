@@ -84,7 +84,7 @@ class Evo
     ##
     # Find package(s) by _name_.
     
-    def self.find_by_name name
+    def self.find name
       Evo.loaded_packages.select do |package|
         package.name == name.to_sym
       end

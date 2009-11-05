@@ -57,12 +57,12 @@ describe Evo::Package do
     end
   end
     
-  describe ".find_by_name" do
+  describe ".find" do
     it "should find packages by name" do
-      Evo::Package.find_by_name(:foo).first.should be_a(Evo::Package)
-      Evo::Package.find_by_name(:foo).length.should == 1
-      Evo::Package.find_by_name('foo').length.should == 1
-      Evo::Package.find_by_name(:system).length.should == 2
+      Evo::Package.find(:foo).first.should be_a(Evo::Package)
+      Evo::Package.find(:foo).length.should == 1
+      Evo::Package.find('foo').length.should == 1
+      Evo::Package.find(:system).length.should == 2
     end
   end
 end
