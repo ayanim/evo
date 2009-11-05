@@ -1,6 +1,13 @@
 
 class Evo
   
+  #--
+  # Setting defaults
+  #++
+  
+  enable :sessions
+  enable :methodoverride
+  
   ##
   # Path to Evo's core.
   
