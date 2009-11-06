@@ -1,6 +1,7 @@
 
 configure do |app|
   set :port, 3000
+  set :haml, :escape_html => true
   enable :run
   enable :sessions
   enable :methodoverride
