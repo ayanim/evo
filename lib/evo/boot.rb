@@ -11,7 +11,7 @@ class Evo
   # === Options
   # 
   #   :root      (required) Application root
-  #   ...        All other options set attr_writter's
+  #   ...        All other options are passed to #set
   # 
   # === Examples
   #
