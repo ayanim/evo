@@ -20,7 +20,7 @@ class Evo
   
   def self.boot! options = {}
     set :root, options.delete(:root) || raise('application :root is required')
-    options.each { |k, v| send(:"#{k}=", v) if respond_to? :"#{k}=" }
+    set options
     load_packages
     load_config
     if run?
