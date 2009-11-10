@@ -81,20 +81,26 @@ class Evo
         object_name = parts.last.to_sym
         parts[-1] = "views/_#{parts.last}.*"
         path = package.path_to File.join(parts)
+        engine = Evo.template_engine_for path
         options[:locals] ||= {}
         if collection = options.delete(:collection)
           collection.map do |object|
             options[:locals].merge! object_name => object
-            render Evo.template_engine_for(path), path, options
+            render engine, path, options
           end.join("\n")
         else
           if object = options.delete(:object)
             options[:locals].merge! object_name => object
           end
-          render Evo.template_engine_for(path), path, options
+          render engine, path, options
         end
       end
       alias :partial :render_partial
+      
+      private
+      
+      ##
+      # Sinatra hack to allow views to be loaded from arbitrary paths.
       
       def lookup_template engine, template, views_dir, filename = nil, line = nil
         return super unless File.exists? template
