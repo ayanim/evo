@@ -75,21 +75,26 @@ class Evo
   end
   
   ##
+  # Return immediate directories within _path_.
+  
+  def self.directories_in path
+    paths_to(path).map do |dir|
+      Dir[dir / '*']
+    end.flatten
+  end
+  
+  ##
   # Return all package paths.
   
   def self.package_paths
-    paths_to(:packages).map do |dir|
-      Dir[dir / '*']
-    end.flatten
+    directories_in :packages
   end
   
   ##
   # Return all theme paths.
   
   def self.theme_paths
-    paths_to(:themes).map do |dir|
-      Dir[dir / '*']
-    end.flatten
+    directories_in :themes
   end
   
   ##
