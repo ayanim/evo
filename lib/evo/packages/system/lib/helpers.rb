@@ -105,11 +105,6 @@ class Evo
       ##
       # Render partial template _name_ with the given _options_.
       #
-      #   Local variables are injected for use within the view. 
-      #   For example partial(:item, :collection => Item.all) will
-      #   iterate and assign each value in :collection as a local
-      #   variable named 'item'.
-      #
       # === Options
       #
       #  :package      Render a view residing in the given :package
