@@ -129,4 +129,11 @@ class Evo
       package.load_directory :spec
     end
   end
+  
+  ##
+  # Return the template engine symbol for the given _path_.
+  
+  def self.template_engine_for path
+    File.extname(path)[1..-1].to_sym
+  end
 end
