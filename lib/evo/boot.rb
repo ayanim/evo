@@ -27,6 +27,10 @@ class Evo
   #
   #   Evo.boot! :root => File.dirname(__FILE__) + '/fixtures/app', :environment => :test
   #
+  # === Raises
+  #
+  #  * Evo::BootError
+  #
   
   def self.boot! options = {}
     set :root, options.delete(:root) || raise(BootError, 'application :root is required')
