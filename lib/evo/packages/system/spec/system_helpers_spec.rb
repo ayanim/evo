@@ -60,6 +60,19 @@ describe "system" do
       get '/'
       last_response.body.should include('im erb')
     end
+    
+    it "should allow yield :sym to output a region" do
+      mock_app do
+        get '/' do
+          render :regions
+        end
+      end
+      content_for :header, 'Im a heading'
+      content_for :primary, 'Im content'
+      get '/'
+      last_response.should include('id="header">Im a heading')
+      last_response.should include('id="primary">Im content')
+    end
   end
   
   describe "#render_partial" do
