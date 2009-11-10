@@ -81,15 +81,6 @@ class Evo
       end
       
       ##
-      # Render template _path_ with the given _options_.
-      
-      def render_template path, options
-        Tilt.new(path).render options.delete(:context), options do |region|
-          content_for region
-        end
-      end
-      
-      ##
       # Render template _name_ with the given _options_.
       #
       # === Options
@@ -99,9 +90,16 @@ class Evo
       #
       
       def render name, options = {}
+        if options.delete :partial
+          parts = name.to_s.split '/'
+          parts[-1] = "_#{parts.last}"
+          name = File.join parts
+        end
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        raise "#{name.inspect} view does not exist" unless path
-        render_template path, options
+        raise "view #{name.inspect} does not exist" unless path
+        Tilt.new(path).render options.delete(:context), options do |region|
+          content_for region
+        end
       end
       
       ##
@@ -121,21 +119,17 @@ class Evo
       #
 
       def render_partial name, options = {}
-        parts = name.to_s.split '/'
-        object_name = parts.last.to_sym
-        parts[-1] = "views/_#{parts.last}.*"
-        path = (options.delete(:package) || package).path_to File.join(parts)
-        raise "#{name.inspect} partial does not exist" unless path
+        object_name = name.to_s.split('/').last.to_sym
         if collection = options.delete(:collection)
           collection.map do |object|
             options[object_name] = object
-            render_template path, options
+            render name, options.merge!(:partial => true)
           end.join("\n")
         else
           if object = options.delete(:object)
             options[object_name] = object
           end
-          render_template path, options
+          render name, options.merge!(:partial => true)
         end
       end
       alias :partial :render_partial
