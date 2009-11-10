@@ -129,22 +129,6 @@ class Evo
       end
       alias :partial :render_partial
       
-      private
-      
-      ##
-      # HACK: Sinatra to allow views to be loaded from arbitrary paths.
-      
-      def lookup_template engine, template, views_dir, filename = nil, line = nil
-        return super unless template.is_a? String
-        [ ::File.read(template), template, 1 ]
-      end
-      
-      def lookup_layout engine, template, views_dir
-        p engine
-        p template
-        # TODO: implement
-      end
-      
     end
   end
 end
