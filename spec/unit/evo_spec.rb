@@ -55,15 +55,6 @@ describe Evo do
     end
   end
   
-  describe "#template_engine_for" do
-    it "should return a template engine symbol for the given path" do
-      Evo.template_engine_for('foo.haml').should == :haml
-      Evo.template_engine_for('foo/bar.haml').should == :haml
-      Evo.template_engine_for('foo/bar.haml').should == :haml
-      Evo.template_engine_for('foo/bar.html.erb').should == :erb
-    end
-  end
-  
   describe "#parse_options" do
     describe "-x" do
       it "should lock the application" do
