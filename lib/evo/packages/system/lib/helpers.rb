@@ -1,6 +1,5 @@
 
 class Evo
-  alias :render_template :render
   module System
     module Helpers
       
