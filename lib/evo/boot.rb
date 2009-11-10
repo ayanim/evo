@@ -1,6 +1,13 @@
 
 class Evo
   
+  #--
+  # Exceptions
+  #++
+  
+  Error = Class.new StandardError
+  BootError = Class.new Error
+  
   ##
   # Boot Evolution:
   #
@@ -22,12 +29,12 @@ class Evo
   #
   
   def self.boot! options = {}
-    set :root, options.delete(:root) || raise('application :root is required')
+    set :root, options.delete(:root) || raise(BootError, 'application :root is required')
     set options
     load_config
     load_packages
     load_themes
-    set :theme, Evo::Theme.get(theme) || raise("theme #{theme.inspect} does not exist")
+    set :theme, Evo::Theme.get(theme) || raise(BootError, "theme #{theme.inspect} does not exist")
     if run?
       parse_options
       run self and puts "== Evolution/#{VERSION}"
