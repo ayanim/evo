@@ -34,17 +34,20 @@ class Evo
       #  contents_for :footer, 'Copyright 2009'
       #  contents_for :footer, 'TJ Holowaychuk'
       #
-      #  contents_for(:footer).join(' ')
+      #  contents_for(:footer).map(&:to_html).join(' ')
       #  # => 'Copyright 2009 TJ Holowaychuk'
       #
       #  # from within a view
       #  yield :footer, ' '
       #
+      #  # or join with ''
+      #  yield :footer
+      #
       
       def content_for region, contents = nil, &block
         case
-        when contents ; regions[region] << contents
-        when block    ; regions[region] << capture(&block)
+        when contents ; regions[region] << Evo::Block.new(contents)
+        when block    ; regions[region] << Evo::Block.new(capture(&block))
         else          ; regions[region]
         end
       end
@@ -131,7 +134,7 @@ class Evo
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
         raise "view #{name.inspect} does not exist" unless path
         Tilt.new(path).render options.delete(:context), options do |region, string|
-          content_for(region).join string
+          content_for(region).map(&:to_html).join string
         end
       end
       

@@ -22,7 +22,7 @@ describe "system" do
         get '/' do
           content_for :header, 'foo'
           content_for :header, 'bar'
-          content_for(:header).join
+          content_for(:header).map(&:to_html).join
         end
       end
       get '/'
@@ -35,6 +35,7 @@ describe "system" do
           content_for :header do
             'Testing'
           end
+          content_for(:header).map(&:to_html).join
         end
       end
       get '/'
@@ -47,11 +48,11 @@ describe "system" do
           content_for :header, 'foo'
           content_for :header, 'bar'
           content_for :header, 'baz'
-          content_for(:header).join
+          content_for(:header).map(&:to_html).join
         end
         
         get '/other' do
-          content_for(:header).join
+          content_for(:header).map(&:to_html).join
         end
       end
       get '/'
