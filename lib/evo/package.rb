@@ -171,6 +171,35 @@ class Evo
       Evo.paths_to :packages / name / glob
     end
     
+    # Partials implementation which includes collections support
+    # partial 'photo/_item', :object => @photo
+    # partial 'photo/_item', :collection => @photos
+    def render_partial template, options = {}
+      options.merge! :layout => false
+      # path = template.to_s.split(File::SEPARATOR)
+      # object_name = path[-1].to_sym
+      # path[-1] = "_#{path[-1]}"
+      # template_path = File.join(path)
+      # raise 'Partial collection specified but is nil' if options.has_key?(:collection) && options[:collection].nil?
+      # if collection = options.delete(:collection)
+      #   options.delete(:object)
+      #   counter = 0
+      #   collection.inject([]) do |buffer, member|
+      #     counter += 1
+      #     options[:locals] ||= {}
+      #     options[:locals].merge!(object_name => member, "#{object_name}_counter".to_sym => counter)
+      #     buffer << render_template(template_path, options)
+      #   end.join("\n")
+      # else
+      #   if member = options.delete(:object)
+      #     options[:locals] ||= {}
+      #     options[:locals].merge!(object_name => member)
+      #   end
+      #   render_template(template_path, options)
+      # end
+    end
+    alias :partial :render_partial
+    
     ##
     # Return first path to _glob_.
     
