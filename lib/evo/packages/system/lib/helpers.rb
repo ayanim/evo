@@ -92,7 +92,7 @@ class Evo
       
       def render name, options = {}
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        Tilt.new(path).render options do |region|
+        Tilt.new(path).render nil, options do |region|
           content_for region
         end
       end
@@ -114,23 +114,20 @@ class Evo
       #
 
       def render_partial name, options = {}
-        options.merge! :layout => false
         parts = name.to_s.split '/'
         object_name = parts.last.to_sym
         parts[-1] = "views/_#{parts.last}.*"
         path = (options.delete(:package) || package).path_to File.join(parts)
-        engine = Evo.template_engine_for path
-        options[:locals] ||= {}
         if collection = options.delete(:collection)
           collection.map do |object|
-            options[:locals].merge! object_name => object
-            render_template engine, path, options
+            options[object_name] = object
+            Tilt.new(path).render nil, options
           end.join("\n")
         else
           if object = options.delete(:object)
-            options[:locals].merge! object_name => object
+            options[object_name] = object
           end
-          render_template engine, path, options
+          Tilt.new(path).render nil, options
         end
       end
       alias :partial :render_partial
