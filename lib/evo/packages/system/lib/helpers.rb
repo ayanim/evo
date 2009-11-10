@@ -1,5 +1,6 @@
 
 class Evo
+  alias :render_template :render
   module System
     module Helpers
       
@@ -68,9 +69,9 @@ class Evo
       #  ...    All options are passed to Sinatra's #render method.
       #
       
-      def render_template name, options = {}
+      def render name, options = {}
         path = package.path_to "views/#{name}.*"
-        render Evo.template_engine_for(path), path, options
+        render_template Evo.template_engine_for(path), path, options
       end
       
       ##
@@ -99,13 +100,13 @@ class Evo
         if collection = options.delete(:collection)
           collection.map do |object|
             options[:locals].merge! object_name => object
-            render engine, path, options
+            render_template engine, path, options
           end.join("\n")
         else
           if object = options.delete(:object)
             options[:locals].merge! object_name => object
           end
-          render engine, path, options
+          render_template engine, path, options
         end
       end
       alias :partial :render_partial

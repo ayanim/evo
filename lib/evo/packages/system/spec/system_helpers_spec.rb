@@ -54,7 +54,7 @@ describe "system" do
     it "should render a view" do
       mock_app do
         get '/' do
-          render_template :bar
+          render :bar
         end
       end
       get '/'
