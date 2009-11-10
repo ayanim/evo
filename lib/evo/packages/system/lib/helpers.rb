@@ -86,12 +86,13 @@ class Evo
       # === Options
       #
       #  :package  Render a view residing in the given :package
+      #  :context  Evaluate template against the given :context object
       #  ...       All other options are passed to Sinatra's #render method.
       #
       
       def render name, options = {}
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        Tilt.new(path).render nil, options do |region|
+        Tilt.new(path).render options.delete(:context), options do |region|
           content_for region
         end
       end
@@ -117,16 +118,17 @@ class Evo
         object_name = parts.last.to_sym
         parts[-1] = "views/_#{parts.last}.*"
         path = (options.delete(:package) || package).path_to File.join(parts)
+        raise "#{name.inspect} partial does not exist" unless path
         if collection = options.delete(:collection)
           collection.map do |object|
             options[object_name] = object
-            Tilt.new(path).render nil, options
+            Tilt.new(path).render options.delete(:context), options
           end.join("\n")
         else
           if object = options.delete(:object)
             options[object_name] = object
           end
-          Tilt.new(path).render nil, options
+          Tilt.new(path).render options.delete(:context), options
         end
       end
       alias :partial :render_partial

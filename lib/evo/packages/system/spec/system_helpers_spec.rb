@@ -159,5 +159,15 @@ describe "system" do
       get '/'
       last_response.body.should == "<p>foo</p>\n"
     end
+    
+    it "should evaluate against the given :context when passed" do
+      mock_app do
+        get '/' do
+          partial :context, :context => package
+        end
+      end
+      get '/'
+      last_response.body.should include('<h2>foo</h2>')
+    end
   end
 end
