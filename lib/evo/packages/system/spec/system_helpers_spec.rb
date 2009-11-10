@@ -49,4 +49,26 @@ describe "system" do
       a.should_not == b
     end
   end
+  
+  describe "#render_partial" do
+    it "should populate a local variable when :object is used" do
+      mock_app do
+        get '/' do
+          partial :item, :object => package
+        end
+      end
+      get '/'
+      last_response.body.should == "<h2>foo</h2>\n"
+    end
+    
+    it "should render the partial several times when a :collection is passed" do
+      mock_app do
+        get '/' do
+          partial :item, :collection => [package, package]
+        end
+      end
+      get '/'
+      last_response.body.should == "<h2>foo</h2>\n\n<h2>foo</h2>\n"
+    end
+  end
 end

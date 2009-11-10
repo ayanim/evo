@@ -99,22 +99,6 @@ describe Evo::Package do
     end
   end
   
-  describe "#render_partial" do
-    before :each do
-      @cat = mock 'Item', :name => 'Cat, im a kitty cat'  
-      @dog = mock 'Item', :name => 'Woof Woof'  
-    end
-    
-    it "should populate a local variable when :object is used" do
-      @package.render_partial(:item, :object => @cat).should include('<h2>Cat, im a kitty cat</h2>')
-    end
-    
-    it "should iterate collections when :collection is used" do
-      @package.render_partial(:item, :collection => [@cat, @dog]).should include('<h2>Cat, im a kitty cat</h2>')
-      @package.render_partial(:item, :collection => [@cat, @dog]).should include('<h2>Woof Woof</h2>')
-    end
-  end
-    
   describe ".find" do
     it "should find packages by name" do
       Evo::Package.find(:foo).first.should be_a(Evo::Package)

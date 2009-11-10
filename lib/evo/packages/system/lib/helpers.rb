@@ -60,6 +60,51 @@ class Evo
         session[:id] = token
       end
       
+      ##
+      # Render partial template _name_ with the given _options_.
+      #
+      #   Local variables are injected for use within the view. 
+      #   For example partial(:item, :collection => Item.all) will
+      #   iterate and assign each value in :collection as a local
+      #   variable named 'item'.
+      #
+      # === Options
+      #
+      #  :object       Render the template against a single object
+      #  :collection   Render the template with each object in :collection
+      #  ...           All other options are passed to Sinatra's #render method
+      #
+
+      def render_partial name, options = {}
+        options.merge! :layout => false
+        parts = name.to_s.split '/'
+        object_name = parts.last.to_sym
+        parts[-1] = "views/_#{parts.last}.*"
+        path = package.path_to File.join(parts)
+        options[:locals] ||= {}
+        if collection = options.delete(:collection)
+          collection.map do |object|
+            options[:locals].merge! object_name => object
+            render Evo.template_engine_for(path), path, options
+          end.join("\n")
+        else
+          if object = options.delete(:object)
+            options[:locals].merge! object_name => object
+          end
+          render Evo.template_engine_for(path), path, options
+        end
+      end
+      alias :partial :render_partial
+      
+      def lookup_template engine, template, views_dir, filename = nil, line = nil
+        return super unless File.exists? template
+        if cached = self.class.templates[template]
+          lookup_template(engine, cached[:template], views_dir, cached[:filename], cached[:line])
+        else
+          [ ::File.read(template), template, 1 ]
+        end
+      end
+      
     end
   end
 end
