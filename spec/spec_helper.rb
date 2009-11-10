@@ -8,7 +8,7 @@ require 'rack/test'
 
 # Boot evolution
 
-Evo.boot! :environment => :test, 
+Evo.boot! :environment => :test,
           :root => File.dirname(__FILE__) + '/fixtures/app'
 
 # Spec configuration

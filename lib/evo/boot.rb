@@ -4,14 +4,16 @@ class Evo
   ##
   # Boot Evolution:
   #
+  #  * Loads configuration
   #  * Loads packages
   #  * Loads themes
-  #  * Loads config/environments.rb
+  #  * Sets the current theme instance derived from Evo.theme
   #  * Runs when #run? is true
   # 
   # === Options
   # 
   #   :root      (required) Application root
+  #   :theme     Active theme name, defaults to :chrome
   #   ...        All other options are passed to #set
   # 
   # === Examples
@@ -22,9 +24,10 @@ class Evo
   def self.boot! options = {}
     set :root, options.delete(:root) || raise('application :root is required')
     set options
+    load_config
     load_packages
     load_themes
-    load_config
+    set :theme, Evo::Theme.get(theme) || raise("theme #{theme.inspect} does not exist")
     if run?
       parse_options
       run self and puts "== Evolution/#{VERSION}"

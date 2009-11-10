@@ -6,9 +6,24 @@ describe Evo do
     Evo.should == Sinatra::Application
   end
   
+  it "should default :theme to :chrome" do
+    Evo.theme.name.should == :chrome
+  end
+  
   describe "VERSION" do
     it "should be a triple" do
       Evo::VERSION.should be_a_valid_version
+    end
+  end
+  
+  describe ".boot!" do
+    it "should raise an error when :root is not present" do
+      lambda { Evo.boot! }.should raise_error('application :root is required')
+    end
+    
+    it "should raise an error when :theme is not a valid theme name" do
+      lambda { Evo.boot! :root => File.dirname(__FILE__) + '/../fixtures/app', :theme => :foo }.
+      should raise_error('theme :foo does not exist')
     end
   end
   
