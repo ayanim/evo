@@ -1,18 +1,23 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
+shared_examples_for 'All packages' do
+  describe "#==" do
+    it "should check if two packages have the same name" do
+      (@package == @package).should be_true
+      (@package == @other).should be_false
+    end
+  end
+end
+
 describe Evo::Package do
   before :each do
     @package = Evo::Package.new File.dirname(__FILE__) + '/../fixtures/app/packages/foo'
     @jobqueue = Evo::Package.new Evo.core_root + '/packages/jobqueue'
+    @other = @jobqueue
   end
   
-  describe "#==" do
-    it "should check if two packages have the same name" do
-      (@package == @package).should be_true
-      (@package == @jobqueue).should be_false
-    end
-  end
+  it_should_behave_like 'All packages'
   
   describe "#has_directory?" do
     it "should check if a directory exists" do
