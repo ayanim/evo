@@ -16,6 +16,50 @@ describe "system" do
     end
   end
   
+  describe "#content_for" do
+    it "should buffer contents for a specific region" do
+      mock_app do
+        get '/' do
+          content_for :header, 'foo'
+          content_for :header, 'bar'
+          content_for :header
+        end
+      end
+      get '/'
+      last_response.body.should == "foo\nbar"
+    end
+    
+    it "should buffer regular blocks" do
+      mock_app do
+        get '/' do
+          content_for :header do
+            'Testing'
+          end
+        end
+      end
+      get '/'
+      last_response.body.should include('Testing')
+    end
+    
+    it "should clear the buffer after each request" do
+      mock_app do
+        get '/' do
+          content_for :header, 'foo'
+          content_for :header, 'bar'
+          content_for :header, 'baz'
+        end
+        
+        get '/other' do
+          content_for :header
+        end
+      end
+      get '/'
+      last_response.body.should_not be_empty
+      get '/other'
+      last_response.body.should be_empty
+    end
+  end
+  
   describe "#messages" do
     it "should contain a session-based message queue" do
       mock_app do
@@ -54,7 +98,7 @@ describe "system" do
     it "should render a view" do
       mock_app do
         get '/' do
-          render :bar
+          render :bar 
         end
       end
       get '/'
@@ -64,14 +108,14 @@ describe "system" do
     it "should allow yield :sym to output a region" do
       mock_app do
         get '/' do
-          render :regions
+          content_for :header, 'Im a heading'
+          content_for :primary, 'Im content'
+          render :regions 
         end
       end
-      content_for :header, 'Im a heading'
-      content_for :primary, 'Im content'
       get '/'
-      last_response.should include('id="header">Im a heading')
-      last_response.should include('id="primary">Im content')
+      last_response.body.should include('Im a heading')
+      last_response.body.should include('Im content')
     end
   end
   

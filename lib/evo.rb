@@ -25,6 +25,7 @@ $:.unshift '/Users/tjholowaychuk/Scripts/gems/rext/lib'
 $:.unshift '/Users/tjholowaychuk/Scripts/gems/formz/lib' 
 
 require 'yaml'
+require 'tilt'
 require 'sinatra'
 require 'dm-core'
 require 'dm-migrations'

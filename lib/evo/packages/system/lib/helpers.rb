@@ -4,6 +4,26 @@ class Evo
   module System
     module Helpers
       
+      def regions
+        @__regions ||= Hash.new([])
+      end
+      
+      def reset_regions!
+        @__regions = Hash.new []
+      end
+      
+      def content_for region, contents = nil, &block
+        case
+        when contents ; regions[region] << contents
+        when block    ; regions[region] << capture(&block)
+        else          ; regions[region].join "\n"
+        end
+      end
+      
+      def capture &block
+        yield
+      end
+      
       ##
       # Set current package when evaluating a route _block_.
       
@@ -72,7 +92,9 @@ class Evo
       
       def render name, options = {}
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        render_template Evo.template_engine_for(path), path, options
+        Tilt.new(path).render options do |region|
+          content_for region
+        end
       end
       
       ##
