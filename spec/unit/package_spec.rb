@@ -8,6 +8,14 @@ shared_examples_for 'All packages' do
       (@package == @other).should be_false
     end
   end
+  
+  describe "#has_directory?" do
+    it "should check if a directory exists" do
+      @package.should have_directory(:spec)
+      @package.should_not have_directory(:bar)
+      @package.should_not have_directory('routes/foo.rb')
+    end
+  end
 end
 
 describe Evo::Package do
@@ -18,14 +26,6 @@ describe Evo::Package do
   end
   
   it_should_behave_like 'All packages'
-  
-  describe "#has_directory?" do
-    it "should check if a directory exists" do
-      @package.should have_directory(:spec)
-      @package.should_not have_directory(:bar)
-      @package.should_not have_directory('routes/foo.rb')
-    end
-  end
   
   describe "#has_file?" do
     it "should check if a file exists" do
