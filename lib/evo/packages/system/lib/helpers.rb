@@ -66,7 +66,7 @@ class Evo
       #
       # === Options
       #
-      #  :package  Package instance
+      #  :package  Render a view residing in the given :package
       #  ...       All other options are passed to Sinatra's #render method.
       #
       
@@ -85,7 +85,7 @@ class Evo
       #
       # === Options
       #
-      #  :package      Package instance
+      #  :package      Render a view residing in the given :package
       #  :object       Render the template against a single object
       #  :collection   Render the template with each object in :collection
       #  ...           All other options are passed to Sinatra's #render method
