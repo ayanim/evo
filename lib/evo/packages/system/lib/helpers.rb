@@ -66,11 +66,12 @@ class Evo
       #
       # === Options
       #
-      #  ...    All options are passed to Sinatra's #render method.
+      #  :package  Package instance
+      #  ...       All other options are passed to Sinatra's #render method.
       #
       
       def render name, options = {}
-        path = package.path_to "views/#{name}.*"
+        path = (options.delete(:package) || package).path_to "views/#{name}.*"
         render_template Evo.template_engine_for(path), path, options
       end
       
