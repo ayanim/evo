@@ -3,21 +3,54 @@ class Evo
   module System
     module Helpers
       
+      ##
+      # Region contents stack(s).
+      
       def regions
-        @__regions ||= Hash.new([])
+        @__regions ||= reset_regions!
       end
       
+      ##
+      # Reset region contents.
+      
       def reset_regions!
-        @__regions = Hash.new []
+        @__regions = Hash.new do |hash, key|
+          hash[key] = []
+        end
       end
+      
+      ##
+      # Get or set _contents_ for the given _region_.
+      #
+      # Contents may be provided via _contents_ object or
+      # by capturing the given _block_. 
+      #
+      # When both _contents_ and _block_ are not present, 
+      # the array of contents for the _region_ are returned;
+      # which may then be styled as needed.
+      #
+      # === Examples
+      #
+      #  contents_for :footer, 'Copyright 2009'
+      #  contents_for :footer, 'TJ Holowaychuk'
+      #
+      #  contents_for(:footer).join(' ')
+      #  # => 'Copyright 2009 TJ Holowaychuk'
+      #
+      #  # from within a view
+      #  yield :footer, ' '
+      #
       
       def content_for region, contents = nil, &block
         case
         when contents ; regions[region] << contents
         when block    ; regions[region] << capture(&block)
-        else          ; regions[region].join "\n"
+        else          ; regions[region]
         end
       end
+      
+      ##
+      # Capture _block_ output.
       
       def capture &block
         yield
@@ -97,8 +130,8 @@ class Evo
         end
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
         raise "view #{name.inspect} does not exist" unless path
-        Tilt.new(path).render options.delete(:context), options do |region|
-          content_for region
+        Tilt.new(path).render options.delete(:context), options do |region, string|
+          content_for(region).join string
         end
       end
       

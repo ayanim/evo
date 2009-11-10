@@ -22,11 +22,11 @@ describe "system" do
         get '/' do
           content_for :header, 'foo'
           content_for :header, 'bar'
-          content_for :header
+          content_for(:header).join
         end
       end
       get '/'
-      last_response.body.should == "foo\nbar"
+      last_response.body.should == "foobar"
     end
     
     it "should buffer regular blocks" do
@@ -47,10 +47,11 @@ describe "system" do
           content_for :header, 'foo'
           content_for :header, 'bar'
           content_for :header, 'baz'
+          content_for(:header).join
         end
         
         get '/other' do
-          content_for :header
+          content_for(:header).join
         end
       end
       get '/'
@@ -108,13 +109,14 @@ describe "system" do
     it "should allow yield :sym to output a region" do
       mock_app do
         get '/' do
-          content_for :header, 'Im a heading'
+          content_for :header, 'Welcome'
+          content_for :header, 'to our site'
           content_for :primary, 'Im content'
           render :regions 
         end
       end
       get '/'
-      last_response.body.should include('Im a heading')
+      last_response.body.should include("Welcome to our site\n")
       last_response.body.should include('Im content')
     end
   end
