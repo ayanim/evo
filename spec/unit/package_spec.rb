@@ -113,10 +113,6 @@ describe Evo::Package do
       @package.render_partial(:item, :collection => [@cat, @dog]).should include('<h2>Cat, im a kitty cat</h2>')
       @package.render_partial(:item, :collection => [@cat, @dog]).should include('<h2>Woof Woof</h2>')
     end
-    
-    it "should raise an error when :collection's value is not enumerable" do
-      lambda { @package.render_partial(:item, :collection => nil) }.should raise_error(ArgumentError, 'partial :collection must respond to #each; got nil')
-    end
   end
     
   describe ".find" do

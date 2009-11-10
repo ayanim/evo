@@ -171,32 +171,39 @@ class Evo
       Evo.paths_to :packages / name / glob
     end
     
-    # Partials implementation which includes collections support
-    # partial 'photo/_item', :object => @photo
-    # partial 'photo/_item', :collection => @photos
-    def render_partial template, options = {}
+    ##
+    # Render partial template _name_ with the given _options_.
+    #
+    #   Local variables are injected for use within the view. 
+    #   For example partial(:item, :collection => Item.all) will
+    #   iterate and assign each value in :collection as a local
+    #   variable named 'item'.
+    #
+    # === Options
+    #
+    #  :object       Render the template against a single object
+    #  :collection   Render the template with each object in :collection
+    #  ...           All other options are passed to Sinatra's #render method
+    #
+    
+    def render_partial name, options = {}
       options.merge! :layout => false
-      # path = template.to_s.split(File::SEPARATOR)
-      # object_name = path[-1].to_sym
-      # path[-1] = "_#{path[-1]}"
-      # template_path = File.join(path)
-      # raise 'Partial collection specified but is nil' if options.has_key?(:collection) && options[:collection].nil?
-      # if collection = options.delete(:collection)
-      #   options.delete(:object)
-      #   counter = 0
-      #   collection.inject([]) do |buffer, member|
-      #     counter += 1
-      #     options[:locals] ||= {}
-      #     options[:locals].merge!(object_name => member, "#{object_name}_counter".to_sym => counter)
-      #     buffer << render_template(template_path, options)
-      #   end.join("\n")
-      # else
-      #   if member = options.delete(:object)
-      #     options[:locals] ||= {}
-      #     options[:locals].merge!(object_name => member)
-      #   end
-      #   render_template(template_path, options)
-      # end
+      parts = name.to_s.split '/'
+      object_name = parts.last.to_sym
+      parts[-1] = "views/_#{parts.last}.*"
+      path = path_to File.join(parts)
+      options[:locals] ||= {}
+      if collection = options.delete(:collection)
+        collection.map do |object|
+          options[:locals].merge! object_name => object
+          render Evo.template_engine_for(path), path, options
+        end.join("\n")
+      else
+        if object = options.delete(:object)
+          options[:locals].merge! object_name => object
+        end
+        Evo.render Evo.template_engine_for(path), path, options
+      end
     end
     alias :partial :render_partial
     
