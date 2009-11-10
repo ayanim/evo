@@ -60,10 +60,17 @@ class Evo
         session[:id] = token
       end
       
+      ##
+      # Render template _name_ with the given _options_.
+      #
+      # === Options
+      #
+      #  ...    All options are passed to Sinatra's #render method.
+      #
+      
       def render_template name, options = {}
         path = package.path_to "views/#{name}.*"
-        engine = Evo.template_engine_for path
-        render engine, path, options
+        render Evo.template_engine_for(path), path, options
       end
       
       ##
