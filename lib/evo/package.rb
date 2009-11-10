@@ -133,7 +133,7 @@ class Evo
     #
     
     def replaceable_paths_to dir, glob
-      Evo.loaded_packages.map do |package|
+      self.class.instances.map do |package|
         if self == package
           Dir[package.path / dir / glob]
         else
@@ -182,7 +182,7 @@ class Evo
     # Find package(s) by _name_.
     
     def self.find name
-      Evo.loaded_packages.select do |package|
+      instances.select do |package|
         package.name == name.to_sym
       end
     end
@@ -199,6 +199,13 @@ class Evo
     
     def self.map
       @map ||= {}
+    end
+    
+    ##
+    # Loaded packages.
+    
+    def self.instances
+      Evo.loaded_packages
     end
     
     ##

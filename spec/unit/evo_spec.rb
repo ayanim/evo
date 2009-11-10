@@ -55,6 +55,13 @@ describe Evo do
     end
   end
   
+  describe "#load_themes" do
+    it "should load themes" do
+      Evo.load_themes
+      Evo.loaded_themes.first.should be_a(Evo::Theme)
+    end
+  end
+  
   describe "#parse_options" do
     describe "-x" do
       it "should lock the application" do

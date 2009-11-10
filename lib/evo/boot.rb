@@ -84,11 +84,37 @@ class Evo
   end
   
   ##
+  # Return all theme paths.
+  
+  def self.theme_paths
+    paths_to(:themes).map do |dir|
+      Dir[dir / '*']
+    end.flatten
+  end
+  
+  ##
   # Load all configuration files.
   
   def self.load_config
     paths_to(:config / 'environment.rb').each do |file|
       require file
+    end
+  end
+  
+  ##
+  # Return loaded Evo::Theme instances.
+  
+  def self.loaded_themes
+    @loaded_themes || []
+  end
+  
+  ##
+  # Load all themes within #load_path's visibility.
+  # Populates #loaded_themes.
+  
+  def self.load_themes
+    @loaded_themes = theme_paths.map do |dir|
+      Evo::Theme.new dir
     end
   end
   
