@@ -85,6 +85,7 @@ class Evo
       #
       # === Options
       #
+      #  :package      Package instance
       #  :object       Render the template against a single object
       #  :collection   Render the template with each object in :collection
       #  ...           All other options are passed to Sinatra's #render method
@@ -95,7 +96,7 @@ class Evo
         parts = name.to_s.split '/'
         object_name = parts.last.to_sym
         parts[-1] = "views/_#{parts.last}.*"
-        path = package.path_to File.join(parts)
+        path = (options.delete(:package) || package).path_to File.join(parts)
         engine = Evo.template_engine_for path
         options[:locals] ||= {}
         if collection = options.delete(:collection)

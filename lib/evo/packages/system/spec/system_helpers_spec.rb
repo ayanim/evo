@@ -92,5 +92,15 @@ describe "system" do
       get '/'
       last_response.body.should == "<h2>foo</h2>\n"
     end
+    
+    it "should render views relative to :package when passed" do
+      mock_app do
+        get '/' do
+          partial :item, :object => package, :package => ::Evo::Package.get(:system)
+        end
+      end
+      get '/'
+      last_response.body.should == "<p>foo</p>\n"
+    end
   end
 end
