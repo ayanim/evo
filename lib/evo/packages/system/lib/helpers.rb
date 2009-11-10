@@ -60,6 +60,12 @@ class Evo
         session[:id] = token
       end
       
+      def render_template name, options = {}
+        path = package.path_to "views/#{name}.*"
+        engine = Evo.template_engine_for path
+        render engine, path, options
+      end
+      
       ##
       # Render partial template _name_ with the given _options_.
       #
@@ -109,6 +115,12 @@ class Evo
         else
           [ ::File.read(template), template, 1 ]
         end
+      end
+      
+      def lookup_layout engine, template, views_dir
+        p engine
+        p template
+        # TODO: implement
       end
       
     end

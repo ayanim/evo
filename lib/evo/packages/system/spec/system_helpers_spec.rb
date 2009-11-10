@@ -50,6 +50,18 @@ describe "system" do
     end
   end
   
+  describe "#render" do
+    it "should render a view" do
+      mock_app do
+        get '/' do
+          render_template :bar
+        end
+      end
+      get '/'
+      last_response.body.should include('im erb')
+    end
+  end
+  
   describe "#render_partial" do
     it "should populate a local variable when :object is used" do
       mock_app do
