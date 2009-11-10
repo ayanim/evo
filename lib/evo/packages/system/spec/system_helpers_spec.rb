@@ -70,5 +70,15 @@ describe "system" do
       get '/'
       last_response.body.should == "<h2>foo</h2>\n\n<h2>foo</h2>\n"
     end
+    
+    it "should still work when :locals are passed" do
+      mock_app do
+        get '/' do
+          partial :item, :object => package, :locals => { :foo => 'bar' }
+        end
+      end
+      get '/'
+      last_response.body.should == "<h2>foo</h2>\n"
+    end
   end
 end
