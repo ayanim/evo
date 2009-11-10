@@ -1,5 +1,6 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/shared/all_packages'
 
 describe Evo::Theme do
   before :each do
