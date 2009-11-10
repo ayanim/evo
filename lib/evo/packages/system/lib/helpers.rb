@@ -81,20 +81,27 @@ class Evo
       end
       
       ##
+      # Render template _path_ with the given _options_.
+      
+      def render_template path, options
+        Tilt.new(path).render options.delete(:context), options do |region|
+          content_for region
+        end
+      end
+      
+      ##
       # Render template _name_ with the given _options_.
       #
       # === Options
       #
       #  :package  Render a view residing in the given :package
       #  :context  Evaluate template against the given :context object
-      #  ...       All other options are passed to Sinatra's #render method.
       #
       
       def render name, options = {}
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        Tilt.new(path).render options.delete(:context), options do |region|
-          content_for region
-        end
+        raise "#{name.inspect} view does not exist" unless path
+        render_template path, options
       end
       
       ##
@@ -108,9 +115,9 @@ class Evo
       # === Options
       #
       #  :package      Render a view residing in the given :package
+      #  :context      Evaluate template against the given :context object
       #  :object       Render the template against a single object
       #  :collection   Render the template with each object in :collection
-      #  ...           All other options are passed to Sinatra's #render method
       #
 
       def render_partial name, options = {}
@@ -122,13 +129,13 @@ class Evo
         if collection = options.delete(:collection)
           collection.map do |object|
             options[object_name] = object
-            Tilt.new(path).render options.delete(:context), options
+            render_template path, options
           end.join("\n")
         else
           if object = options.delete(:object)
             options[object_name] = object
           end
-          Tilt.new(path).render options.delete(:context), options
+          render_template path, options
         end
       end
       alias :partial :render_partial
