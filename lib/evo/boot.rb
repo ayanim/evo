@@ -5,6 +5,7 @@ class Evo
   # Boot Evolution:
   #
   #  * Loads packages
+  #  * Loads themes
   #  * Loads config/environments.rb
   #  * Runs when #run? is true
   # 
@@ -22,6 +23,7 @@ class Evo
     set :root, options.delete(:root) || raise('application :root is required')
     set options
     load_packages
+    load_themes
     load_config
     if run?
       parse_options
