@@ -1,6 +1,4 @@
 
-require File.dirname(__FILE__) + '/../spec_helper'
-
 describe Evo::JavaScriptQueue do
   before :each do
     @js = Evo::JavaScriptQueue.new  
@@ -36,7 +34,7 @@ describe Evo::JavaScriptQueue do
       it "should output within a <script> tag" do
         @js << 'foo = "bar"'
         markup = @js.to_html
-        markup.should include("<script>\n")
+        markup.should include(%(<script type="text/javascript">\n))
         markup.should include('foo = "bar"')
         markup.should include("\n</script>")
       end
@@ -45,7 +43,7 @@ describe Evo::JavaScriptQueue do
         @js << 'foo = "bar"'
         @js << 'foo = "baz"'
         markup = @js.to_html
-        markup.should include("<script>\n")
+        markup.should include(%(<script type="text/javascript">\n))
         markup.should include(%(foo = "bar";\n))
         markup.should include(%(foo = "baz";\n))
         markup.should include("\n</script>")
@@ -73,7 +71,7 @@ describe Evo::JavaScriptQueue do
         @js.add 'foo = "bar"'
         markup = @js.to_html
         markup.should have_selector('script[src="http://foo.com/app.js"]')
-        markup.should include("<script>\n")
+        markup.should include(%(<script type="text/javascript">\n))
         markup.should include('foo = "bar"')
         markup.should include("\n</script>")
       end

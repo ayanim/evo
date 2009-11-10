@@ -1,6 +1,4 @@
 
-require File.dirname(__FILE__) + '/../spec_helper'
-
 describe Evo::MessageQueue do
   before :each do
     @messages = Evo::MessageQueue.new  
