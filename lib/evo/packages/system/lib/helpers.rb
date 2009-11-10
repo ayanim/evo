@@ -121,9 +121,7 @@ class Evo
             render name, options.merge!(:partial => true)
           end.join("\n")
         else
-          if object = options.delete(:object)
-            options[object_name] = object
-          end
+          options[object_name] = options.delete(:object) if options.include? :object
           render name, options.merge!(:partial => true)
         end
       end
