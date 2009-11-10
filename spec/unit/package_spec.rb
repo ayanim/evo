@@ -16,20 +16,11 @@ shared_examples_for 'All packages' do
       @package.should_not have_directory('routes/foo.rb')
     end
   end
-end
-
-describe Evo::Package do
-  before :each do
-    @package = Evo::Package.new File.dirname(__FILE__) + '/../fixtures/app/packages/foo'
-    @jobqueue = Evo::Package.new Evo.core_root + '/packages/jobqueue'
-    @other = @jobqueue
-  end
-  
-  it_should_behave_like 'All packages'
   
   describe "#has_file?" do
     it "should check if a file exists" do
-      @package.should have_file('routes/foo_routes.rb')
+      @package.should have_file('spec/foo_spec.rb')
+      @package.should_not have_file('spec/foo_spec')
       @package.should_not have_file(:routes)
     end
   end
@@ -53,22 +44,33 @@ describe Evo::Package do
   describe "#load_directory" do
     it "should load all *.rb files within the directory" do
       @package.load_directory :spec
-      $LOADED_FEATURES.should contain('foo/spec/foo_spec.rb')
-      $LOADED_FEATURES.should contain('foo/spec/nested/nested_foo_spec.rb')
+      $LOADED_FEATURES.should contain(@path + '/spec/foo_spec.rb')
+      $LOADED_FEATURES.should contain(@path + '/spec/nested/nested_foo_spec.rb')
     end
   end
   
   describe "#paths_to" do
     it "should return paths available" do
-      @package.paths_to(:public / 'style.css').should contain('foo/public/style.css')
+      @package.paths_to(:public / 'style.css').should contain(@path + '/public/style.css')
     end
   end
   
   describe "#path_to" do
     it "should return the first available path" do
-      @package.path_to(:public / 'style.css').should include('foo/public/style.css')
+      @package.path_to(:public / 'style.css').should include(@path + '/public/style.css')
     end
   end
+end
+
+describe Evo::Package do
+  before :each do
+    @package = Evo::Package.new File.dirname(__FILE__) + '/../fixtures/app/packages/foo'
+    @jobqueue = Evo::Package.new Evo.core_root + '/packages/jobqueue'
+    @path = 'foo'
+    @other = @jobqueue
+  end
+  
+  it_should_behave_like 'All packages'
   
   describe "#paths_to_view" do
     it "should return paths available" do
