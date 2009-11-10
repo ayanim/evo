@@ -116,15 +116,11 @@ class Evo
       private
       
       ##
-      # Sinatra hack to allow views to be loaded from arbitrary paths.
+      # HACK: Sinatra to allow views to be loaded from arbitrary paths.
       
       def lookup_template engine, template, views_dir, filename = nil, line = nil
-        return super unless File.exists? template
-        if cached = self.class.templates[template]
-          lookup_template(engine, cached[:template], views_dir, cached[:filename], cached[:line])
-        else
-          [ ::File.read(template), template, 1 ]
-        end
+        return super unless template.is_a? String
+        [ ::File.read(template), template, 1 ]
       end
       
       def lookup_layout engine, template, views_dir
