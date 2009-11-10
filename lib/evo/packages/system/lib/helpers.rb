@@ -44,10 +44,10 @@ class Evo
       #  yield :footer
       #
       
-      def content_for region, contents = nil, &block
+      def content_for region, contents = nil, options = {}, &block
         case
-        when contents ; regions[region] << Evo::Block.new(contents)
-        when block    ; regions[region] << Evo::Block.new(capture(&block))
+        when contents ; regions[region] << Evo::Block.new(contents, options)
+        when block    ; regions[region] << Evo::Block.new(capture(&block), contents)
         else          ; regions[region]
         end
       end
@@ -134,7 +134,7 @@ class Evo
         path = (options.delete(:package) || package).path_to "views/#{name}.*"
         raise "view #{name.inspect} does not exist" unless path
         Tilt.new(path).render options.delete(:context), options do |region, string|
-          content_for(region).map(&:to_html).join string
+          content_for(region).sort_by(&:weight).map(&:to_html).join string
         end
       end
       

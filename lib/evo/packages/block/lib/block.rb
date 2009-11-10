@@ -15,10 +15,11 @@ class Evo
     alias :to_s :contents
     
     ##
-    # Initialize block with _contents_.
+    # Initialize block with _contents_ and _options_.
     
-    def initialize contents = nil
+    def initialize contents = nil, options = {}
       @contents, @weight = contents, 0
+      options.each { |k,v| send :"#{k}=", v } if options
     end
   end
 end

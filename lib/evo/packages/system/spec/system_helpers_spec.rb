@@ -121,6 +121,20 @@ describe "system" do
       last_response.body.should include('Im content')
     end
     
+    it "should output region blocks by :weight" do
+      mock_app do
+        get '/' do
+          content_for :header, 'to our site', :weight => -5
+          content_for :header, 'Welcome', :weight => -10
+          content_for :primary, 'Im content'
+          render :regions 
+        end
+      end
+      get '/'
+      last_response.body.should include("Welcome to our site\n")
+      last_response.body.should include('Im content')
+    end
+        
     it "should allow nesting view directories" do
       mock_app do
         get '/' do
