@@ -119,6 +119,16 @@ describe "system" do
       last_response.body.should include("Welcome to our site\n")
       last_response.body.should include('Im content')
     end
+    
+    it "should allow nesting view directories" do
+      mock_app do
+        get '/' do
+          render :'items/list'
+        end
+      end
+      get '/'
+      last_response.body.should include('list of items')
+    end
   end
   
   describe "#render_partial" do
@@ -142,14 +152,14 @@ describe "system" do
       last_response.body.should == "<h2>foo</h2>\n\n<h2>foo</h2>\n"
     end
     
-    it "should still work when :locals are passed" do
+    it "should allow nesting view directories" do
       mock_app do
         get '/' do
-          partial :item, :object => package, :locals => { :foo => 'bar' }
+          partial :'items/item', :object => package
         end
       end
       get '/'
-      last_response.body.should == "<h2>foo</h2>\n"
+      last_response.body.should include('foo')
     end
     
     it "should render views relative to :package when passed" do
