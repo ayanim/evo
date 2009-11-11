@@ -19,7 +19,7 @@ describe "spec helpers" do
   
   describe "#mock_app" do
     it "should subclass Evo" do
-      mock_app { environment.should == :not_test }
+      mock_app {}
       app.should_not == Evo
     end
     
