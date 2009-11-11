@@ -9,6 +9,12 @@ describe "user" do
     last_response.body.should include("value='Login'")
   end
   
+  it "should default the user to anonymous on each request" do
+    get 'login'
+    last_response.should be_ok
+    User.current.should == User.anonymous
+  end
+  
   describe "get /login" do
     it "should display a login form" do
       get '/login'
@@ -25,7 +31,7 @@ describe "user" do
           last_response.should be_ok
           last_response_should_show_a_login_form
           get '/login'
-          User.current.name.should == 'admin'
+          User.current.should == User.first
         end
       end
       

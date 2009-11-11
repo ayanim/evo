@@ -3,7 +3,6 @@ before do
   session[:id] ||= token
   sess = Session.get(session[:id]) || Session.create(:id => session[:id], :hostname => env['REMOTE_ADDR'])
   sess.last_request_at = DateTime.now
-  sess.user = User.anonymous unless sess.user
   sess.user = User.current = if sess.user
       if sess.user.blocked?
         regenerate_session
