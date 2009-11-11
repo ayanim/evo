@@ -83,7 +83,7 @@ describe "system" do
   
   describe "#regenerate_session" do
     it "should assign a new session token" do
-      mock_app do
+      mock_app :package => :foo do
         get '/' do
           regenerate_session
         end
@@ -98,7 +98,7 @@ describe "system" do
   
   describe "#render" do
     it "should render a view" do
-      mock_app do
+      mock_app :package => :foo do
         get '/' do
           render :bar 
         end
@@ -108,7 +108,7 @@ describe "system" do
     end
     
     it "should allow yield :sym to output a region" do
-      mock_app do
+      mock_app :package => :foo do
         get '/' do
           content_for :header, 'Welcome'
           content_for :header, 'to our site'
@@ -122,7 +122,7 @@ describe "system" do
     end
     
     it "should output region blocks by :weight" do
-      mock_app do
+      mock_app :package => :foo do
         get '/' do
           content_for :header, 'to our site', :weight => -5
           content_for :header, 'Welcome', :weight => -10
@@ -136,7 +136,7 @@ describe "system" do
     end
         
     it "should allow nesting view directories" do
-      mock_app do
+      mock_app :package => :foo do
         get '/' do
           render :'items/list'
         end

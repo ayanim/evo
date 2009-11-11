@@ -49,10 +49,11 @@ Spec::Runner.configure do |c|
     
     # Mock app based on _block_.
     
-    def mock_app &block
+    def mock_app options = {}, &block
       subclass = Class.new Evo
       subclass.enable :sessions
       subclass.set :environment, :not_test
+      Evo::Package.current = Evo::Package.get(options[:package]) if options.include? :package
       subclass.instance_eval &block
       @app = subclass.new
     end
