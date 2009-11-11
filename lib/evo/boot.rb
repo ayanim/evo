@@ -46,6 +46,45 @@ class Evo
   end
   
   ##
+  # Seed the database with pre-canned data.
+  #
+  # * Creates anonymous Role
+  # * Creates authenticated Role
+  # * Creates admin User
+  # * Create provided permissions
+  # 
+  
+  def self.seed
+    seed_roles
+    seed_users
+    Permission.create_provided!
+  end
+  
+  ##
+  # Seed the database with pre-canned roles.
+  #
+  # * Creates anonymous Role
+  # * Creates authenticated Role
+  # 
+  
+  def self.seed_roles
+    Role.create :name => 'anonymous', :assignable => false
+    Role.create :name => 'authenticated', :assignable => false
+  end
+  
+  ##
+  # Seed the database with pre-canned users.
+  #
+  # * Creates admin User
+  # * Creates anonymous User
+  # 
+  
+  def self.seed_users
+    User.create :name => 'admin', :email => 'tj@vision-media.ca', :password => 'password'
+    User.create :name => 'guest', :email => 'guest@example.com', :anonymous => true
+  end
+  
+  ##
   # Parse options from _args_.
   
   def self.parse_options args = ARGV.dup
