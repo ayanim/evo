@@ -15,6 +15,10 @@ describe "user" do
     User.current.should == User.anonymous
   end
   
+  it "should logout a user when blocked" do
+    
+  end
+  
   describe "get /login" do
     it "should display a login form" do
       get '/login'
