@@ -32,5 +32,21 @@ describe "spec helpers" do
       get '/'
       last_response.body.should == 'system'
     end
+    
+    it "should allow testing of sessions" do
+      mock_app do
+        get '/foo' do
+          session[:foo] = 'bar'
+          'test'
+        end
+        
+        get '/bar' do
+          session[:foo]
+        end
+      end
+      get '/foo'
+      get '/bar'
+      last_response.body.should == 'bar'
+    end
   end
 end
