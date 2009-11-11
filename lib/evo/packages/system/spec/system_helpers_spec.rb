@@ -107,6 +107,16 @@ describe "system" do
       last_response.body.should include('im erb')
     end
     
+    it "should render the page layout" do
+      mock_app :package => :foo do
+        get '/' do
+          render :bar
+        end
+      end
+      get '/'
+      last_response.body.should include('<html>')
+    end
+    
     it "should allow yield :sym to output a region" do
       mock_app :package => :foo do
         get '/' do
