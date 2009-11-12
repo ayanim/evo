@@ -11,6 +11,15 @@ class Evo
   module System
     module Helpers
       
+      def body_classes
+        returning [] do |classes|
+          parts = request.path.split('/').from(1)
+          begin
+            classes << parts.join('-')
+          end while parts.pop 
+        end.join ' '
+      end
+      
       ##
       # Region contents stack(s).
       

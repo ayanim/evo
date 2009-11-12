@@ -1,5 +1,17 @@
 
 describe "system" do
+  describe "#body_classes" do
+    it "should return a string of various body classes based on the request" do
+      mock_app do
+        get '/user/:id/:operation' do
+          body_classes
+        end
+      end
+      get '/user/2/edit'
+      last_response.body.should == 'user-2-edit user-2 user '
+    end
+  end
+  
   describe "#javascripts" do
     it "should contain a javascript queue" do
       mock_app do
