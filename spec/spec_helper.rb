@@ -47,6 +47,15 @@ Spec::Runner.configure do |c|
       @app || Evo
     end
     
+    ##
+    # Switch theme to _name_ for the duration of the given _block_.
+    
+    def with_theme name, &block
+      orig, Evo.theme = Evo.theme, Evo::Theme.get(name)
+      yield
+      Evo.theme = orig
+    end
+    
     # Mock app based on _block_.
     
     def mock_app options = {}, &block

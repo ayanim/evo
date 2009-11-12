@@ -17,6 +17,16 @@ describe "spec helpers" do
     end
   end
   
+  describe "#with_theme" do
+    it "should switch the theme for the duration of the block passed" do
+      orig = Evo.theme
+      with_theme :wahoo do
+        Evo.theme.should == Evo::Theme.get(:wahoo)
+      end
+      Evo.theme.should == orig
+    end
+  end
+  
   describe "#mock_app" do
     it "should subclass Evo" do
       mock_app {}
