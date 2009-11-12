@@ -156,7 +156,7 @@ class Evo
   # Load all configuration files.
   
   def self.load_config
-    paths_to(:config / 'environment.rb').each do |file|
+    paths_to(:config / 'environment.rb').reverse.each do |file|
       require file
     end
   end
