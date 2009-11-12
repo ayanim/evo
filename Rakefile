@@ -11,7 +11,7 @@ Echoe.new 'evo', Evo::VERSION do |p|
   p.summary = "Evolution Content Management System"
   p.url = "http://github.com/visionmedia/evo"
   p.runtime_dependencies = []
-  p.runtime_dependencies << 'rext'
+  p.runtime_dependencies << 'rext >=0.5.0'
   p.runtime_dependencies << 'haml'
   p.runtime_dependencies << 'daemon-spawn'
   p.runtime_dependencies << 'tilt'
