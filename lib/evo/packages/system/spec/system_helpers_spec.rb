@@ -18,17 +18,11 @@ describe "system" do
   
   describe "#javascripts" do
     it "should contain a javascript queue" do
-      mock_app do
-        get '/' do
-          javascripts.add '/system/javascripts/jquery.js'
-          javascripts.add '/system/javascripts/jquery.ui.js'
-          javascripts.to_html
-        end
-      end
-      get '/'
-      last_response.should be_ok
-      last_response.body.should include('<script src="/system/javascripts/jquery.js" type="text/javascript"')
-      last_response.body.should include('<script src="/system/javascripts/jquery.ui.js" type="text/javascript"')
+      javascripts.add '/system/javascripts/jquery.js'
+      javascripts.add '/system/javascripts/jquery.ui.js'
+      markup = javascripts.to_html
+      markup.should include('<script src="/system/javascripts/jquery.js" type="text/javascript"')
+      markup.should include('<script src="/system/javascripts/jquery.ui.js" type="text/javascript"')
     end
   end
   
