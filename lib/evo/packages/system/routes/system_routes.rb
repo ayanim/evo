@@ -1,4 +1,8 @@
 
+before do
+  reset_regions!
+end
+
 ##
 # Compile and transfer :package's sass files from the views directory.
 
