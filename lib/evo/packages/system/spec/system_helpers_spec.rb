@@ -96,6 +96,43 @@ describe "system" do
     end
   end
   
+  describe "#render_layout" do
+    it "should raise Evo::LayoutMissingError when the layout does not exist" do
+      mock_app :package => :foo do
+        get '/' do
+          render_layout :page
+        end
+      end
+      lambda { get '/' }.should raise_error(Evo::LayoutMissingError, /layout :page does not exist/)
+    end
+    
+    it "should render the layout when present" do
+      Evo.theme = Evo::Theme.get :wahoo
+      mock_app do
+        get '/' do
+          render_layout :page
+        end
+      end
+      get '/'
+      last_response.body.should include('<html>')
+    end
+    
+    it "should allow yield :sym to output a region" do
+      Evo.theme = Evo::Theme.get :wahoo
+      mock_app :package => :foo do
+        get '/' do
+          content_for :header, 'Welcome'
+          content_for :header, 'to our site'
+          content_for :primary, 'Im content'
+          render :bar
+        end
+      end
+      get '/'
+      last_response.body.should include("<h2>Welcome to our site</h2>")
+      last_response.body.should include('Im content')
+    end
+  end
+  
   describe "#render" do
     it "should render a view" do
       mock_app :package => :foo do
@@ -108,6 +145,7 @@ describe "system" do
     end
     
     it "should render the page layout" do
+      Evo.theme = Evo::Theme.get :wahoo
       mock_app :package => :foo do
         get '/' do
           render :bar
@@ -117,18 +155,17 @@ describe "system" do
       last_response.body.should include('<html>')
     end
     
-    it "should allow yield :sym to output a region" do
+    
+    it "should not render the page layout when :layout is false" do
+      Evo.theme = Evo::Theme.get :wahoo
       mock_app :package => :foo do
         get '/' do
-          content_for :header, 'Welcome'
-          content_for :header, 'to our site'
-          content_for :primary, 'Im content'
-          render :regions 
+          render :bar, :layout => false
         end
       end
       get '/'
-      last_response.body.should include("Welcome to our site\n")
-      last_response.body.should include('Im content')
+      last_response.body.should_not include('<html>')      
+      last_response.body.should include('im erb')      
     end
     
     it "should output region blocks by :weight" do
@@ -141,7 +178,7 @@ describe "system" do
         end
       end
       get '/'
-      last_response.body.should include("Welcome to our site\n")
+      last_response.body.should include("<h2>Welcome to our site</h2>")
       last_response.body.should include('Im content')
     end
         

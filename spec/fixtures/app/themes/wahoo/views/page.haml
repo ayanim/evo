@@ -1,3 +1,5 @@
 %html
   %body
-    = yield :primary
+    %h2= yield :header, ' '
+    %div#primary
+      = yield :primary

@@ -1,5 +1,13 @@
 
 class Evo
+  
+  #--
+  # Exceptions
+  #++
+  
+  ViewMissingError = Class.new StandardError
+  LayoutMissingError = Class.new ViewMissingError
+  
   module System
     module Helpers
       
@@ -121,19 +129,38 @@ class Evo
       #
       # === Options
       #
-      #  :package  Render a view residing in the given :package
-      #  :context  Evaluate template against the given :context object
+      #  :package  Render a view residing in the given :package              
+      #  :context  Evaluate template against the given :context object      
+      #  :layout   Boolean indicating whether or not to render this view
+      #            as the primary contents for the current theme's layout.
       #
       
       def render name, options = {}
-        if options.delete :partial
+        partial = options.delete :partial
+        if partial
           parts = name.to_s.split '/'
           parts[-1] = "_#{parts.last}"
           name = File.join parts
         end
-        path = (options.delete(:package) || package).path_to "views/#{name}.*"
-        raise "view #{name.inspect} does not exist" unless path
-        Tilt.new(path).render options.delete(:context), options do |region, string|
+        path = (options[:package] || package).path_to "views/#{name}.*"
+        raise Evo::ViewMissingError, "view #{name.inspect} does not exist" unless path
+        output = Tilt.new(path).render options.delete(:context), options
+        if !partial && options.delete(:layout) != false
+          content_for :primary, output
+          return render_layout :page, options
+        end
+        output
+      rescue Evo::LayoutMissingError
+        output
+      end
+      
+      ##
+      # Render layout template _name_ with the given _options_.
+      
+      def render_layout name, options = {}
+        path = Evo.theme.path_to "views/#{name}.*"
+        raise Evo::LayoutMissingError, "layout #{name.inspect} does not exist" unless path
+        Tilt.new(path).render nil, options do |region, string|
           content_for(region).sort_by(&:weight).map(&:to_html).join string
         end
       end
