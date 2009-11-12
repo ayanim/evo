@@ -161,6 +161,7 @@ class Evo
         path = Evo.theme.path_to "views/#{name}.*"
         raise Evo::LayoutMissingError, "layout #{name.inspect} does not exist" unless path
         Tilt.new(path).render nil, options do |region, string|
+          region ||= :primary
           content_for(region).sort_by(&:weight).map(&:to_html).join string
         end
       end
