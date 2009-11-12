@@ -21,9 +21,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-$:.unshift '/Users/tjholowaychuk/Scripts/gems/rext/lib' 
-$:.unshift '/Users/tjholowaychuk/Scripts/gems/formz/lib' 
-
 require 'yaml'
 require 'tilt'
 require 'sinatra'
