@@ -55,8 +55,7 @@ class Evo
   # 
   
   def self.seed
-    seed_roles
-    seed_users
+    seed_roles; seed_roles
     Permission.create_provided!
   end
   
