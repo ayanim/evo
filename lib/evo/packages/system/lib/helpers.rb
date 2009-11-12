@@ -169,7 +169,7 @@ class Evo
         output = Tilt.new(path).render options.delete(:context), options
         if !partial && options.delete(:layout) != false
           content_for :primary, output
-          return render_layout :page, options
+          return render_layout(:page, options)
         end
         output
       rescue Evo::LayoutMissingError
