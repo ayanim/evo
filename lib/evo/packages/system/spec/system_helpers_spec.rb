@@ -28,28 +28,16 @@ describe "system" do
   
   describe "#content_for" do
     it "should buffer contents for a specific region" do
-      mock_app do
-        get '/' do
-          content_for :header, 'foo'
-          content_for :header, 'bar'
-          content_for(:header).map(&:to_html).join
-        end
-      end
-      get '/'
-      last_response.body.should == "foobar"
+      content_for :header, 'foo'
+      content_for :header, 'bar'
+      content_for(:header).map(&:to_html).join.should == 'foobar'
     end
     
     it "should buffer regular blocks" do
-      mock_app do
-        get '/' do
-          content_for :header do
-            'Testing'
-          end
-          content_for(:header).map(&:to_html).join
-        end
+      content_for :header do
+        'Testing'
       end
-      get '/'
-      last_response.body.should include('Testing')
+      content_for(:header).map(&:to_html).join.should include('Testing')
     end
     
     it "should clear the buffer after each request" do
