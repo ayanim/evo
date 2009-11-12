@@ -217,6 +217,16 @@ describe "system" do
       last_response.body.should == "<h2>foo</h2>\n\n<h2>foo</h2>\n"
     end
     
+    it "should render the partial server times evaluating against :context when :collection is passed" do
+      mock_app do
+        get '/' do
+          partial :context, :collection => [package, package], :context => true
+        end
+      end
+      get '/'
+      last_response.body.should == "<h2>foo</h2>\n\n<h2>foo</h2>\n"      
+    end
+    
     it "should allow nesting view directories" do
       mock_app do
         get '/' do

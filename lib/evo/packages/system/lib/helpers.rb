@@ -209,6 +209,7 @@ class Evo
         if collection = options.delete(:collection)
           collection.map do |object|
             options[object_name] = object
+            options[:context] = object if options[:context]
             render name, options.merge!(:partial => true)
           end.join("\n")
         else
