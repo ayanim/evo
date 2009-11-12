@@ -11,13 +11,25 @@ class Evo
   module System
     module Helpers
       
+      ##
+      # Body classes. For example when visiting
+      # the path '/user/2/edit' this method will
+      # return 'user-2-edit user-2 user'
+      
       def body_classes
         returning [] do |classes|
-          parts = request.path.split('/').from(1)
+          segments = path_segments
           begin
-            classes << parts.join('-')
-          end while parts.pop 
+            classes << segments.join('-')
+          end while segments.pop 
         end.join ' '
+      end
+      
+      ##
+      # Return array of request path segments.
+      
+      def path_segments
+        request.path.split('/').from(1)
       end
       
       ##
