@@ -105,29 +105,31 @@ describe "system" do
     end
     
     it "should render the layout when present" do
-      Evo.theme = Evo::Theme.get :wahoo
-      mock_app do
-        get '/' do
-          render_layout :page
+      with_theme :wahoo do
+        mock_app do
+          get '/' do
+            render_layout :page
+          end
         end
-      end
       get '/'
       last_response.body.should include('<html>')
+      end
     end
     
     it "should allow yield :sym to output a region" do
-      Evo.theme = Evo::Theme.get :wahoo
-      mock_app :package => :foo do
-        get '/' do
-          content_for :header, 'Welcome'
-          content_for :header, 'to our site'
-          content_for :primary, 'Im content'
-          render :bar
+      with_theme :wahoo do
+        mock_app :package => :foo do
+          get '/' do
+            content_for :header, 'Welcome'
+            content_for :header, 'to our site'
+            content_for :primary, 'Im content'
+            render :bar
+          end
         end
+        get '/'
+        last_response.body.should include("<h2>Welcome to our site</h2>")
+        last_response.body.should include('Im content')
       end
-      get '/'
-      last_response.body.should include("<h2>Welcome to our site</h2>")
-      last_response.body.should include('Im content')
     end
   end
   
@@ -143,41 +145,44 @@ describe "system" do
     end
     
     it "should render the page layout" do
-      Evo.theme = Evo::Theme.get :wahoo
-      mock_app :package => :foo do
-        get '/' do
-          render :bar
+      with_theme :wahoo do
+        mock_app :package => :foo do
+          get '/' do
+            render :bar
+          end
         end
+        get '/'
+        last_response.body.should include('<html>')
       end
-      get '/'
-      last_response.body.should include('<html>')
     end
     
-    
     it "should not render the page layout when :layout is false" do
-      Evo.theme = Evo::Theme.get :wahoo
-      mock_app :package => :foo do
-        get '/' do
-          render :bar, :layout => false
+      with_theme :wahoo do
+        mock_app :package => :foo do
+          get '/' do
+            render :bar, :layout => false
+          end
         end
-      end
-      get '/'
-      last_response.body.should_not include('<html>')      
-      last_response.body.should include('im erb')      
+        get '/'
+        last_response.body.should_not include('<html>')      
+        last_response.body.should include('im erb')  
+      end    
     end
     
     it "should output region blocks by :weight" do
-      mock_app :package => :foo do
-        get '/' do
-          content_for :header, 'to our site', :weight => -5
-          content_for :header, 'Welcome', :weight => -10
-          content_for :primary, 'Im content'
-          render :regions 
+      with_theme :wahoo do
+        mock_app :package => :foo do
+          get '/' do
+            content_for :header, 'to our site', :weight => -5
+            content_for :header, 'Welcome', :weight => -10
+            content_for :primary, 'Im content'
+            render :regions 
+          end
         end
+        get '/'
+        last_response.body.should include("<h2>Welcome to our site</h2>")
+        last_response.body.should include('Im content')
       end
-      get '/'
-      last_response.body.should include("<h2>Welcome to our site</h2>")
-      last_response.body.should include('Im content')
     end
         
     it "should allow nesting view directories" do
