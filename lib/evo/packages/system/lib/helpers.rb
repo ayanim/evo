@@ -133,6 +133,7 @@ class Evo
       #  :context  Evaluate template against the given :context object      
       #  :layout   Boolean indicating whether or not to render this view
       #            as the primary contents for the current theme's layout.
+      #  ...       All other options are passed to Tilt
       #
       
       def render name, options = {}
@@ -156,6 +157,11 @@ class Evo
       
       ##
       # Render layout template _name_ with the given _options_.
+      #
+      # === Options
+      #
+      #  ...       All options are passed to Tilt
+      #
       
       def render_layout name, options = {}
         path = Evo.theme.path_to "views/#{name}.*"
