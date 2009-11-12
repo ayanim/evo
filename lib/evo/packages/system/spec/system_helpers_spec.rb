@@ -1,14 +1,18 @@
 
 describe "system" do
+  include Evo::System::Helpers
+  
+  describe "#path_segments" do
+    it "should return the current path's segments as an array" do
+      stub!(:request).and_return mock('Request', :path => '/user/2/edit')
+      path_segments.should == ['user', '2', 'edit']
+    end
+  end
+  
   describe "#body_classes" do
     it "should return a string of various body classes based on the request" do
-      mock_app do
-        get '/user/:id/:operation' do
-          body_classes
-        end
-      end
-      get '/user/2/edit'
-      last_response.body.should == 'user-2-edit user-2 user '
+      stub!(:path_segments).and_return ['user', '2', 'edit']
+      body_classes.should == 'user-2-edit user-2 user '
     end
   end
   
