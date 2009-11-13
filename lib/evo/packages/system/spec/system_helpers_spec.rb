@@ -1,6 +1,9 @@
 
 describe "system" do
   include Evo::System::Helpers
+  include Evo::System::PackageHelpers
+  include Evo::System::SessionHelpers
+  include Evo::System::ViewHelpers
   
   describe "#path_segments" do
     it "should return the current path's segments as an array" do
