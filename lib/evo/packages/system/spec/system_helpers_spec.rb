@@ -29,6 +29,25 @@ describe "system" do
       @called.should be_true
     end
     
+    it "should pass arguments" do
+      args = nil
+      after(:package_loaded) { |*args| args = args }
+      trigger :after, :package_loaded, 'foo', 'bar'
+      args.should == ['foo', 'bar']
+    end
+        
+    it "should trigger :before the given symbol when using #before with no block" do
+      before(:boot) { @called = true }
+      before :boot
+      @called.should be_true
+    end
+    
+    it "should trigger :after the given symbol when using #after with no block" do
+      after(:package_loaded) { @called = true }
+      after :package_loaded
+      @called.should be_true
+    end
+        
     it "should trigger before / after the given block" do
       called_before = false
       called_after = false
