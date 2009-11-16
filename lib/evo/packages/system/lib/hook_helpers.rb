@@ -95,6 +95,7 @@ class Evo
           yield
           trigger :after, name
         else
+          return unless hooks[name]
           hooks[name][args.shift].each do |proc|
             proc.call *args
           end
