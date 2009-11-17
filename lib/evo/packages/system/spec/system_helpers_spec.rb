@@ -253,6 +253,19 @@ describe "system" do
       get '/'
       last_response.body.should include('list of items')
     end
+    
+    it "should give precedence to the current theme" do
+      with_theme :wahoo do
+        mock_app :package => :foo do
+          get '/' do
+            render :print, :layout => false
+          end
+        end
+        get '/'
+        last_response.should be_ok
+        last_response.body.should include('overridden!')
+      end
+    end
   end
   
   describe "#render_partial" do

@@ -53,6 +53,7 @@ Spec::Runner.configure do |c|
     def with_theme name, &block
       orig, Evo.theme = Evo.theme, Evo::Theme.get(name)
       yield
+    ensure
       Evo.theme = orig
     end
     
