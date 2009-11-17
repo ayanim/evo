@@ -17,6 +17,13 @@ describe "system" do
         last_response.body.should include('im a style')
       end
     end
+    
+    it "should pass when not present" do
+      with_theme :wahoo do
+        get '/theme/rawr.txt'
+        last_response.should_not be_ok
+      end
+    end
   end
   
   describe "get /:package/*" do
