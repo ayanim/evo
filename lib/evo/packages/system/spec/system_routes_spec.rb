@@ -28,7 +28,7 @@ describe "system" do
     it "should be overridable" do
       get '/theme/javascripts/chrome.js'
       last_response.should be_ok
-      last_response.should include('overriden!')
+      last_response.body.should include('overridden!')
       last_response.should have_content_type('application/javascript')
     end
   end
