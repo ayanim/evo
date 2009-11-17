@@ -10,7 +10,7 @@ get '/:package/*.css' do |name, path|
   require_package name
   require_package_path :views, "#{path}.sass"
   content_type :css
-  render :print, :layout => false, :package => @package
+  render path, :layout => false, :package => @package
 end
 
 ##
@@ -20,6 +20,15 @@ get '/:package/*' do |name, path|
   require_package name
   require_package_path :public, path
   send_file @path
+end
+
+##
+# Compile and transfer the current theme's sass files from the views directory.
+
+get '/theme/*.css' do |path|
+  require_theme_path :views, "#{path}.sass"
+  content_type :css
+  render path, :layout => false, :package => theme
 end
 
 ##

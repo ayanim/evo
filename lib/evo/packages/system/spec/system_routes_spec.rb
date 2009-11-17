@@ -8,6 +8,15 @@ describe "system" do
     end
   end
   
+  describe "get /theme/*.css" do
+    it "should render sass when present" do
+      get '/theme/style.css'
+      last_response.should be_ok
+      last_response.should have_content_type('text/css')
+      last_response.body.should include('body {')
+    end
+  end
+  
   describe "get /theme/*" do
     it "should transfer a file from the current theme when present" do
       with_theme :wahoo do
