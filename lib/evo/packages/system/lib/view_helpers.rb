@@ -130,6 +130,7 @@ class Evo
       def render_layout name, options = {}
         path = Evo.theme.path_to "views/#{name}.*"
         raise Evo::LayoutMissingError, "layout #{name.inspect} does not exist" unless path
+        before :rendering_layout, path
         Tilt.new(path).render self, options do |region, string|
           region ||= :primary
           content_for(region).sort_by(&:weight).map(&:to_html).join string

@@ -15,6 +15,9 @@ before do
       User.anonymous
     end
   sess.save
+  
+  @menu.add 'Login', '/login'
+  @menu.add 'Logout', '/logout'
 end
 
 ##

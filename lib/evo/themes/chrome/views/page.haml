@@ -3,15 +3,15 @@
   %head
     %title evolution
     %link(rel='stylesheet' href='/theme/style.css')
-    != javascripts.to_html
+    = yield :javascripts
   %body
     %div#wrapper
       %div#header
         %span#logo evolution
-        = yield :header
+        = yield :menu
       %div#container-top
       %div#container
         %div#primary
-          != messages.to_html
+          = yield :messages
           = yield
       %div#container-bottom

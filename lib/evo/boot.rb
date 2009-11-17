@@ -79,7 +79,7 @@ class Evo
   
   def self.seed
     seed_roles; seed_users
-    Permission.create_provided!
+    ::Permission.create_provided!
   end
   
   ##
@@ -90,8 +90,8 @@ class Evo
   # 
   
   def self.seed_roles
-    Role.create :name => 'anonymous', :assignable => false
-    Role.create :name => 'authenticated', :assignable => false
+    ::Role.create :name => 'anonymous', :assignable => false
+    ::Role.create :name => 'authenticated', :assignable => false
   end
   
   ##
@@ -104,8 +104,8 @@ class Evo
   def self.seed_users
     raise SetupError, ':admin_email required' unless admin_email?
     raise SetupError, ':admin_password required' unless admin_password?
-    User.create :name => 'admin', :email => admin_email, :password => 'password'
-    User.create :name => 'guest', :email => admin_password, :anonymous => true
+    ::User.create :name => 'admin', :email => admin_email, :password => 'password'
+    ::User.create :name => 'guest', :email => admin_password, :anonymous => true
   end
   
   ##
