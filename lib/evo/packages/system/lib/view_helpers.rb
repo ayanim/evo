@@ -109,7 +109,7 @@ class Evo
         end
         path = (options[:package] || package).path_to "views/#{name}.*"
         raise Evo::ViewMissingError, "view #{name.inspect} does not exist" unless path
-        output = Tilt.new(path).render options.delete(:context) || self, options
+        output = Tilt.new(path).render options.fetch(:context, self), options
         if !partial && options.delete(:layout) != false
           content_for :primary, output
           return render_layout(:page, options)
