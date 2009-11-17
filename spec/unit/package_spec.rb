@@ -52,6 +52,7 @@ describe Evo::Package do
       Evo::Package.find(:foo).length.should == 1
       Evo::Package.find('foo').length.should == 1
       Evo::Package.find(:system).length.should == 2
+      Evo::Package.find(:foobar).should == []
     end
   end
   
@@ -60,6 +61,7 @@ describe Evo::Package do
       Evo::Package.get(:foo).should be_a(Evo::Package)
       Evo::Package.get('foo').should be_a(Evo::Package)
       Evo::Package.get(:system).should be_a(Evo::Package)
+      Evo::Package.get(:foobar).should be_nil
     end
   end
 end

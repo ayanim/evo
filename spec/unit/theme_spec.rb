@@ -17,6 +17,7 @@ describe Evo::Theme do
       Evo::Theme.find(:wahoo).length.should == 1
       Evo::Theme.find('wahoo').length.should == 1
       Evo::Theme.find(:chrome).length.should == 2
+      Evo::Theme.find(:foobar).should == []
     end
   end
   
@@ -25,6 +26,7 @@ describe Evo::Theme do
       Evo::Theme.get(:wahoo).should be_a(Evo::Theme)
       Evo::Theme.get('wahoo').should be_a(Evo::Theme)
       Evo::Theme.get(:chrome).should be_a(Evo::Theme)
+      Evo::Theme.get(:foobar).should be_nil
     end
   end
 end
