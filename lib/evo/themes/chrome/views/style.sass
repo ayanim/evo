@@ -1,2 +1,510 @@
+
+// --- Variables
+
+!width = 1008px
+!dark = #141414
+!light_grey = #636363
+!lighter_grey = #efefef
+!lighter_lighter_grey = #e3e3e3
+!light_blue = #119de5
+!green = #00D800
+!red = #D8000C
+
+// --- Mixins
+
+=underline
+  :background url(/theme/images/h4.png) 0 100% repeat-x
+
+=underline-dark
+  :background url(/theme/images/h3.png) 0 100% repeat-x
+
+=arrow
+  :background url(/theme/images/arrow.png) 50% 100% no-repeat
+
+=arrow-dark
+  :background url(/theme/images/arrow-dark.png) 50% 100% no-repeat
+
+=sprites
+  :background-image url(/theme/images/sprites.png)
+  
+=background-sprites
+  :background-image url(/theme/images/sprites.background.png)
+  
+=inset
+  :border-bottom 1px solid rgb(227, 227, 235)
+  :border-left 1px solid rgb(227, 227, 235)
+  :border-right 1px solid rgb(227, 227, 235)
+  :border-top 1px solid rgb(170, 173, 178)
+  
+=rounded
+  :-webkit-border-radius 3px
+  :-moz-border-radius 3px
+  
+=rounded-more
+  :-webkit-border-radius 6px
+  :-moz-border-radius 6px
+  
+=clearfix
+  &:after
+    :display block
+    :clear both
+    :height 0
+    :visibility hidden
+    :line-height 0
+    :content "."
+    
+=inline-menu
+  :display inline
+  :list-style none
+  :margin 0
+  :padding 0
+  li
+    :display block
+    :float left
+  
+=striped
+  &:nth-child(even)
+    :background url(/theme/images/h2.png) 0 0 repeat-x
+    
+=highlite
+  :background-image none
+  :background #FFFDF1
+  
+=icon
+  :display block
+  :padding 0
+  :width 14px
+  :height 14px
+  :text-indent -9999999px
+  
+=list-icon
+  +icon
+  :margin-top 1px
+  :margin-right 5px
+  :float right
+  
+=text-shadow
+  :text-shadow= -1px 1px 1px #5490ae 
+  
+=button
+  +sprites
+  +text-shadow
+  :display block
+  :width 88px
+  :font-family "Lucida Sans Unicode"
+  :text-align center
+  :line-height 25px
+  :color white
+  :background
+    :position -2px -68px
+    :repeat no-repeat
+  &:hover
+    :background-position -93px -68px
+  &:active
+    :background-position -184px -68px
+    
+// --- Tags
+
+*
+  :outline none
+
 body
-  :color #fff
+  :margin 0
+  :text-align center
+  :font 11px "Lucida Grande"
+  :line-height 1.5
+  :color= !light_grey
+  :background
+    :color= !lighter_grey
+    :image url(/theme/images/background.png)
+    :position 0 0
+    :repeat repeat-x
+  
+h1, h2, h3, h4
+  :margin 0 0 10px 0
+  :padding 15px 0 0 0
+  :font
+    :size 24px
+    :weight normal
+  :color= !dark
+  
+h2
+  :font-size 22px
+  
+h3
+  :font-size 18px
+  
+h4
+  :font-size 16px
+
+a
+  :text-decoration none
+  :color= !light_blue
+  
+p
+  :margin 10px 0
+  
+a.button
+  +button
+  
+input[type=submit]
+  :margin 0
+  :padding 0
+  :background transparent
+  :border none
+  +button
+    
+ul li a
+  :color= !dark
+
+table
+  :border-collapse collapse
+  :width 100%
+  thead
+    th
+      :height 42px
+      :font-weight bold
+      :color= !dark
+  tbody 
+    tr:hover
+      +highlite
+    tr:first-child td
+      :border-top= 1px "solid" !lighter_lighter_grey
+    td
+      :border-bottom= 1px "solid" !lighter_lighter_grey
+      :height 42px
+
+table ~ .button
+  :margin 15px 5px 0 0
+      
+table.select
+  thead tr th:first-child,
+  tr td:first-child
+    :padding 0 0 0 12px
+    :width 42px
+    input
+      :margin-top 10px
+
+table.striped tr
+  +striped
+  
+table.buttons
+  tr td:last-child a
+    :float right
+    :margin-top 1px
+    :margin-right 5px
+    
+fieldset
+  :margin 0 0 20px 0
+  :padding 15px 0 15px 0
+  :border none
+  :border-bottom= 1px "solid" !lighter_grey
+    
+legend
+  :font-size 14px
+  :color= !dark
+
+form .field
+  :width 99%
+  :margin-bottom 15px
+  
+table td .field
+  :margin 0
+    
+label em
+  :padding 0 2px
+  :font-weight bold
+  :color red
+
+input
+  +rounded
+  +inset
+  :width 100%
+  :padding 5px 4px
+  :color= !light_grey
+  :outline none
+  &.error
+    :border-color= !red
+  
+fieldset input[type=checkbox]
+  :margin-right 10px
+  :width inherit
+  :height inherit
+  
+ul li input
+  :margin 0
+  
+input.search
+  +rounded-more
+  :width 150px
+  
+.form-buttons
+  :margin 15px 0
+
+fieldset ~ .form-buttons
+  :margin 0
+
+.form-buttons .field-submit
+  :margin-right 5px
+  :float left
+    
+// --- General classes
+
+.hidden
+  :display none
+
+.right
+  :float right
+
+.block
+  h2
+    :margin-left 10px
+    :font-size 24px
+  .heading
+    :height 125px
+    .description
+      :margin 8px 12px 20px 10px
+      :width 250px
+  
+.block-2-left
+  :float left
+  :width 65%
+  .description
+    :width 300px
+  
+.block-2-right
+  :float right
+  :padding-left 25px
+  :width 30%
+  :border-left= 1px "solid" !lighter_lighter_grey
+  
+input[type=checkbox]
+  :width 20px
+  :height 20px
+  
+  
+// --- Pagers
+
+#primary ul.pager
+  :margin 15px 0
+  :width 100%
+  li
+    :margin 0
+    :padding 0
+    :text-indent 0
+    :border none
+    &:first-child
+      :border none
+    a
+      :display block
+      :float left
+      :margin 0 2px
+      :padding 2px 6px
+      :border= 1px "solid" !lighter_grey
+      :text-transform lowercase
+      :color= !light_grey
+      &:hover
+        :color= !dark
+    &:active a
+      :padding-top 3px
+      :padding-bottom 1px
+    &.first
+      :border-top none
+    &.active a
+      :color= !light_blue
+    &.more
+      :float left
+      :padding 4px 8px 0 8px
+      :border none
+      :color= !light_grey
+  
+// --- Messages
+
+#primary ul.messages
+  :margin-top 0
+  :border 1px "solid"
+  &.info li
+    :background-color #BDE5F8
+    :color #00529B
+  &.warning li
+    :background-color #9F6000
+    :color #FEEFB3
+  &.error li
+    :background-color #FFBABA
+    :color #D8000C
+    
+.error-message
+  :display block
+  :padding 5px 0
+  :color= !red
+  
+// --- General IDs
+  
+#header
+  :position relative
+  :height 130px
+
+#logo
+  +sprites
+  :position absolute
+  :top 38px
+  :left 13px
+  :padding-left 18px
+  :font-size 30px
+  :color= !dark
+  :background
+    :position 0 -95px
+    :repeat no-repeat
+    
+#navigation
+  +inline-menu
+  :position absolute
+  :top 95px
+  :right 0
+  li
+    :height 36px
+    a
+      :padding 0 8px
+      :font-family "Lucida Sans Unicode"
+      :color= !light_grey
+  li.active
+    +underline-dark
+    a
+      :color= !dark
+  li:hover
+    +underline
+    a
+      :color= !dark
+  li:active
+    +underline-dark
+    
+#wrapper
+  :margin 0 auto
+  :width= !width
+  :text-align left
+
+#container-top
+  +background-sprites
+  :height 12px
+  :background-position 0 0
+    
+#container-bottom
+  +background-sprites
+  :height 21px
+  :background-position 0 -100px
+
+#container
+  +clearfix
+  :padding-bottom 20px
+  :background
+    :image url(/theme/images/v2.png)
+    :position 0 0 repeat-y
+
+#primary
+  :padding 0 20px 20px 20px
+  ul
+    :margin 15px 0
+    :padding 0
+    :list-style none
+    li
+      :padding 8px 5px 8px 0
+      :text-indent 10px
+      :border-bottom= 1px "solid" !lighter_lighter_grey
+      :color= !dark
+      &:first-child
+        :border-top= 1px "solid" !lighter_lighter_grey
+    li input[type=text]
+      :width 83%
+      
+  ul.striped li
+    +striped
+    &:hover
+      +highlite
+
+// --- Specifics
+
+table.users,
+table.permissions
+  tr td
+    &:nth-child(2)
+      :width 100px
+      :color= !dark
+
+table.items
+  tr
+    td
+      &:nth-child(2)
+        :width 80px
+        :color= !dark
+    td.price
+      :text-align left
+      :color= !dark
+    td.price + td.price
+      :color= !light_grey
+      
+ul a.delete
+  +list-icon
+  :background url(/theme/images/sprites.delete.png) 0 0 no-repeat
+  &:hover
+    :background-position -18px 0
+  
+ul a.add
+  +list-icon
+  :margin-top 5px
+  :background url(/theme/images/sprites.add.png) 0 0 no-repeat
+  &:hover
+    :background-position -18px 0
+    
+select.roles
+  :margin-top 0
+  :display none
+  
+table.permissions
+  th:first-child,
+  td:first-child
+    :padding-left 10px
+    :width 200px
+    :color= !dark
+  td:nth-child(n+2)
+    :padding-left 10px
+  td input[type=checkbox]
+    :margin-top 10px
+
+div.panel
+  :height 32px
+  span
+    :display block
+    :float left
+    :padding 6px 5px 6px 15px
+    :height 100%
+    :background url(/theme/images/sprites.tab.png) 0 0  no-repeat
+    :text-transform lowercase
+  div
+    :float left
+    :padding 3px 13px 0 0
+    :height 100%
+    :background white url(/theme/images/sprites.tab.png) 100% 0 no-repeat
+
+div.operations
+  :float left
+  :margin-bottom 5px
+  :width 100%
+  input, select, label
+    :float left
+    :margin-right 5px
+  label
+    :margin-top 5px
+  &+ table
+    :clear both
+
+#item-factor
+  :width 50px
+  :text-align right
+
+table.jobs
+  td.inactive
+    :color= !light_blue
+  td.active
+    :color= !green
+  td.failure
+    :color= !red

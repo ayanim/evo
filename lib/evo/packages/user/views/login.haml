@@ -1,4 +1,9 @@
 %form(method='post')
+  %label(for='username') Username <em>*</em>:
   %input(type='text' name='username')
+  
+  %label(for='password') Password <em>*</em>:
   %input(type='password' name='password')
-  %input(type='submit' name='op' value='Login')
+  
+  %div.form-buttons
+    %input(type='submit' name='op' value='Login')
