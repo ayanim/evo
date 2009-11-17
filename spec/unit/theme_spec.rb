@@ -16,7 +16,7 @@ describe Evo::Theme do
       Evo::Theme.find(:wahoo).first.should be_a(Evo::Theme)
       Evo::Theme.find(:wahoo).length.should == 1
       Evo::Theme.find('wahoo').length.should == 1
-      Evo::Theme.find(:chrome).length.should == 1
+      Evo::Theme.find(:chrome).length.should == 2
     end
   end
   

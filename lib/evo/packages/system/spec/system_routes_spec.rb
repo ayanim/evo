@@ -24,6 +24,13 @@ describe "system" do
         last_response.should_not be_ok
       end
     end
+    
+    it "should be overridable" do
+      get '/theme/javascripts/chrome.js'
+      last_response.should be_ok
+      last_response.should include('overriden!')
+      last_response.should have_content_type('application/javascript')
+    end
   end
   
   describe "get /:package/*" do
