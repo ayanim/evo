@@ -46,6 +46,11 @@ describe "system" do
       last_response.should_not be_ok
     end
     
+    it "should not allow backing up directories" do
+      get '/foo/../views/bar.html'
+      last_response.should_not be_ok
+    end
+    
     it "should be overridable" do
       get '/system/javascripts/jquery.js'
       last_response.should be_ok
