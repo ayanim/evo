@@ -7,7 +7,7 @@ configure do |app|
   enable :sessions
   enable :methodoverride
   disable :static
-  DataMapper.setup :default, "sqlite3:///#{app.root}/databases/evo.#{app.environment}.db"
+  DataMapper.setup :default, "sqlite3:///#{File.expand_path(app.root)}/databases/evo.#{app.environment}.db"
 end
 
 configure :test do
