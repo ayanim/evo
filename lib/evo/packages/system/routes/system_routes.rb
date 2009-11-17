@@ -1,6 +1,14 @@
 
 before do
+  # Reset region content before our next request.
   reset_regions!
+  
+  # Add system javascripts
+  javascripts.add '/system/javascripts/jquery.js'
+  javascripts.add '/system/javascripts/jquery.rest.js'
+  javascripts.add '/system/javascripts/jquery.table-select.js'
+  javascripts.add '/system/javascripts/jquery.inline-search.js'
+  javascripts.add '/system/javascripts/jquery.floating-headers.js'
 end
 
 ##
