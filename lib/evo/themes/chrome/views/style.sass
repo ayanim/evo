@@ -1,5 +1,5 @@
 
-// --- Variables
+// Evolution - Chrome - Copyright (c) 2009 TJ Holowaychuk
 
 !width = 1008px
 !dark = #141414
@@ -429,18 +429,6 @@ table.permissions
     &:nth-child(2)
       :width 100px
       :color= !dark
-
-table.items
-  tr
-    td
-      &:nth-child(2)
-        :width 80px
-        :color= !dark
-    td.price
-      :text-align left
-      :color= !dark
-    td.price + td.price
-      :color= !light_grey
       
 ul a.delete
   +list-icon
@@ -484,27 +472,3 @@ div.panel
     :padding 3px 13px 0 0
     :height 100%
     :background white url(/theme/images/sprites.tab.png) 100% 0 no-repeat
-
-div.operations
-  :float left
-  :margin-bottom 5px
-  :width 100%
-  input, select, label
-    :float left
-    :margin-right 5px
-  label
-    :margin-top 5px
-  &+ table
-    :clear both
-
-#item-factor
-  :width 50px
-  :text-align right
-
-table.jobs
-  td.inactive
-    :color= !light_blue
-  td.active
-    :color= !green
-  td.failure
-    :color= !red
