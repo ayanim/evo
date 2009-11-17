@@ -1,5 +1,5 @@
 
-$:.unshift '/Users/tjholowaychuk/scripts/gems/__evo__/lib' 
+$:.unshift File.dirname(__FILE__) + '/../../../lib' 
 require 'rubygems'
 require 'evo'
 
