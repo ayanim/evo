@@ -20,14 +20,14 @@ end
 ##
 # Display user login form.
 
-get '/login' do
+get '/login/?' do
   render :login
 end
 
 ##
 # Attempt to authenticate a user.
 
-post '/login' do
+post '/login/?' do
   regenerate_session
   if user = User.authenticate(params[:username], params[:password])
     user.session = Session.create :id => session[:id], :hostname => env['REMOTE_ADDR']
@@ -44,7 +44,7 @@ end
 ##
 # Logout the current user.
 
-get '/logout' do
+get '/logout/?' do
   regenerate_session
   messages.info 'Logout successful'
   redirect '/login'
