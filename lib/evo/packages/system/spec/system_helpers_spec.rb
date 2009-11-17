@@ -203,6 +203,16 @@ describe "system" do
       last_response.body.should include('im erb')
     end
     
+    it "should escape haml buffers by default" do
+      mock_app :package => :foo do
+        get '/' do
+          render :malicious 
+        end
+      end
+      get '/'
+      last_response.body.should_not include("<script>alert('rawr')</script>")
+    end
+    
     it "should render the page layout" do
       with_theme :wahoo do
         mock_app :package => :foo do
