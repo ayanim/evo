@@ -8,6 +8,17 @@ describe "system" do
     end
   end
   
+  describe "get /theme/*" do
+    it "should transfer a file from the current theme when present" do
+      with_theme :wahoo do
+        get '/theme/style.css'
+        last_response.should be_ok
+        last_response.should have_content_type('text/css')
+        last_response.body.should include('im a style')
+      end
+    end
+  end
+  
   describe "get /:package/*" do
     it "should transfer a file when it is present" do
       get '/foo/foo.txt'

@@ -21,3 +21,11 @@ get '/:package/*' do |name, path|
   require_package_path :public, path
   send_file @path
 end
+
+##
+# Transfer a public file from the current theme.
+
+get '/theme/*' do |path|
+  require_theme_path :public, path
+  send_file @path
+end
