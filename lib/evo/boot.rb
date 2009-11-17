@@ -6,7 +6,23 @@ class Evo
   #++
   
   Error = Class.new StandardError
+  SetupError = Class.new Error
   BootError = Class.new Error
+
+  ##
+  # Initialize Evolution:
+  #
+  #  * Setup database
+  #  * Seed database
+  #
+  # === See
+  #
+  #  * Evo.seed
+  #
+  
+  def self.setup!
+    DataMapper.auto_migrate! and seed
+  end
   
   ##
   # Boot Evolution:
@@ -27,6 +43,13 @@ class Evo
   #
   #   Evo.boot! :root => File.dirname(__FILE__) + '/fixtures/app', :environment => :test
   #
+  # === See
+  # 
+  #  * Evo.load_config
+  #  * Evo.load_packages
+  #  * Evo.load_themes
+  #  * Evo.parse_options
+  # 
   # === Raises
   #
   #  * Evo::BootError
@@ -55,7 +78,7 @@ class Evo
   # 
   
   def self.seed
-    seed_roles; seed_roles
+    seed_roles; seed_users
     Permission.create_provided!
   end
   
@@ -79,8 +102,10 @@ class Evo
   # 
   
   def self.seed_users
-    User.create :name => 'admin', :email => 'tj@vision-media.ca', :password => 'password'
-    User.create :name => 'guest', :email => 'guest@example.com', :anonymous => true
+    raise SetupError, ':admin_email required' unless admin_email?
+    raise SetupError, ':admin_password required' unless admin_password?
+    User.create :name => 'admin', :email => admin_email, :password => 'password'
+    User.create :name => 'guest', :email => admin_password, :anonymous => true
   end
   
   ##

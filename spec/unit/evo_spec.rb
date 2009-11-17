@@ -16,6 +16,28 @@ describe Evo do
     end
   end
   
+  describe ".setup!" do
+    before do
+      @original_email = Evo.admin_email
+      @original_password = Evo.admin_password
+    end
+  
+    it "should raise an error when :admin_email is not present" do
+      Evo.set :admin_email, nil
+      lambda { Evo.setup! }.should raise_error(Evo::SetupError, /:admin_email required/)
+    end
+    
+    it "should raise an error when :admin_password is not present" do
+      Evo.set :admin_password, nil
+      lambda { Evo.setup! }.should raise_error(Evo::SetupError, /:admin_password required/)
+    end
+    
+    after do
+      Evo.set :admin_email, @original_email
+      Evo.set :admin_password, @original_password
+    end
+  end
+  
   describe ".boot!" do
     it "should raise an error when :root is not present" do
       lambda { Evo.boot! }.should raise_error(Evo::BootError, 'application :root is required')
