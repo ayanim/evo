@@ -155,24 +155,24 @@ describe "system" do
   
   describe "#render_layout" do
     it "should raise Evo::LayoutMissingError when the layout does not exist" do
-      mock_app :package => :foo do
-        get '/' do
-          render_layout :page
-        end
-      end
-      lambda { get '/' }.should raise_error(Evo::LayoutMissingError, /layout :page does not exist/)
-    end
-    
-    it "should render the layout when present" do
-      with_theme :wahoo do
-        mock_app do
+      with_theme :invalid do
+        mock_app :package => :foo do
           get '/' do
             render_layout :page
           end
         end
+      lambda { get '/' }.should raise_error(Evo::LayoutMissingError, /layout :page does not exist/)
+      end
+    end
+    
+    it "should render the layout when present" do
+      mock_app do
+        get '/' do
+          render_layout :page
+        end
+      end
       get '/'
       last_response.body.should include('<html>')
-      end
     end
     
     it "should allow yield :sym to output a region" do

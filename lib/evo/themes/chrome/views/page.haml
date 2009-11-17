@@ -1,0 +1,15 @@
+!!! strict
+%html
+  %head
+    %title evolution
+    %link(rel='stylesheet' href='/stylesheets/style.css')
+  %body
+    %div#wrapper
+      %div#header
+        %span#logo evolution
+        = yield :header
+      %div#container-top
+      %div#container
+        %div#primary
+          = yield
+      %div#container-bottom
