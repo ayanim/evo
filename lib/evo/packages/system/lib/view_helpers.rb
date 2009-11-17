@@ -109,7 +109,7 @@ class Evo
         end
         path = (options[:package] || package).path_to "views/#{name}.*"
         raise Evo::ViewMissingError, "view #{name.inspect} does not exist" unless path
-        output = Tilt.new(path).render options.delete(:context), options
+        output = Tilt.new(path).render options.delete(:context) || self, options
         if !partial && options.delete(:layout) != false
           content_for :primary, output
           return render_layout(:page, options)
@@ -130,7 +130,7 @@ class Evo
       def render_layout name, options = {}
         path = Evo.theme.path_to "views/#{name}.*"
         raise Evo::LayoutMissingError, "layout #{name.inspect} does not exist" unless path
-        Tilt.new(path).render nil, options do |region, string|
+        Tilt.new(path).render self, options do |region, string|
           region ||= :primary
           content_for(region).sort_by(&:weight).map(&:to_html).join string
         end
