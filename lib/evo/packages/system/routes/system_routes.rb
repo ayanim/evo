@@ -10,12 +10,8 @@ before do
   javascripts.add '/system/javascripts/jquery.inline-search.js'
   javascripts.add '/system/javascripts/jquery.floating-headers.js'
   
-  # Primary navigation
-  @menu = Menu.new :primary
-  @menu.add 'Main', '/'
-  
+  # Provide javascript and messages to layout
   before :rendering_layout do
-    content_for :menu, @menu.to_html(request.path)
     content_for :javascripts, javascripts.to_html
     content_for :messages, messages.to_html
   end
