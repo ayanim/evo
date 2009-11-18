@@ -19,6 +19,14 @@ class Evo
         end
       end
       
+      ##
+      # Load user _id_ and assigned to @user, or halt
+      # with 'User not found' 404.
+      
+      def require_user id
+        not_found 'User not found' unless @user = ::User.get(id)
+      end
+      
     end
   end
 end

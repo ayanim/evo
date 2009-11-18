@@ -28,4 +28,31 @@ describe "user" do
       lambda { require_permission_to 'do anything :)' }.should_not raise_error
     end
   end
+  
+  describe "#require_user" do
+    it "should halt with 404 page not found if the user is not found" do
+      mock_app do
+        get '/' do
+          require_user 99
+        end
+      end
+      get '/'
+      last_response.should_not be_ok
+      last_response.status.should == 404
+      last_response.body.should include('User not found')
+    end
+    
+    it "should assign @user when found" do
+      mock_app do
+        get '/' do
+          require_user 1
+          @user.name
+        end
+      end
+      get '/'
+      last_response.should be_ok
+      last_response.body.should == 'admin'
+    end
+  end
+  
 end
