@@ -11,18 +11,29 @@ program :description, 'This executable is designed to assist existing Evolution
     deployments, initialize new applications, install packages,
     and much more.'
     
-begin
+def require_app
   load 'application.rb'
 rescue LoadError
   say 'Current directory is not an evo application'
 end
 
+command :packages do |c|
+  c.action do |args, options|
+    require_app
+    count = 0
+    Evo::Package.instances.sort_by(&:weight).each do |package|
+      count += 1
+      say "%23s : %s" % [$terminal.color(package.name, :bold), package.path.sub(Evo.core_root, '<core>')]
+    end
+    say "%15s : %d" % ['total', count]
+  end
+end
 
 command :console do |c|
   c.syntax = 'evo console [options]'
   c.description = 'Start interactive evo shell'
   c.action do |args, options|
-    # system 'irb', '-I lib', "-r application.rb", '--simple-prompt'
+    # TODO: finish
   end
 end
 
@@ -30,7 +41,7 @@ command :'db migrate' do |c|
   c.syntax = 'evo db migrate [options]'
   c.description = 'Auto-migrate the database (destroys data)'
   c.action do |args, options|
-    
+    # TODO: finish
   end
 end
 
@@ -38,6 +49,6 @@ command :'db upgrade' do |c|
   c.syntax = 'evo db upgrade [options]'
   c.description = 'Auto-upgrade the database (preserves data)'
   c.action do |args, options|
-    
+    # TODO: finish
   end
 end
