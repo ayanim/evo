@@ -227,7 +227,7 @@ class Evo
   def self.packages
     n = -1
     @packages ||= package_paths.map do |dir|
-      package = Evo::Package.new dir
+      package = Package.new dir
       package.natural_weight = n += 1
       package 
     end.sort_by(&:weight)
@@ -239,7 +239,7 @@ class Evo
   
   def self.load_packages
     @loaded_packages = packages.map do |package|
-      Evo::Package.current = package and package.load
+      Package.current = package and package.load
     end.sort_by(&:natural_weight)
   end
   
