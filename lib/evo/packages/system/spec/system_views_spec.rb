@@ -15,7 +15,7 @@ describe "system views" do
       last_response.body.should have_selector('div.block.foo')
       last_response.body.should have_selector('div .heading h2:contains(System)')
       last_response.body.should have_selector('div .heading p.description:contains(description)')
-      last_response.body.should have_selector('div .block-body:contains(body)')
+      last_response.body.should have_selector('div .body:contains(body)')
     end
   end
 end
