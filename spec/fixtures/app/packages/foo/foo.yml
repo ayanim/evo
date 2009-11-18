@@ -1,5 +1,7 @@
 ---
   weight: 0
+  permissions:
+    - administer foo
   dependencies:
     -
       name: visionmedia-user-agent

@@ -25,6 +25,11 @@ class Evo
     attr_accessor :weight
     
     ##
+    # Array of permissions.
+    
+    attr_accessor :permissions
+    
+    ##
     # Array of dependencies.
     
     attr_accessor :dependencies
@@ -49,6 +54,7 @@ class Evo
     ##
     # Load the package:
     #
+    #  * Load permissions
     #  * Require dependencies
     #  * Loads <package>/lib
     #  * Loads <package>/models
@@ -56,11 +62,23 @@ class Evo
     #
     
     def load
+      load_permissions
       require_dependencies
       load_directory :lib
       load_directory :models
       load_directory :routes
       self
+    end
+    
+    ##
+    # Loads all permissions provided.
+    
+    def load_permissions
+      if permissions
+        permissions.each do |permission|
+          ::Permission.provide permission
+        end
+      end
     end
     
     ##

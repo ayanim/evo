@@ -47,6 +47,12 @@ Spec::Runner.configure do |c|
       @app || Evo
     end
     
+    # Fixture _path_/
+    
+    def fixture path
+      File.dirname(__FILE__) + "/fixtures/#{path}"
+    end
+    
     ##
     # Switch theme to _name_ for the duration of the given _block_.
     
