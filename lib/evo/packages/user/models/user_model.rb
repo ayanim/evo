@@ -51,7 +51,6 @@ class User
   property :created_at,    DateTime, :index => true
   property :updated_at,    DateTime, :index => true
   property :last_login_at, DateTime, :index => true
-  property :anonymous,     Boolean,  :index => true
   property :status,        Enum[:active, :blocked],  :default => :active, :index => true
 
   
@@ -126,21 +125,21 @@ class User
   # Check if the user is authenticated.
   
   def authenticated?
-    not anonymous
+    not anonymous?
   end
   
   ##
   # Check if the user is anonymous.
   
   def anonymous?
-    anonymous
+    id == 2
   end
   
   ##
   # Anonymous user.
   
   def self.anonymous
-    first :anonymous => true
+    get 2
   end
   
   ##

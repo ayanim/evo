@@ -1,37 +1,22 @@
 
 describe User do
-  before(:each) { Evo.seed }
+  before(:each) { Evo.setup! }
   
   describe "#initialize" do
     it "should assign anonymous role" do
-      User.new(:anonymous => true).roles.should include(Role.anonymous)
-      User.new(:anonymous => true).roles.should_not include(Role.authenticated)
+      User.anonymous.should be_anonymous
     end
     
     it "should assign authenticated role" do
-      User.new(:anonymous => false).roles.should include(Role.authenticated)
-      User.new(:anonymous => false).roles.should_not include(Role.anonymous)
-    end
-  end
-    
-  describe "#authenticated?" do
-    it "should return true when the user is not anonymous" do
-      User.new.should be_authenticated
-      User.new(:anonymous => true).should_not be_authenticated
-    end
-  end
-  
-  describe "#anonymous?" do
-    it "should return true when the user is anonymous" do
-      User.new.should_not be_anonymous
-      User.new(:anonymous => true).should be_anonymous
+      User.first.should be_authenticated
     end
   end
   
   describe "#superuser?" do
     it "should return true when the first user" do
-      User.new(:id => 1).should be_superuser
-      User.new(:id => 2).should_not be_superuser
+      User.first.should be_superuser
+      User.anonymous.should_not be_superuser
+      User.new.should_not be_superuser
     end
   end
   

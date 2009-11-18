@@ -71,11 +71,12 @@ class Evo
   ##
   # Seed the database with pre-canned data.
   #
-  # * Creates anonymous Role
-  # * Creates authenticated Role
-  # * Creates admin User
-  # * Create provided permissions
-  # 
+  # === See
+  #
+  #  * Evo.seed_roles
+  #  * Evo.seed_users
+  #  * Evo.seed_permissions
+  #
   
   def self.seed
     seed_roles; seed_users; seed_permissions
@@ -103,8 +104,8 @@ class Evo
   def self.seed_users
     raise SetupError, ':admin_email required' unless admin_email?
     raise SetupError, ':admin_password required' unless admin_password?
-    ::User.create :name => 'admin', :email => admin_email, :password => 'password'
-    ::User.create :name => 'guest', :email => admin_password, :anonymous => true
+    ::User.create :name => 'admin', :email => admin_email, :password => admin_password
+    ::User.create :name => 'guest', :email => 'guest@example.com', :password => 'foobar'
   end
   
   ##
