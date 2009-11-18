@@ -17,6 +17,15 @@ class Evo
         @javascripts ||= JavaScriptQueue.new
       end
       
+      ##
+      # Halt with json response _options_.
+      
+      def json options = {}
+        content_type :json
+        options[:status] ||= 0
+        halt 200, options.to_json
+      end
+      
     end
   end
 end
