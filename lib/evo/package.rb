@@ -7,7 +7,7 @@ class Evo
     #++
     
     Error = Class.new StandardError
-    InvalidPackageError = Class.new Error
+    DependencyError = Class.new ::Gem::LoadError
     
     ##
     # Package name symbol.
@@ -23,6 +23,11 @@ class Evo
     # Package weight.
     
     attr_accessor :weight
+    
+    ##
+    # Array of dependencies.
+    
+    attr_accessor :dependencies
     
     ##
     # Natural load weight.
@@ -44,12 +49,14 @@ class Evo
     ##
     # Load the package:
     #
+    #  * Require dependencies
     #  * Loads <package>/lib
     #  * Loads <package>/models
     #  * Loads <package>/routes
     #
     
     def load
+      require_dependencies
       load_directory :lib
       load_directory :models
       load_directory :routes
@@ -57,12 +64,45 @@ class Evo
     end
     
     ##
+    # Require all #dependencies.
+    #
+    # === Raises
+    #
+    #  * Evo::Package::DependencyError
+    # 
+    
+    def require_dependencies
+      if dependencies
+        dependencies.each do |dependency|
+          begin
+            gem dependency['name'], dependency['version']
+            require dependency['require']
+          rescue ::Gem::LoadError
+            raise DependencyError, 'Could not find dependency %s (%s). %s' % [dependency['name'], dependency['version'], dependency['description']]
+          end
+        end
+      end
+    end
+    
+    ##
     # Load YAML configuration file.
     #
     # === Options
     # 
-    #   :weight    Package weight; lower weights are loaded first, defaults to 0
+    #   :weight        Package weight; lower weights are loaded first, defaults to 0
+    #   :dependencies  List of gem dependencies
     # 
+    # === Examples
+    # 
+    # ---
+    #   weight: 0
+    #   dependencies:
+    #     -
+    #       name: visionmedia-user-agent
+    #       require: user-agent
+    #       version: >= 0.0.1
+    #       description: Required to parse user agent strings
+    #
     
     def load_yaml
       if has_file? "#{name}.yml"

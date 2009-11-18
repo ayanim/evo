@@ -1,2 +1,8 @@
 ---
   weight: 0
+  dependencies:
+    -
+      name: visionmedia-user-agent
+      require: user-agent
+      version: >= 0.0.1
+      description: Required to parse user agent strings

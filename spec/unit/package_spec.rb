@@ -46,6 +46,18 @@ describe Evo::Package do
     end
   end
   
+  describe "#require_dependencies" do
+    it "should require the library" do
+      @package.require_dependencies
+      lambda { require 'user-agent' }.should_not raise_error
+    end
+    
+    it "should raise an error when a dependency is not met" do
+      @package.dependencies[0]['name'] = 'visionmedia-user-agents'
+      lambda { @package.require_dependencies }.should raise_error(Evo::Package::DependencyError, /dependency visionmedia-user-agents \(>= 0.0.1\)\. Required to parse/)
+    end
+  end
+  
   describe ".find" do
     it "should find packages by name" do
       Evo::Package.find(:foo).first.should be_a(Evo::Package)
