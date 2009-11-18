@@ -10,6 +10,13 @@ program :name, 'Evolution Content Management System'
 program :description, 'This executable is designed to assist existing Evolution
     deployments, initialize new applications, install packages,
     and much more.'
+    
+begin
+  load 'application.rb'
+rescue LoadError
+  say 'Current directory is not an evo application'
+end
+
 
 command :console do |c|
   c.syntax = 'evo console [options]'

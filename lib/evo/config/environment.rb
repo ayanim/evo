@@ -5,7 +5,7 @@ configure do |app|
   set :admin_email, nil
   set :admin_password, nil
   set :haml, :escape_html => true
-  enable :run
+  set :run, lambda { File.basename($0) != 'evo' }
   enable :sessions
   enable :methodoverride
   disable :static
