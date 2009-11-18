@@ -1,7 +1,7 @@
 
 describe "system views" do
   describe "_block" do
-    it "should description" do
+    it "should render a block" do
       mock_app :package => :system do
         get '/' do
           partial :block,
