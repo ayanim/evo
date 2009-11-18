@@ -78,8 +78,7 @@ class Evo
   # 
   
   def self.seed
-    seed_roles; seed_users
-    ::Permission.create_provided!
+    seed_roles; seed_users; seed_permissions
   end
   
   ##
@@ -106,6 +105,15 @@ class Evo
     raise SetupError, ':admin_password required' unless admin_password?
     ::User.create :name => 'admin', :email => admin_email, :password => 'password'
     ::User.create :name => 'guest', :email => admin_password, :anonymous => true
+  end
+  
+  def self.seed_permissions
+    Package.instances.each do |package|
+      next unless package.permissions
+      package.permissions.each do |permission|
+        ::Permission.create :name => permission
+      end
+    end
   end
   
   ##

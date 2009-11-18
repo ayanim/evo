@@ -21,6 +21,7 @@ command :'package stats' do |c|
   c.syntax = 'evo package stats [options]'
   c.description = 'Display package statistics'
   c.option '-d', '--dependencies', 'Display package dependencies'
+  c.option '-p', '--permissions', 'Display package permissions'
   c.option '-V', '--verbose', 'Display verbose package stats'
   c.action do |args, options|
     require_app
