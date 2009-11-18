@@ -1,2 +1,16 @@
 ---
   weight: -80
+  permissions:
+    - administer users
+    - create users
+    - view users
+    - edit users
+    - edit own settings
+    - edit own user account
+    - delete own user account
+    - delete users
+    - create roles
+    - delete roles
+    - assign user roles
+    - delete user roles
+    - administer permissions

@@ -1,2 +1,4 @@
 ---
   weight: -80
+  permissions:
+    - administer job queue
