@@ -22,18 +22,23 @@ command :'package stats' do |c|
   c.description = 'Display package statistics'
   c.option '-d', '--dependencies', 'Display package dependencies'
   c.option '-p', '--permissions', 'Display package permissions'
-  c.option '-V', '--verbose', 'Display verbose package stats'
+  c.option '-f', '--files', 'Display package file stats'
   c.action do |args, options|
     require_app
     Evo::Package.instances.sort_by(&:weight).each do |package|
       say "%23s : %s" % [$terminal.color(package.name, :bold), package.path.sub(Evo.core_root, '<core>')]
-      if options.verbose
+      if options.files
         say "%15s : %d" % ['workers', package.files_in_directory(:workers).length]
         say "%15s : %d" % ['models', package.files_in_directory(:models).length]
         say "%15s : %d" % ['specs', package.files_in_directory(:specs).length]
         say "%15s : %d" % ['views', package.files_in_directory(:views).length]
       end
-      if (options.verbose || options.dependencies) && package.dependencies
+      if options.permissions && package.permissions
+        package.permissions.each do |permission|
+          say "                - #{permission}"
+        end
+      end
+      if options.dependencies && package.dependencies
         package.dependencies.each do |dependency|
           say "%15s : %s : %s" % [dependency['name'], dependency['version'], dependency['description']]
         end
