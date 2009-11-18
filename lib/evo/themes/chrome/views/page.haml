@@ -3,8 +3,7 @@
   %head
     %title evolution
     %link(rel='stylesheet' href='/theme/style.css')
-    = yield :javascripts
-  %body
+  %body(class=body_classes)
     %div#wrapper
       %div#header
         %span#logo evolution
@@ -15,3 +14,4 @@
           = yield :messages
           = yield
       %div#container-bottom
+  = yield :javascripts

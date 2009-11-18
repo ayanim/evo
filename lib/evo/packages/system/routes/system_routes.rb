@@ -5,10 +5,15 @@ before do
   
   # Add system javascripts
   javascripts.add '/system/javascripts/jquery.js'
+  javascripts.add '/system/javascripts/jquery.ui.js'
   javascripts.add '/system/javascripts/jquery.rest.js'
+  javascripts.add '/system/javascripts/jquery.goodies.js'
   javascripts.add '/system/javascripts/jquery.table-select.js'
   javascripts.add '/system/javascripts/jquery.inline-search.js'
   javascripts.add '/system/javascripts/jquery.floating-headers.js'
+  javascripts.add '/system/javascripts/evo.js'
+  javascripts.add '/system/javascripts/system.js'
+  javascripts.add 'evo = typeof evo == "undefined" ? {} : evo'
   
   # Provide javascript and messages to layout
   before :rendering_layout do

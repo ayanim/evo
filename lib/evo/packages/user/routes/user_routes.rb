@@ -1,5 +1,11 @@
 
 before do
+  javascripts.add '/user/javascripts/user.js'
+  javascripts.add 'evo.roles = ' + Role.all.to_json
+  javascripts.add 'evo.currentUser = ' + current_user.to_json
+end
+
+before do
   session[:id] ||= token
   sess = Session.first_or_create({ :id => session[:id] }, :hostname => env['REMOTE_ADDR'])
   sess.last_request_at = DateTime.now
