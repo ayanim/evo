@@ -1,0 +1,5 @@
+= form :login do
+  - text :username, :label => 'Username', :required => true
+  - password :password, :label => 'Password', :required => true
+  - buttons do
+    - submit :op, 'Login'
