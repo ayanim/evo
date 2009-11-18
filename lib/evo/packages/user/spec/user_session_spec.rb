@@ -1,5 +1,7 @@
 
 describe Session do
+  before(:each) { Evo.setup! }
+  
   describe ".reap" do
     before :each do
       @new_1 = Session.create :id => '1111111', :hostname => '0.0.0.0', :last_request_at => DateTime.now, :user_id => 1

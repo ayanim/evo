@@ -1,6 +1,6 @@
 
 describe "user" do
-  before(:each) { Evo.seed }
+  before(:each) { Evo.setup! }
   
   def last_response_should_show_a_login_form
     last_response.body.should include("method='post'")

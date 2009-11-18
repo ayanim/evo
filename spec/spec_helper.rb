@@ -10,6 +10,7 @@ require 'rack/test'
 
 Evo.boot! :environment => :test,
           :root => File.dirname(__FILE__) + '/fixtures/app'
+Evo.setup!
 
 # Spec configuration
 
@@ -23,12 +24,6 @@ Spec::Runner.configure do |c|
   # Rack::Test
   
   c.include Rack::Test::Methods
-  
-  # Reset database
-  
-  c.before :each do
-    DataMapper.auto_migrate!
-  end
   
   # Reset app
   

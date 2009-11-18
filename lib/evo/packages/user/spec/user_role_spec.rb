@@ -1,5 +1,7 @@
 
 describe Role do
+  before(:each) { Evo.setup! }
+  
   it "should allow permissions" do
     role = Role.create :name => 'Manager'
     role.permissions.create :name => 'edit users'

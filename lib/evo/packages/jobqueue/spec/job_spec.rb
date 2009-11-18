@@ -1,5 +1,7 @@
 
 describe Job do
+  before(:each) { Evo.setup! }
+  
   describe ".process" do
     before :each do
       @foo = Job.create :type => :mine, :data => ['foo']
