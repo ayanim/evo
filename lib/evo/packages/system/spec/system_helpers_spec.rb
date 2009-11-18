@@ -153,6 +153,25 @@ describe "system" do
     end
   end
   
+  describe "#capture" do
+    it "should capture strings" do
+      results = capture do
+        'test'
+      end
+      results.should == 'test'
+    end
+    
+    it "should capture haml" do
+      mock_app :package => :foo do
+        get '/' do
+          render :capture_haml
+        end
+      end
+      get '/'
+      last_response.body.should have_selector('div > h2:contains(Yay)')
+    end
+  end
+  
   describe "#render_block" do
     it "should provide an api to the :_block partial" do
       mock_app :package => :system do

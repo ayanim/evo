@@ -1,9 +1,10 @@
-%form(method='post')
-  %label(for='username') Username <em>*</em>:
-  %input(type='text' name='username')
-  
-  %label(for='password') Password <em>*</em>:
-  %input(type='password' name='password')
-  
-  %div.form-buttons
-    %input(type='submit' name='op' value='Login')
+= render_block 'User', 'Provide your credentials in the form below to login.' do
+  %form(method='post')
+    %label(for='username') Username <em>*</em>:
+    %input(type='text' name='username')
+    
+    %label(for='password') Password <em>*</em>:
+    %input(type='password' name='password')
+    
+    %div.form-buttons
+      %input(type='submit' name='op' value='Login')

@@ -85,7 +85,11 @@ class Evo
       # Capture _block_ output.
       
       def capture &block
-        yield
+        if respond_to?(:block_is_haml?) && block_is_haml?(block)
+          capture_haml &block
+        else
+          yield
+        end
       end
       
       ##
@@ -98,6 +102,7 @@ class Evo
           :package => Evo::Package.get(:system),
           :title => title,
           :description => description,
+          :classes => '',
           :body => capture(&block)
         }.merge(options))
       end
