@@ -17,15 +17,17 @@ rescue LoadError
   say 'Current directory is not an evo application'
 end
 
-command :packages do |c|
+command :'package stats' do |c|
   c.action do |args, options|
     require_app
-    count = 0
     Evo::Package.instances.sort_by(&:weight).each do |package|
-      count += 1
       say "%23s : %s" % [$terminal.color(package.name, :bold), package.path.sub(Evo.core_root, '<core>')]
+      if package.dependencies
+        package.dependencies.each do |dependency|
+          say "%15s : %s : %s" % [dependency['name'], dependency['version'], dependency['description']]
+        end
+      end
     end
-    say "%15s : %d" % ['total', count]
   end
 end
 
@@ -37,11 +39,21 @@ command :console do |c|
   end
 end
 
+command :setup do |c|
+  c.syntax = 'evo setup [options]'
+  c.description = 'Auto-migrates and seeds database'
+  c.action do |args, options|
+    require_app
+    Evo.setup! and say "Setup complete"
+  end
+end
+
 command :'db migrate' do |c|
   c.syntax = 'evo db migrate [options]'
   c.description = 'Auto-migrate the database (destroys data)'
   c.action do |args, options|
-    # TODO: finish
+    require_app
+    DataMapper.auto_migrate! and say "Migrated database"
   end
 end
 
@@ -49,6 +61,7 @@ command :'db upgrade' do |c|
   c.syntax = 'evo db upgrade [options]'
   c.description = 'Auto-upgrade the database (preserves data)'
   c.action do |args, options|
-    # TODO: finish
+    require_app
+    DataMapper.auto_upgrade! and say "Upgraded database"
   end
 end
