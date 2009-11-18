@@ -38,7 +38,7 @@ post '/login/?' do
   else
     messages.error 'Invalid username / password combination'
   end
-  render :login
+  redirect '/login'
 end
 
 ##

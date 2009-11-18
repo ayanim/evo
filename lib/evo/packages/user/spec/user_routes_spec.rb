@@ -29,6 +29,7 @@ describe "user" do
       describe "given correct credentials" do
         it "should authenticate the user" do
           post '/login', :username => 'admin', :password => 'password'
+          follow_redirect!
           last_response.should be_ok
           last_response_should_show_a_login_form
           get '/login'
@@ -39,6 +40,7 @@ describe "user" do
       describe "given invalid credentials" do
         it "should display error messages" do
           post '/login', :username => 'admin', :password => 'invalid password'
+          follow_redirect!
           last_response.should be_ok
           last_response_should_show_a_login_form
         end
@@ -50,6 +52,7 @@ describe "user" do
         it "should logout the user" do
           User.current = User.first
           post '/login', :username => 'admin', :password => 'invalid password'
+          follow_redirect!
           last_response.should be_ok
           last_response_should_show_a_login_form
           get '/login'
