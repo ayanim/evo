@@ -111,9 +111,7 @@ class Evo
     
     def load_yaml
       if has_file? "#{name}.yml"
-        YAML.load_file(path / "#{name}.yml").each do |key, val|
-          send :"#{key}=", val
-        end
+        YAML.load_file(path / "#{name}.yml").apply_to self
       end
     end
     

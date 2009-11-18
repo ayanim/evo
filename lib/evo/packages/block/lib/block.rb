@@ -19,7 +19,7 @@ class Evo
     
     def initialize contents = nil, options = {}
       @contents, @weight = contents, 0
-      options.each { |k,v| send :"#{k}=", v } if options
-    end
+      options.apply_to self if options
+     end
   end
 end
