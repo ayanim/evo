@@ -33,12 +33,12 @@ command :'package stats' do |c|
         say "%15s : %d" % ['specs', package.files_in_directory(:specs).length]
         say "%15s : %d" % ['views', package.files_in_directory(:views).length]
       end
-      if options.permissions && package.permissions
+      if options.permissions
         package.permissions.each do |permission|
           say "                - #{permission}"
         end
       end
-      if options.dependencies && package.dependencies
+      if options.dependencies
         package.dependencies.each do |dependency|
           say "%15s : %s : %s" % [dependency['name'], dependency['version'], dependency['description']]
         end

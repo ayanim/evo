@@ -47,6 +47,7 @@ class Evo
     
     def initialize path
       @path, @weight = path, 0
+      @dependencies, @permissions, = [], []
       @name = File.basename(path).to_sym
       load_yaml
     end
@@ -77,14 +78,12 @@ class Evo
     # 
     
     def require_dependencies
-      if dependencies
-        dependencies.each do |dependency|
-          begin
-            gem dependency['name'], dependency['version']
-            require dependency['require']
-          rescue ::Gem::LoadError
-            raise DependencyError, 'Could not find dependency %s (%s). %s' % [dependency['name'], dependency['version'], dependency['description']]
-          end
+      dependencies.each do |dependency|
+        begin
+          gem dependency['name'], dependency['version']
+          require dependency['require']
+        rescue ::Gem::LoadError
+          raise DependencyError, 'Could not find dependency %s (%s). %s' % [dependency['name'], dependency['version'], dependency['description']]
         end
       end
     end

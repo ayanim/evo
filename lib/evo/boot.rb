@@ -113,7 +113,6 @@ class Evo
   
   def self.seed_permissions
     Package.instances.each do |package|
-      next unless package.permissions
       package.permissions.each do |permission|
         ::Permission.create :name => permission
       end
