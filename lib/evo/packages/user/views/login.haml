@@ -1,6 +1,6 @@
 = render_block 'User', 'Provide your credentials below to login.' do
-  - form :login do
-    - text :name, :label => 'Username', :required => true
+  = form :login do
+    - text :username, :label => 'Username', :required => true
     - password :password, :label => 'Password', :required => true
     - buttons do
       - submit :op, 'Login'

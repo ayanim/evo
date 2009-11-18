@@ -3,11 +3,11 @@ describe "user" do
   before(:each) { Evo.setup! }
   
   def last_response_should_show_a_login_form
-    last_response.body.should include("method='post'")
-    last_response.body.should include("name='username'")
-    last_response.body.should include("name='password'")
-    last_response.body.should include("name='op'")
-    last_response.body.should include("value='Login'")
+    last_response.body.should include('method="post"')
+    last_response.body.should include('name="username"')
+    last_response.body.should include('name="password"')
+    last_response.body.should include('name="op"')
+    last_response.body.should include('value="Login"')
   end
   
   it "should default the user to anonymous on each request" do
