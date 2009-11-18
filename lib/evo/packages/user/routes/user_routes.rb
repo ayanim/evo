@@ -49,3 +49,13 @@ get '/logout/?' do
   messages.info 'Logout successful'
   redirect '/login'
 end
+
+   
+##
+# List user accounts.
+
+get '/users/?' do
+  require_permission_to 'administer users'
+  @users = User.all(:id.not => 2).page params
+  render :list
+end

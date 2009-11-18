@@ -16,6 +16,35 @@ describe "user" do
     User.current.should == User.anonymous
   end
   
+  describe "get /users" do
+    it "should raise an error unless the user may 'administer users'" do
+      lambda { get '/users' }.should raise_error(/administer users/)
+    end
+    
+    it "should display a table of users" do
+      get '/users'
+      last_response.should be_ok
+      last_response.should have_content_type('text/html')
+      last_response.should have_selector('table.users tr#user-1')
+    end
+    
+    it "should not display the guest user" do
+      get '/users'
+      last_response.should_not have_selector('table.users tr#user-2')
+    end
+    
+    it "should display assignable roles" do
+      get '/users'
+      last_response.should have_selector('ul.roles')
+    end
+
+    it "should not display unassignable roles" do
+      get '/users'
+      last_response.should_not have_selector('ul.roles li:contains(authenticated)')
+      last_response.should_not have_selector('ul.roles li:contains(anonymous)')
+    end
+  end
+  
   describe "get /login" do
     it "should display a login form" do
       get '/login'

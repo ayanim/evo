@@ -1,0 +1,8 @@
+%ul.roles.striped
+  - for role in roles
+    %li{ :id => "role-#{role.id}" } 
+      = role.name.to_s
+      - if current_user.may? 'delete roles'
+        %a.delete{ :href => '#' } Delete
+- if current_user.may? 'create roles'
+  %a.button.right{ :id => 'add-role', :href => '#' } Add

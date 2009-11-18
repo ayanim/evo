@@ -1,0 +1,29 @@
+%table.striped.select.buttons.users
+  %thead
+    %tr
+      %th
+        %input{ :type => 'checkbox' }
+      %th User
+      %th Roles
+      %th
+  %tbody
+    - for user in users
+      %tr{ :id => 'user-' + user.id.to_s }
+        %td
+          %input{ :type => 'checkbox' }
+        %td= user.name.to_s
+        %td= user.roles.to_a.select(&:assignable?).map(&:name).join(', ')
+        %td
+          - if current_user.may? 'edit users'
+            %a{ :href => "/user/#{user.id}/edit", :class => 'button' } Edit
+%div.panel.hidden
+  %span With Selected:
+  %div
+    %select
+      %option{ :value => ''  } - Select -
+      %option{ :value => 'destroy'  } Delete
+      %option{ :value => 'block'   } Block
+      %option{ :value => 'unblock' } Unblock
+- if current_user.may? 'create users'
+  %a.button.right{ :href => '/register' } Add
+= users.pager.to_html '/users'

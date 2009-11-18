@@ -1,0 +1,4 @@
+= render_block 'Users', 'Below is the user administration section, allowing you to add, block, delete, or modify user accounts.', :classes => 'block-2-left' do
+  = partial :list, :users => @users
+= render_block 'Roles', 'Each user may be assigned multiple roles. A user role consists of a set of persmissions, determining what the user may access.', :classes => 'block-2-right' do
+  = partial :roles, :roles => Role.assignable
