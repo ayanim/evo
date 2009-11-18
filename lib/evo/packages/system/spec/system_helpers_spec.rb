@@ -153,6 +153,23 @@ describe "system" do
     end
   end
   
+  describe "#render_block" do
+    it "should provide an api to the :_block partial" do
+      mock_app :package => :system do
+        get '/' do
+          render_block 'System', 'description', :classes => 'foo' do
+            'body'
+          end
+        end
+      end
+      get '/'
+      last_response.body.should have_selector('div.block.foo')
+      last_response.body.should have_selector('div .heading h2:contains(System)')
+      last_response.body.should have_selector('div .heading p.description:contains(description)')
+      last_response.body.should have_selector('div .body:contains(body)')
+    end
+  end
+  
   describe "#render_layout" do
     it "should raise Evo::LayoutMissingError when the layout does not exist" do
       with_theme :invalid do

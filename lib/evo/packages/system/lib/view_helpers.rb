@@ -89,6 +89,20 @@ class Evo
       end
       
       ##
+      # Render block partial with _title_, _description_, and any
+      # additional _options_ passed to the partial. _block_ contents 
+      # is captured as the block :body.
+      
+      def render_block title, description, options = {}, &block
+        partial(:block, {
+          :package => Evo::Package.get(:system),
+          :title => title,
+          :description => description,
+          :body => capture(&block)
+        }.merge(options))
+      end
+      
+      ##
       # Render template _name_ with the given _options_.
       #
       # === Options
