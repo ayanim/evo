@@ -107,6 +107,9 @@ class Evo
     ::User.create :name => 'guest', :email => admin_password, :anonymous => true
   end
   
+  ##
+  # Seed the database with all package permissions.
+  
   def self.seed_permissions
     Package.instances.each do |package|
       next unless package.permissions
