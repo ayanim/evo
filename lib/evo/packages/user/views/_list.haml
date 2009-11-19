@@ -22,8 +22,6 @@
     %select
       %option{ :value => ''  } - Select -
       %option{ :value => 'destroy'  } Delete
-      %option{ :value => 'block'   } Block
-      %option{ :value => 'unblock' } Unblock
 - if current_user.may? 'create users'
   %a.button.right{ :href => '/register' } Add
 = users.pager.to_html '/users'
