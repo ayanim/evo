@@ -18,7 +18,7 @@ class Evo
       
       def body_classes
         returning [] do |classes|
-          segments = path_segments
+          return '' unless segments = path_segments
           begin
             classes << segments.join('-')
           end while segments.pop 
