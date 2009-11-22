@@ -309,7 +309,7 @@ describe "system" do
         end
         get '/'
         last_response.should be_ok
-        last_response.body.should include('overridden!')
+        last_response.body.should include('color: blue')
       end
     end
   end
