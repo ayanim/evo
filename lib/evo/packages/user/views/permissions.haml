@@ -1,0 +1,16 @@
+= render_block 'Permissions', 'Roles and their associated permissions are listed below, controlling what a user may or may not access.' do
+  %form#permissions(method='post')
+    %table.striped.permissions
+      %thead
+        %tr
+          %th Permission
+          - for role in @roles.sort_by(&:id)
+            %th= role.name.to_s 
+      %tbody
+        - for permission in @permissions
+          %tr
+            %td= permission.name
+            - for role in @roles
+              %td= checkbox "permissions[#{role.id}][#{permission.id}]", :checked => role.may?(permission.name), :value => permission.id
+    = buttons do
+      - submit :op, 'Save'
