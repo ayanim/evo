@@ -4,7 +4,7 @@
       %thead
         %tr
           %th
-            %input{ :type => 'checkbox' }
+            %input(type='checkbox')
           %th Id
           %th Type
           %th Status
@@ -16,10 +16,10 @@
         - for job in @jobs
           %tr{ :id => "job-#{job.id}" }
             %td
-              %input{ :type => 'checkbox' }
+              %input(type='checkbox')
             %td= "#{job.id}:#{job.priority}"
             %td= job.type.to_s.capitalize
-            %td{ :class => job.status.to_s }= job.status.to_s.capitalize
+            %td{ :class => "status #{job.status}" }= job.status.to_s.capitalize
             %td= job.created_at.to_time.in_words_since_now + ' ago'
             %td= job.updated_at.to_time.in_words_since_now + ' ago'
             %td= job.message

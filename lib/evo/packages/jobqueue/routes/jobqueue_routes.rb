@@ -1,4 +1,8 @@
 
+before do
+  javascripts.add '/jobqueue/javascripts/jobqueue.js'
+end
+
 ##
 # Displays job queue and worker information.
 #
