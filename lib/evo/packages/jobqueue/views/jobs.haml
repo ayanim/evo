@@ -1,0 +1,34 @@
+= render_block 'Job Queue', "Currently #{@count} jobs are queued." do
+  - unless @jobs.empty?
+    %table.striped.select.jobs
+      %thead
+        %tr
+          %th
+            %input{ :type => 'checkbox' }
+          %th Id
+          %th Type
+          %th Status
+          %th Created
+          %th Last Updated
+          %th Message
+          %th Data
+      %tbody
+        - for job in @jobs
+          %tr{ :id => "job-#{job.id}" }
+            %td
+              %input{ :type => 'checkbox' }
+            %td= "#{job.id}:#{job.priority}"
+            %td= job.type.to_s.capitalize
+            %td{ :class => job.status.to_s }= job.status.to_s.capitalize
+            %td= job.created_at.to_time.in_words_since_now + ' ago'
+            %td= job.updated_at.to_time.in_words_since_now + ' ago'
+            %td= job.message
+            %td= job.data.inspect
+    %div.panel.hidden
+      %span With Selected:
+      %div
+        %select
+          %option{ :value => ''  } - Select -
+          %option{ :value => 'destroy'  } Delete
+          %option{ :value => 'inactive'  } Enqueue
+    = @jobs.pager.to_html '/jobs'
