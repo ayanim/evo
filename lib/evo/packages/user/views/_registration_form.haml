@@ -1,0 +1,8 @@
+= form_for @user do
+  - text :name, :label => 'Username', :required => true
+  - text :email, :label => 'Email', :required => true
+  - text :'user[email_confirmation]', :label => 'Email Confirmation', :required => true
+  - password :'user[password]', :label => 'Password', :required => true, :value => ''
+  - password :'user[password_confirmation]', :label => 'Password Confirmation', :required => true
+  - buttons do
+    - submit :op, 'Register'
