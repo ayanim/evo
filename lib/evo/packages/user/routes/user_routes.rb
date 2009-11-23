@@ -62,6 +62,6 @@ end
 
 get '/users/?' do
   require_permission_to 'administer users'
-  @users = User.all(:id.not => 2).page params
+  @users = User.all(:id.not => 2).page params.merge(:order => [:id.asc])
   render :list
 end
