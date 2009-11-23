@@ -1,0 +1,337 @@
+--- 
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: 
+  - JavaScript
+  length: 25
+  name: Move user js to user package
+  number: 60
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Form API
+  number: 20
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Implement. Global and user level settings
+  labels: []
+
+  length: 25
+  name: Settings API
+  number: 22
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Menu API
+  number: 32
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: 
+  - Testing
+  length: 25
+  name: "Webrat / Cucumber "
+  number: 1
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: for example Evo::Package#has_file? checks only one package directory
+  labels: []
+
+  length: 25
+  name: Differentiate between method names allowing ALL pages, or just the specific package
+  number: 8
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: 
+  - Performance
+  length: 25
+  name: Integrate Moneta for job queue
+  number: 11
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: use UI for setting but disable for :test env
+  labels: 
+  - Performance
+  length: 25
+  name: Integrate Moneta for cache
+  number: 12
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |-
+    
+    Rack::Cache
+  labels: []
+
+  length: 25
+  name: Implement everything possible as middleware
+  number: 13
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Batch API
+  number: 19
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |-
+    Layouts should have a suggestion api such as:
+        views/page.haml
+        views/page.front.haml
+        views/page.users.haml
+        views/page.users.1.haml
+        views/page.users.1.edit.haml
+        views/page.edit.haml
+    
+    etc
+  labels: 
+  - Views
+  length: 25
+  name: Add view suggestions api
+  number: 29
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: 
+  - JavaScript
+  length: 25
+  name: Utilize mojo mustache templates
+  number: 33
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: "\"With selected\" should stay open while checkboxes are selected"
+  number: 34
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Add hook API
+  number: 36
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: for some cases this will be useful, so provide a setting. Implement as middleware
+  labels: []
+
+  length: 25
+  name: Dont authenticate for static files
+  number: 39
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: or when option is set. Check if sinatra is already doing this (thought it was). Do not cache the OUTPUT just cache the compiled template for Haml etc
+  labels: 
+  - Performance
+  - Views
+  length: 25
+  name: Cache templates in production
+  number: 45
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: irb -r application.rb
+  labels: []
+
+  length: 25
+  name: IRB Console
+  number: 46
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Move HookHelpers to extension
+  number: 47
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: to prevent CSRF
+  labels: []
+
+  length: 25
+  name: Authenticity token
+  number: 49
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |
+    Does not seem to be working
+
+  labels: 
+  - Security
+  length: 25
+  name: Fix haml html escaping
+  number: 50
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: "  * Move permission / role / role creation out of boot, use hook\n  * Move providing of permissions out of Evo::Package in core\n\n\
+    This would require loading <package>/lib first so that it can alter the system before loading the yaml. However in this case since core packages need this functionality it may have to remain with core"
+  labels: 
+  - Users
+  length: 25
+  name: Abstract user routines
+  number: 51
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: "Move #capture to Formz"
+  number: 53
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Asking for admin email / password etc
+  labels: []
+
+  length: 25
+  name: Setup page
+  number: 48
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: "Blocks may have:\r\n\
+    \r\n  * Configuration form\r\n  * Save hook / route\r\n  "
+  labels: []
+
+  length: 25
+  name: Block API
+  number: 54
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Refactor using Rext / Formz utils
+  number: 55
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: converted to the package instance ...
+  labels: 
+  - Views
+  length: 25
+  name: "Allow #render :package option to be a sym"
+  number: 56
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Get session testing working and abstract post /login logic
+  labels: []
+
+  length: 25
+  name: "Add #with_user spec helper"
+  number: 58
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: provide this automatically when :provides => :json is present
+  labels: []
+
+  length: 25
+  name: "When sinatra releases #after remove #json"
+  number: 59
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: tipsy ? close proximity inline forms / confirmation
+  labels: 
+  - JavaScript
+  length: 25
+  name: Inline confirmation
+  number: 61
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Specs for providing packages from arbitrary locations with the load path
+  number: 62
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Implement packages as gems
+  number: 63
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Highlight block description keywords like in screenshot
+  number: 64
+  project: evo
+  username: visionmedia
