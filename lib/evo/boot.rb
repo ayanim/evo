@@ -31,6 +31,7 @@ class Evo
   #  * Loads packages
   #  * Loads themes
   #  * Sets the current theme instance derived from Evo.theme
+  #  * Loads current theme
   #  * Runs when #run? is true
   # 
   # === Options
@@ -62,6 +63,7 @@ class Evo
     load_packages
     load_themes
     set :theme, Evo::Theme.get(theme) || raise(BootError, "theme #{theme.inspect} does not exist")
+    theme.load
     if run?
       parse_options
       run self and puts "== Evolution/#{VERSION}"
