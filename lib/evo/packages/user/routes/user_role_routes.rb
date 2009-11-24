@@ -1,4 +1,10 @@
 
+helpers do
+  def require_assignable_role
+    json :message => 'Role is not assignable' unless params[:role_id].to_i > 2
+  end
+end
+
 ##
 # Remove user :id's :role_id.
 #
@@ -13,6 +19,7 @@
 
 delete '/user/*/role', :provides => :json do |id|
   require_permission_to 'delete user roles'
+  require_assignable_role
   if join = RoleUser.first(:user_id => id, :role_id => params[:role_id])
     json :status => 1 if join.destroy
   end
@@ -33,6 +40,7 @@ end
 
 delete '/user/role', :provides => :json do
   require_permission_to 'delete roles'
+  require_assignable_role
   if role = Role.get(params[:role_id])
     if role.destroy
       json :status => 1
@@ -78,6 +86,7 @@ end
 post '/user/*/role/?', :provides => :json do |id|
   require_permission_to 'assign user roles'
   require_user id
+  require_assignable_role
   if @user.roles.push(Role.get(params[:role_id])) && @user.save
     json :status => 1, :message => 'Role added'
   end
