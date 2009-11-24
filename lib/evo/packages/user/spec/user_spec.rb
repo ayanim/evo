@@ -12,6 +12,15 @@ describe User do
     end
   end
   
+  describe "#assigned_roles" do
+    it "should exclude default roles" do
+      User.anonymous.assigned_roles.should == []
+      User.first.assigned_roles.should == []
+      User.first.roles.create :name => 'Foo'
+      User.first.assigned_roles.should include(Role.first(:name => 'Foo'))
+    end
+  end
+  
   describe "#superuser?" do
     it "should return true when the first user" do
       User.first.should be_superuser

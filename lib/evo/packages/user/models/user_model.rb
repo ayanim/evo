@@ -101,6 +101,14 @@ class User
   alias :may? :has_permission?
   
   ##
+  # Return only roles which have been assigned,
+  # excluding anonymous / authenticated roles.
+  
+  def assigned_roles
+    roles.all :id.gt => 2
+  end
+  
+  ##
   # User JSON. Include roles.
   
   def to_json options = {}
