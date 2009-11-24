@@ -1,0 +1,4 @@
+= render_block @user.name, 'Alter the account and press the save button to commit changes.', :classes => 'block-2-left' do
+  = partial :edit_form, :user => @user, :show_status => @show_status, :show_delete => @show_delete
+= render_block 'Roles', 'Roles listed below are currently assigned to this user.', :classes => 'block-2-right' do
+  = partial :roles, :roles => @user.roles

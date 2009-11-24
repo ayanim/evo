@@ -1,0 +1,9 @@
+= form_for user, :method => :put do 
+  - text :name, :label => 'Username', :required => true
+  - text :email, :label => 'Email', :required => true
+  - if show_status
+    - select :status, { :active => 'Active', :blocked => 'Blocked' }, :label => 'Status'
+  - buttons do
+    - submit :op, 'Save'
+    - if show_delete
+      - submit :op, 'Delete', :class => 'delete'
