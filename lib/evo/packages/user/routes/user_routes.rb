@@ -65,3 +65,31 @@ get '/users/?' do
   @users = User.all(:id.not => 2).page params.merge(:order => [:id.asc])
   render :list
 end
+
+##
+# Deletes the given user :id. 
+#
+#  * Regenerates the current user's session if deleting self
+#
+# === Permissions
+#
+#  * 'delete own user account'
+#  * 'delete user'
+#
+# === Provides
+#
+#  * :json
+#
+
+delete '/user/?', :provides => :json do
+  if user = User.get(params[:id])
+    if user == current_user
+      require_permission_to 'delete own user account'
+      regenerate_session
+    else
+      require_permission_to 'delete users'      
+    end
+    json :status => user.destroy
+  end
+  json :message => 'Failed to delete user'
+end
