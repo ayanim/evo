@@ -41,14 +41,9 @@ end
 delete '/user/role', :provides => :json do
   require_permission_to 'delete roles'
   require_assignable_role
-  if role = Role.get(params[:role_id])
-    if role.destroy
-      json :status => 1
-    else
-      json :message => "Failed to delete role #{params[:role_id]}"
-    end
+  unless foo = Role.get(params[:role_id]).destroy
+    json :message => "Failed to delete role #{params[:role_id]}"
   end
-  json :message => "Failed to find delete #{params[:role_id]}"
 end
 
 ##
@@ -87,8 +82,7 @@ post '/user/*/role/?', :provides => :json do |id|
   require_permission_to 'assign user roles'
   require_user id
   require_assignable_role
-  if @user.roles.push(Role.get(params[:role_id])) && @user.save
-    json :status => 1, :message => 'Role added'
+  unless @user.roles.push(Role.get(params[:role_id])) && @user.save
+    json :message => 'Failed to add role'
   end
-  json :message => 'Failed to add role'
 end
