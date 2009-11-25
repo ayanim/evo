@@ -20,8 +20,8 @@
             %td= "#{job.id}:#{job.priority}"
             %td= job.type.to_s.capitalize
             %td{ :class => "status #{job.status}" }= job.status.to_s.capitalize
-            %td= job.created_at.to_time.in_words_since_now + ' ago'
-            %td= job.updated_at.to_time.in_words_since_now + ' ago'
+            %td= job.created_at.in_words_since_now + ' ago'
+            %td= job.updated_at.in_words_since_now + ' ago'
             %td= job.message
             %td= job.data.inspect
     %div.panel.hidden
