@@ -6,6 +6,7 @@
 ## Goals
 
   * True modularity
+  * Role / Permission based access
   * Background workers
   * Unified APIs
   * Rich Interaction
@@ -32,6 +33,16 @@ Packages are located via **Evo.load_paths** which starts looking for package(s)
 and their related files at the *application root*, and then follow on to *evo's root*.
 This simple feature allows for vendorized packages, gem-based packages, overriding of
 core or contrib packages via load path precedence and much more.
+
+## Role / Permission based access
+
+Evolution has two core unassignable roles, "Authenticated", and "Anonymous". Any number
+of roles may be created, and assigned to any number of users. A matrix of permissions
+is then applied to these roles, determining what users may access throughout the system.
+
+Currently permissions are not applied at base levels such as models. We cannot simply assume
+that since a user does not have the "delete users" permission, that the system itself cannot
+delete users during a request, so permissions are generally applied at the routing level.
 
 ## Background Workers
 
