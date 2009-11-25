@@ -16,13 +16,15 @@
 ## Modularity
 
 Evolution employs the concept of modularity via "Packages". A package
-is simply a directory structure which is familiar to Evolution. Each page
+is simply a directory structure which is familiar to Evolution. Each package
 may contain the following:
 
+  * Views
   * Specs
+  * Workers
   * Routes
   * Public Files
-  * Assiting Libraries
+  * Assisting Libraries
 
 Local packages (in your app) have the ability to override core functionality
 without altering core. This same practice may be used with themes as well,
@@ -33,6 +35,9 @@ Packages are located via **Evo.load_paths** which starts looking for package(s)
 and their related files at the *application root*, and then follow on to *evo's root*.
 This simple feature allows for vendorized packages, gem-based packages, overriding of
 core or contrib packages via load path precedence and much more.
+
+Themes are an extension of packages, and take precedence over all other packages, and may
+override public files or views.
 
 ## Role / Permission based access
 
