@@ -13,7 +13,6 @@ before do
   javascripts.add '/system/javascripts/jquery.floating-headers.js'
   javascripts.add '/system/javascripts/evo.js'
   javascripts.add '/system/javascripts/system.js'
-  javascripts.add 'evo = typeof evo == "undefined" ? {} : evo'
   
   # Provide javascript and messages to layout
   before :rendering_layout do
