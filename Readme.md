@@ -61,7 +61,7 @@ A major problem with Rails applications, and others a-like, is simply
 that everyone has their own way of doing things. Although this is necessary
 in some situations, large content management systems such as Drupal have proven
 that when the community comes together on a single unified project the results
-are astonishing.
+are astonishing and extremely powerful.
 
 By everyone working together on these APIs we can assure that each package
 will work flawlessly with core, ideally with no configuration at all (or provided via UI).
