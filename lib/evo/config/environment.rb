@@ -5,7 +5,7 @@ configure do |app|
   set :admin_email, nil
   set :admin_password, nil
   set :haml, :escape_html => true
-  set :run, lambda { File.basename($0) != 'evo' }
+  set :run, lambda { File.basename($0) != 'evo' and not File.basename($0).ends_with?('_worker.rb') }
   enable :sessions
   enable :methodoverride
   disable :static
