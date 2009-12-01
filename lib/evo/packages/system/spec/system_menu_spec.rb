@@ -53,11 +53,13 @@ describe Menu do
     it "should output by :weight asc" do
       menu = Menu.new :navigation
       menu << Menu::Item.new('Login', '/login', :weight => 80)
+      menu << Menu::Item.new('Permissions', '/permissions', :weight => -50)
       menu << Menu::Item.new('Register', '/register')
       markup = menu.to_html
       markup.should have_selector('ul[id=navigation]')
-      markup.should have_selector('ul > li:first-child a[href="/register"]')
-      markup.should have_selector('ul > li:nth-child(2) a[href="/login"]')
+      markup.should have_selector('ul > li:nth-child(1) a[href="/permissions"]')
+      markup.should have_selector('ul > li:nth-child(2) a[href="/register"]')
+      markup.should have_selector('ul > li:nth-child(3) a[href="/login"]')
     end
     
     it "should add .active class when the path matches the given uri" do

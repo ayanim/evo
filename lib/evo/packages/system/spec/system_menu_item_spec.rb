@@ -4,6 +4,28 @@ describe Menu::Item do
     @item = Menu::Item.new 'Login', '/login'  
   end
   
+  describe "#initialize" do
+    it "should default #display to true" do
+      @item.display.should be_true
+    end
+    
+    it "should default #weight to 0" do
+      @item.weight.should == 0
+    end
+    
+    it "should allow :weight to be passed" do
+      Menu::Item.new('Login', '/login', :weight => -50).weight.should == -50
+    end
+    
+    it "should allow :display to be passed" do
+      Menu::Item.new('Login', '/login', :display => false).display.should be_false
+    end
+    
+    it "should allow :when to be passed as :display" do
+      Menu::Item.new('Login', '/login', :when => false).display.should be_false
+    end
+  end
+  
   describe "#display?" do
     describe "when #display is a bool" do
       it "should return the bool" do
