@@ -4,7 +4,7 @@
     - example permission
   dependencies:
     -
-      name: some-example
-      require: example
+      name: json
+      require: json
       version: >= 0.0.1
-      description: Helps do something for our application
+      description: Example dependency
