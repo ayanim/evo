@@ -17,6 +17,19 @@ rescue LoadError
   say 'Current directory is not an evo application'
 end
 
+command :init do |c|
+  c.syntax = 'evo init [options]'
+  c.action do |args, options|
+    dest = args.shift || '.'
+    unless Dir[dest / '*'].empty?
+      abort unless agree "`#{dest}' is not empty, continue? "
+    end
+    FileUtils.mkdir_p dest
+    FileUtils.cp_r File.dirname(__FILE__) / :'..' / :templates / :default / '.', dest
+    say "Evolution initialized at `#{dest}'"
+  end
+end
+
 command :'package stats' do |c|
   c.syntax = 'evo package stats [options]'
   c.description = 'Display package statistics'
