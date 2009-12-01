@@ -140,7 +140,7 @@ class User
   # Check if the user is anonymous.
   
   def anonymous?
-    id == 2
+    name == 'guest'
   end
   
   ##
