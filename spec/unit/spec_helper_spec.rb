@@ -2,6 +2,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe "spec helpers" do
+  before(:each) { Evo.setup! }
+  
   describe "#app" do
     it "should default to Evo" do
       app.should == Evo
