@@ -107,6 +107,10 @@ run:
 or for a specific command:
 
     $ evo help init
+    
+## Running Specs
+
+    $ spec spec
 
 ## License
 
