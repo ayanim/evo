@@ -23,6 +23,14 @@ before do
   sess.save
 end
 
+before do
+  @menu.add Menu::Item.new('Login', '/login', :when => current_user.anonymous?, :weight => 90)
+  @menu.add Menu::Item.new('Logout', '/logout', :when => current_user.authenticated?, :weight => 90)
+  @menu.add Menu::Item.new('Register', '/register', :when => 'create users', :weight => 85)
+  @menu.add Menu::Item.new('Users', '/users', :when => 'administer users')
+  @menu.add Menu::Item.new('Permissions', '/user/permissions', :when => 'administer permissions')
+end
+
 ##
 # Display user login form.
 

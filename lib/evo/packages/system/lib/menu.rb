@@ -39,7 +39,7 @@ class Evo
     # Output unordered list(s) with the current _uri_.
 
     def to_html uri = nil
-      %(<ul id="#{id}">#{ items.map { |item| item.to_html(uri) }.join }</ul>)
+      %(<ul id="#{id}">#{ items.sort_by(&:weight).map { |item| item.to_html(uri) }.join }</ul>)
     end
 
     #--
@@ -67,6 +67,11 @@ class Evo
       # Weither or not to display the item.
 
       attr_accessor :display
+      
+      ##
+      # Item weight.
+      
+      attr_accessor :weight
 
       ##
       # Initialize with an item _name_, and relative
@@ -77,6 +82,7 @@ class Evo
         @display = options.fetch :display, true
         @display = options.fetch :when, @display
         @children = options.fetch :children, []
+        @weight = options.fetch :weight, 0
       end
 
       ##

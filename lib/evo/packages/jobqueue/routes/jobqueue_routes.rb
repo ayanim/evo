@@ -1,6 +1,7 @@
 
 before do
   javascripts.add '/jobqueue/javascripts/jobqueue.js'
+  @menu.add Menu::Item.new('Jobs', '/jobs', :when => 'administer job queue')
 end
 
 ##

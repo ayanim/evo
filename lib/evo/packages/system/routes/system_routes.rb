@@ -14,8 +14,12 @@ before do
   javascripts.add '/system/javascripts/evo.js'
   javascripts.add '/system/javascripts/system.js'
   
-  # Provide javascript and messages to layout
+  # Primary navigation
+  @menu = Menu.new :navigation
+  
+  # Defer rendering of javascript, messages, and menu
   before :rendering_layout do
+    content_for :menu, @menu.to_html(request.path)
     content_for :javascripts, javascripts.to_html
     content_for :messages, messages.to_html
   end
