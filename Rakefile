@@ -26,3 +26,5 @@ Echoe.new 'evo', Evo::VERSION do |p|
   p.runtime_dependencies << 'dm-pager'
   p.development_dependencies << 'webrat'
 end
+
+task :gemspec => [:build_gemspec]
