@@ -111,6 +111,30 @@ or for a specific command:
 ## Running Specs
 
     $ spec spec
+    
+## Running A Development Build
+
+First install the gem
+
+    $ rake build && [sudo] rake install
+    
+Create an application somewhere on your system
+
+    $ evo init [dest]
+
+Edit config/environment.rb to alter administration credentials (or anything else you like).
+Migrate and seed database (one-time mutative operation):
+   
+    $ evo setup
+    
+Run the application:
+
+    $ ruby application.rb && open -a Safari http://localhost:3000/login
+    
+Application usage:
+
+    $ ruby application.rb --help
+      application.rb [-x] [-e env] [-s server] [-p port]
 
 ## License
 

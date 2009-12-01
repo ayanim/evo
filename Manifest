@@ -1,4 +1,3 @@
-Evo.gemspec
 History.md
 Manifest
 Rakefile
@@ -141,7 +140,9 @@ spec/unit/spec_helper_spec.rb
 spec/unit/theme_spec.rb
 templates/default/application.rb
 templates/default/config/environment.rb
+templates/default/databases/evo.development.db
 templates/default/packages/application/application.yml
 templates/default/packages/application/public/javascripts/application.js
-templates/default/packages/application/routes/miner_routes.rb
+templates/default/packages/application/routes/application_routes.rb
 templates/default/packages/application/spec/application_spec.rb
+templates/default/packages/application/views/hello.haml

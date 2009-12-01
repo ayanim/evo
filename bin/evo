@@ -19,6 +19,7 @@ end
 
 command :init do |c|
   c.syntax = 'evo init [options]'
+  c.description = 'Initialize an application'
   c.action do |args, options|
     dest = args.shift || '.'
     unless Dir[dest / '*'].empty?
@@ -26,7 +27,9 @@ command :init do |c|
     end
     FileUtils.mkdir_p dest
     FileUtils.cp_r File.dirname(__FILE__) / :'..' / :templates / :default / '.', dest
-    say "Evolution initialized at `#{dest}'"
+    say "Evolution initialized at `#{dest}', to get started:"
+    say "  - Edit config/environment.rb"
+    say "  - Run `$ evo setup && ruby application.rb`"
   end
 end
 
