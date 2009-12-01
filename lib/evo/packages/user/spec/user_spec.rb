@@ -4,11 +4,17 @@ describe User do
   
   describe "#initialize" do
     it "should assign anonymous role" do
+      User.anonymous.roles.length.should == 1
+      User.anonymous.roles.first.name.should == 'anonymous'
       User.anonymous.should be_anonymous
+      User.anonymous.should_not be_authenticated
     end
     
     it "should assign authenticated role" do
+      User.first.roles.length.should == 1
+      User.first.roles.first.name.should == 'authenticated'
       User.first.should be_authenticated
+      User.first.should_not be_anonymous
     end
   end
   
