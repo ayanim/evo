@@ -1,0 +1,6 @@
+
+// Application - Core
+
+$(function(){
+  
+})

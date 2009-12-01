@@ -1,0 +1,10 @@
+---
+  weight: 0
+  permissions:
+    - example permission
+  dependencies:
+    -
+      name: some-example
+      require: example
+      version: >= 0.0.1
+      description: Helps do something for our application
