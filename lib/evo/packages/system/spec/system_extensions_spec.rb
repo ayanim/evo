@@ -1,9 +1,11 @@
 
 describe "system" do
-  describe "#store" do
+  describe "#data" do
     it "should provide access to evolution's datastore" do
-      store[:foo] = 'bar'
-      store[:foo].should == 'bar'
+      data[:foo] = 'bar'
+      data[:foo].should == 'bar'
+      data.store :bar, 'baz', :expires_in => 5.minutes
+      data[:bar].should == 'baz'
     end
   end
   

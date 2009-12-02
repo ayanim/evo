@@ -13,7 +13,7 @@ class Evo
       ##
       # Access to evo's data store.
       
-      def store
+      def data
         Evo.store
       end
       
