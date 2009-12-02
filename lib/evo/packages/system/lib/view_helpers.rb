@@ -126,8 +126,8 @@ class Evo
           parts[-1] = "_#{parts.last}"
           name = File.join parts
         end
-        path = theme.path_to :views / (options[:package] || package).name / "#{name}.*"
-        path ||= (options[:package] || package).path_to "views/#{name}.*"
+        path = theme.path_to_view((options[:package] || package).name / name)
+        path ||= (options[:package] || package).path_to_view name
         raise Evo::ViewMissingError, "view #{name.inspect} does not exist" unless path
         output = Tilt.new(path).render options.fetch(:context, self), options
         if !partial && options.delete(:layout) != false
