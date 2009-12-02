@@ -31,13 +31,11 @@ class Evo
       #
       
       def cache key, value = nil, options = {}
-        key = :"cache.#{key}"
-        if data.key? key
-          data[key]
-        elsif not value.nil?
-          options[:expires_in] ||= options.delete(:for)
-          data.store key, value, options
-        end
+        data[key = :"cache.#{key}"] || begin
+            return if value.nil?
+            options[:expires_in] ||= options.delete(:for)
+            data.store key, value, options
+          end
       end
       
       ##
