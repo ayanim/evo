@@ -9,6 +9,14 @@ class Evo
       def self.route_added verb, path, proc
         Evo::Package.map[proc.__id__] = Evo::Package.current
       end
+      
+      ##
+      # Access to evo's data store.
+      
+      def store
+        Evo.store
+      end
+      
     end
   end
 end
