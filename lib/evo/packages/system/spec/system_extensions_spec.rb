@@ -9,6 +9,46 @@ describe "system" do
     end
   end
   
+  describe "#cache" do
+    it "should store data when not previously cached" do
+      cache(:page).should be_nil
+      cache(:page, 'contents').should == 'contents'
+      cache(:page).should == 'contents'
+    end
+    
+    it "should accept a block returning contents" do
+      cache(:user).should be_nil
+      cache :user do
+        'contents'
+      end.should == 'contents'
+      cache(:user).should == 'contents'
+    end
+    
+    it "should skip the block when cache exists" do
+      cache :page, 'contents'
+      cache :page do
+        'foo bar'
+      end.should == 'contents'
+      cache(:page).should == 'contents'
+    end
+    
+    it "should delete the cache when a value of nil is passed" do
+      cache(:page, 'contents').should == 'contents'
+      cache(:page, nil).should be_nil
+      cache(:page).should be_nil
+    end
+    
+    it "should accept options defered to #data.store" do
+      data.store.should_receive(:store).with(:key, 'value', :expires_in => 1.day)
+      cache(:key, 'value', :expires_in => 1.day)
+    end
+    
+    it "should accept :for as an alias of :expires_in" do
+      data.store.should_receive(:store).with(:key, 'value', :expires_in => 1.day)
+      cache(:key, 'value', :for => 1.day)
+    end
+  end
+  
   describe "#before" do
     it "should become a callback for the given symbol" do
       called = false
