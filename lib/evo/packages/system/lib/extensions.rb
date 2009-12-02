@@ -18,6 +18,29 @@ class Evo
       end
       
       ##
+      # Cache _value_ with _key_ or supply a _key_
+      # to attempt fetching cached data. nil is returned
+      # when the given _key_ is not found. All cache keys
+      # are prefixed with 'cache.'
+      #
+      # === Examples
+      #    
+      #   cache :template, '...', :for => 2.days 
+      #   cache :template 
+      #   # => '...'
+      #
+      
+      def cache key, value = nil, options = {}
+        key = :"cache.#{key}"
+        if data.key? key
+          data[key]
+        elsif not value.nil?
+          options[:expires_in] ||= options.delete(:for)
+          data.store key, value, options
+        end
+      end
+      
+      ##
       # Hook hash.
       
       def hooks

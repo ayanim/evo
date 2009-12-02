@@ -16,36 +16,16 @@ describe "system" do
       cache(:page).should == 'contents'
     end
     
-    it "should accept a block returning contents" do
-      cache(:user).should be_nil
-      cache :user do
-        'contents'
-      end.should == 'contents'
-      cache(:user).should == 'contents'
-    end
-    
-    it "should skip the block when cache exists" do
-      cache :page, 'contents'
-      cache :page do
-        'foo bar'
-      end.should == 'contents'
+    it "should return previously cached data" do
+      cache(:page, 'contents').should == 'contents'
+      cache(:page, 'foo bar').should == 'contents'
+      cache(:page, 'baz').should == 'contents'
       cache(:page).should == 'contents'
     end
     
-    it "should delete the cache when a value of nil is passed" do
-      cache(:page, 'contents').should == 'contents'
-      cache(:page, nil).should be_nil
-      cache(:page).should be_nil
-    end
-    
-    it "should accept options defered to #data.store" do
-      data.store.should_receive(:store).with(:key, 'value', :expires_in => 1.day)
-      cache(:key, 'value', :expires_in => 1.day)
-    end
-    
-    it "should accept :for as an alias of :expires_in" do
-      data.store.should_receive(:store).with(:key, 'value', :expires_in => 1.day)
-      cache(:key, 'value', :for => 1.day)
+    it "should allow :for as an alias of :expires_in" do
+      data.should_receive(:store).with(:'cache.foo', 'bar', :expires_in => 1.day)
+      cache :foo, 'bar', :for => 1.day
     end
   end
   
