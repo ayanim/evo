@@ -12,6 +12,7 @@ Echoe.new 'evo', Evo::VERSION do |p|
   p.url = "http://github.com/visionmedia/evo"
   p.runtime_dependencies = []
   p.runtime_dependencies << 'haml'
+  p.runtime_dependencies << 'moneta'
   p.runtime_dependencies << 'daemon-spawn'
   p.runtime_dependencies << 'tilt'
   p.runtime_dependencies << 'rext >=0.6.1'

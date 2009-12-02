@@ -23,6 +23,7 @@
 
 require 'yaml'
 require 'tilt'
+require 'moneta'
 require 'sinatra'
 require 'dm-core'
 require 'dm-migrations'
