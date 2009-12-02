@@ -324,17 +324,24 @@ input[type=checkbox]
 // --- Messages
 
 #primary ul.messages
-  :margin-top 0
-  :border 1px "solid"
-  &.info li
+  :margin 5px 0
+  li
+    :border 1px "solid"
+  &.info
     :background-color #BDE5F8
-    :color #00529B
-  &.warning li
-    :background-color #9F6000
-    :color #FEEFB3
-  &.error li
+    li
+      :border-color #7ACDF3
+      :color #00529B
+  &.warning
+    :background-color #FEEFB3
+    li
+      :border-color #FFE16B
+      :color #9F6000 
+  &.error
     :background-color #FFBABA
-    :color #D8000C
+    li
+      :border-color #FF6868
+      :color #D8000C
     
 .error-message
   :display block
