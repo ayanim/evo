@@ -12,6 +12,9 @@
 
 // --- Mixins
 
+=feather
+  :-webkit-text-stroke 1px rgba(255, 255, 255, 0)
+
 =underline
   :background url(/theme/images/h4.png) 0 100% repeat-x
 
@@ -129,7 +132,7 @@
 body
   :margin 0
   :text-align center
-  :font 11px "Lucida Grande"
+  :font 11px "Lucida Grande", "Helvetica Neue", "Arial"
   :line-height 1.5
   :color= !light_grey
   :background
@@ -144,7 +147,9 @@ h1, h2, h3, h4
   :font
     :size 24px
     :weight normal
+    :family "Helvetica Neue"
   :color= !dark
+  +feather
   
 h2
   :font-size 22px
@@ -381,12 +386,15 @@ input[type=checkbox]
   :top 38px
   :left 13px
   :padding-left 18px
-  :font-size 30px
+  :font
+    :size 30px
+    :family "Helvetica Neue"
   :color= !dark
   :background
     :position 0 -95px
     :repeat no-repeat
-    
+  +feather
+  
 #navigation
   +inline-menu
   :position absolute
