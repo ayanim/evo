@@ -62,8 +62,7 @@ class Evo
     load_config
     load_packages
     load_themes
-    set :theme, Evo::Theme.get(theme) || raise(BootError, "theme #{theme.inspect} does not exist")
-    theme.load
+    load_theme
     if run?
       parse_options
       run self and puts "== Evolution/#{VERSION}"
@@ -213,6 +212,15 @@ class Evo
     @loaded_themes = theme_paths.map do |dir|
       Evo::Theme.new dir
     end
+  end
+  
+  ##
+  # Load the current theme.
+  
+  def self.load_theme
+    instances = Evo::Theme.find theme
+    set :theme, instances.last || raise(BootError, "theme #{theme.inspect} does not exist")
+    instances.map(&:load)
   end
   
   ##
