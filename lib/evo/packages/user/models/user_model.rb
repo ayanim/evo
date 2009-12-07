@@ -29,7 +29,6 @@ class User
     super
     roles << Role.authenticated if authenticated?
     roles << Role.anonymous if anonymous?
-    attribute_set :settings, {}
   end
   
   ##
@@ -49,7 +48,7 @@ class User
   property :name,          String,   :length => 2..32, :index => true
   property :password,      String,   :length => 32                 
   property :email,         String,   :length => 6..64, :unique => true
-  property :settings,      Json,     :lazy => false
+  property :settings,      Json,     :lazy => false,   :default => {}
   property :created_at,    DateTime, :index => true
   property :updated_at,    DateTime, :index => true
   property :last_login_at, DateTime, :index => true
@@ -167,9 +166,9 @@ class User
   
   def setting key, value = nil
     if value.nil?
-      settings[key]
+      settings[key.to_s]
     else
-      settings[key] = value
+      settings[key.to_s] = value
     end
   end
   
