@@ -29,6 +29,7 @@ class User
     super
     roles << Role.authenticated if authenticated?
     roles << Role.anonymous if anonymous?
+    attribute_set :settings, {}
   end
   
   ##
@@ -48,6 +49,7 @@ class User
   property :name,          String,   :length => 2..32, :index => true
   property :password,      String,   :length => 32                 
   property :email,         String,   :length => 6..64, :unique => true
+  property :settings,      Object,   :lazy => false
   property :created_at,    DateTime, :index => true
   property :updated_at,    DateTime, :index => true
   property :last_login_at, DateTime, :index => true
@@ -158,6 +160,17 @@ class User
     return unless name_or_email && password
     first :conditions => ['password = ? AND (email = ? OR name = ?)', 
       password.to_md5, name_or_email, name_or_email]
+  end
+  
+  ##
+  # Get or set setting _key_ with _value_.
+  
+  def setting key, value = nil
+    if value.nil?
+      settings[key]
+    else
+      settings[key] = value
+    end
   end
   
 end

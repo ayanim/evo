@@ -4,13 +4,6 @@ class Evo
     module Helpers
 
       ##
-      # Return current user.
-      
-      def current_user
-        ::User.current
-      end
-      
-      ##
       # Require current user to have _perms_.
       
       def require_permission_to *perms
