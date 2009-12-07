@@ -49,7 +49,7 @@ class User
   property :name,          String,   :length => 2..32, :index => true
   property :password,      String,   :length => 32                 
   property :email,         String,   :length => 6..64, :unique => true
-  property :settings,      Object,   :lazy => false
+  property :settings,      Json,     :lazy => false
   property :created_at,    DateTime, :index => true
   property :updated_at,    DateTime, :index => true
   property :last_login_at, DateTime, :index => true

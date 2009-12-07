@@ -18,7 +18,7 @@ class Job
   property :priority,   Integer,  :index => true, :default => 0
   property :created_at, DateTime, :index => true
   property :updated_at, DateTime, :index => true
-  property :data,       Object,   :lazy => false
+  property :data,       Json,     :lazy => false
   
   #--
   # Class methods
