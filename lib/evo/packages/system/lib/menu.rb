@@ -98,8 +98,8 @@ class Evo
       def display?
         case display
         when Proc   ; display.call
-        when String ; ::User.current.may? display
-        when Array  ; ::User.current.may? *display
+        when String ; current_user.may? display
+        when Array  ; current_user.may? *display
         else          display
         end
       end
