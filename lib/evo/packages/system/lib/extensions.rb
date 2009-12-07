@@ -23,6 +23,10 @@ class Evo
       # when the given _key_ is not found. All cache keys
       # are prefixed with 'cache.'
       #
+      # Optionally a _block_ may be passed in order to
+      # create lazily evaluated caches when the key
+      # is not present.
+      #
       # === Examples
       #    
       #   cache :template, '...', :for => 2.days 
@@ -30,11 +34,11 @@ class Evo
       #   # => '...'
       #
       
-      def cache key, value = nil, options = {}
+      def cache key, value = nil, options = {}, &block
         data[key = :"cache.#{key}"] || begin
-            return if value.nil?
+            return if value.nil? and not block
             options[:expires_in] ||= options.delete(:for)
-            data.store key, value, options
+            data.store key, value || yield, options
           end
       end
       

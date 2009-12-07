@@ -23,6 +23,11 @@ describe "system" do
       cache(:page).should == 'contents'
     end
     
+    it "should accept a block for lazy evaluation" do
+      cache(:'/user') { 'lazy' }
+      cache(:'/user').should == 'lazy'
+    end
+    
     it "should allow :for as an alias of :expires_in" do
       data.should_receive(:store).with(:'cache.foo', 'bar', :expires_in => 1.day)
       cache :foo, 'bar', :for => 1.day
