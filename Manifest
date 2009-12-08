@@ -3,6 +3,7 @@ Manifest
 Rakefile
 Readme.md
 bin/evo
+evo.gemspec
 lib/evo.rb
 lib/evo/boot.rb
 lib/evo/config/environment.rb
@@ -19,7 +20,6 @@ lib/evo/packages/jobqueue/spec/job_spec.rb
 lib/evo/packages/jobqueue/views/jobs.haml
 lib/evo/packages/system/lib/extensions.rb
 lib/evo/packages/system/lib/helpers.rb
-lib/evo/packages/system/lib/hook_helpers.rb
 lib/evo/packages/system/lib/javascript_queue.rb
 lib/evo/packages/system/lib/menu.rb
 lib/evo/packages/system/lib/message_queue.rb
@@ -38,6 +38,7 @@ lib/evo/packages/system/public/javascripts/jquery.table-select.js
 lib/evo/packages/system/public/javascripts/jquery.ui.js
 lib/evo/packages/system/public/javascripts/system.js
 lib/evo/packages/system/routes/system_routes.rb
+lib/evo/packages/system/spec/system_extensions_spec.rb
 lib/evo/packages/system/spec/system_helpers_spec.rb
 lib/evo/packages/system/spec/system_javascript_queue.rb
 lib/evo/packages/system/spec/system_menu_item_spec.rb
@@ -47,6 +48,7 @@ lib/evo/packages/system/spec/system_routes_spec.rb
 lib/evo/packages/system/spec/system_views_spec.rb
 lib/evo/packages/system/system.yml
 lib/evo/packages/system/views/_block.haml
+lib/evo/packages/user/lib/extensions.rb
 lib/evo/packages/user/lib/helpers.rb
 lib/evo/packages/user/models/permission_model.rb
 lib/evo/packages/user/models/role_model.rb
@@ -60,6 +62,7 @@ lib/evo/packages/user/routes/user_role_routes.rb
 lib/evo/packages/user/routes/user_routes.rb
 lib/evo/packages/user/spec/spec_helper_spec.rb
 lib/evo/packages/user/spec/spec_helpers.rb
+lib/evo/packages/user/spec/user_extensions_spec.rb
 lib/evo/packages/user/spec/user_helpers_spec.rb
 lib/evo/packages/user/spec/user_role_spec.rb
 lib/evo/packages/user/spec/user_routes_spec.rb
@@ -140,7 +143,6 @@ spec/unit/spec_helper_spec.rb
 spec/unit/theme_spec.rb
 templates/default/application.rb
 templates/default/config/environment.rb
-templates/default/databases/evo.development.db
 templates/default/packages/application/application.yml
 templates/default/packages/application/public/javascripts/application.js
 templates/default/packages/application/routes/application_routes.rb
