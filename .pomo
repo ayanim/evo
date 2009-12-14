@@ -1,12 +1,13 @@
 --- 
 - !ruby/object:Pomo::GithubTask 
   complete: false
-  description: ""
+  description: Not copying over, causing issues for `evo setup` due to './databases' not being present
   labels: 
-  - JavaScript
+  - Bug
+  - Executable
   length: 25
-  name: Move user js to user package
-  number: 60
+  name: Fix template empty directories
+  number: 90
   project: evo
   username: visionmedia
 - !ruby/object:Pomo::GithubTask 
@@ -21,17 +22,7 @@
   username: visionmedia
 - !ruby/object:Pomo::GithubTask 
   complete: false
-  description: Implement. Global and user level settings
-  labels: []
-
-  length: 25
-  name: Settings API
-  number: 22
-  project: evo
-  username: visionmedia
-- !ruby/object:Pomo::GithubTask 
-  complete: false
-  description: ""
+  description: Remove temporary crap that I have currently. Something database driven would be better since we will be adding menu items when users add pages etc. This way they can use a UI to nest pages properly
   labels: []
 
   length: 25
@@ -61,22 +52,12 @@
   username: visionmedia
 - !ruby/object:Pomo::GithubTask 
   complete: false
-  description: ""
+  description: Default to using DM store
   labels: 
   - Performance
   length: 25
   name: Integrate Moneta for job queue
   number: 11
-  project: evo
-  username: visionmedia
-- !ruby/object:Pomo::GithubTask 
-  complete: false
-  description: use UI for setting but disable for :test env
-  labels: 
-  - Performance
-  length: 25
-  name: Integrate Moneta for cache
-  number: 12
   project: evo
   username: visionmedia
 - !ruby/object:Pomo::GithubTask 
@@ -333,5 +314,245 @@
   length: 25
   name: Highlight block description keywords like in screenshot
   number: 64
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: For confirmations
+  labels: 
+  - JavaScript
+  length: 25
+  name: Integrate Swift plugin
+  number: 65
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |
+    Context does not seem to work with latest DM.. check edge. spec
+
+  labels: 
+  - Bug
+  length: 25
+  name: Fix user.save(:register)
+  number: 66
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: register etc
+  labels: 
+  - Form API
+  - Views
+  length: 25
+  name: Display form errors
+  number: 67
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: in various models such as Job
+  labels: 
+  - Security
+  length: 25
+  name: Protect mass assignment
+  number: 68
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: "Then we can go ahead and create helpers like:\r\n\
+    \r\n    javascript 'jobqueue.js'\r\n\
+    \r\n\
+    instead of\r\n\
+    \r\n    javascripts.add '/jobqueue/javascripts/jobqueue.js' "
+  labels: []
+
+  length: 25
+  name: "Make #package available to before / after procs"
+  number: 69
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Currently you have to reference each checked row manually
+  labels: 
+  - JavaScript
+  length: 25
+  name: Better panel utility
+  number: 71
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: When rendering a view, containing partials, those partials no longer have access to the helpers. Fix user edit form etc when fixed
+  labels: 
+  - Views
+  length: 25
+  name: Make sure helpers are always available to views
+  number: 73
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ":class seems to cause some lame haml error"
+  labels: []
+
+  length: 25
+  name: "#render_block :classes -> :class"
+  number: 75
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Complete with panels + selection, searching etc. Buffer inline js
+  labels: []
+
+  length: 25
+  name: Table API
+  number: 77
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Admin theme setting
+  number: 78
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: ""
+  labels: []
+
+  length: 25
+  name: Menu system cache based on user, role(s), etc
+  number: 79
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: "so that this is not needed:\n    before do\n        before :something_happens do\n\n        end\n    end\n\n\
+    we need instance_exec to pass args "
+  labels: []
+
+  length: 25
+  name: before / after hooks should be in context to a route
+  number: 80
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Within the first left-hand side block, not above them
+  labels: 
+  - Themes
+  length: 25
+  name: Display messages in the correct place for chrome theme
+  number: 81
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: element floats passed the bottom of the layout
+  labels: 
+  - Themes
+  length: 25
+  name: Fix floating input when adding a role
+  number: 82
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: We can use ids to keep this cleaner and remove this property
+  labels: 
+  - Users
+  length: 25
+  name: Remove Role.assignable
+  number: 83
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |
+    If a package provides the following route
+        /products/1
+    
+    we should potentially be able to alias these routes via UI for SEO purposes
+        /products/some-product
+
+  labels: []
+
+  length: 25
+  name: Path aliasing
+  number: 84
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: bad compatibility issues, best alternative?
+  labels: []
+
+  length: 25
+  name: Avoid marshall with DM
+  number: 85
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Would be cool in dev env to have a JS css editor so you can preview in realtime and perform IO
+  labels: []
+
+  length: 25
+  name: Inline CSS Editor
+  number: 88
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |-
+    Use a seperate datastore for caches since some
+    key/val stores do not allow removal of specific key ranges
+  labels: []
+
+  length: 25
+  name: Cache clearing api
+  number: 89
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: and arbitrary load paths but check <package>/vendor first
+  labels: []
+
+  length: 25
+  name: Support vendorized gems
+  number: 91
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: |-
+    In the following places:
+        * ~/.evo/commands/*_command.rb
+        * ./commands/*_command.rb
+        * <package>/commands/*_command.rb
+  labels: 
+  - Executable
+  length: 25
+  name: Lookup evo commands
+  number: 92
+  project: evo
+  username: visionmedia
+- !ruby/object:Pomo::GithubTask 
+  complete: false
+  description: Any mutative operation should have this
+  labels: []
+
+  length: 25
+  name: Confirmations for `evo db migrate` and `evo setup`
+  number: 93
   project: evo
   username: visionmedia
