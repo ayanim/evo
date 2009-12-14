@@ -12,6 +12,6 @@ class Permission
   #++
   
   property :id,   Serial
-  property :name, String, :length => 8..64, :nullable => false, :index => true
+  property :name, String, :length => 8..64, :required => true, :index => true
   
 end

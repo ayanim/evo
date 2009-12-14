@@ -12,8 +12,8 @@ class Role
   #++
   
   property :id,         Serial
-  property :name,       String,  :length => 2..32, :nullable => false, :index => true
-  property :assignable, Boolean, :default => true, :nullable => true
+  property :name,       String,  :length => 2..32, :required => true, :index => true
+  property :assignable, Boolean, :default => true
   
   #--
   # Associations

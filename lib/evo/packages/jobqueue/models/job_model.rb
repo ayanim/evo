@@ -12,7 +12,7 @@ class Job
   #++
   
   property :id,         Serial
-  property :type,       String,   :length => 2..64, :nullable => false, :index => true
+  property :type,       String,   :length => 2..64, :required => true, :index => true
   property :message,    String,   :length => 255
   property :status,     Enum[:complete, :failure, :active, :inactive], :default => :inactive, :index => true
   property :priority,   Integer,  :index => true, :default => 0
