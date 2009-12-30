@@ -55,6 +55,7 @@ class Job
         (object || block).call job
       rescue Exception => e
         job.update :status => :failure, :message => e.message
+        raise e
       else
         job.update :status => :complete
       end

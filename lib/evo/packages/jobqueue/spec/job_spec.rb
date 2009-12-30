@@ -40,8 +40,8 @@ describe Job do
     end
     
     it "should mark the job as a failure when an error is raised" do
-      Job.process { raise 'foo' }
-      Job.process { raise 'foo' }
+      lambda { Job.process { raise 'foo' }}.should raise_error('foo')
+      lambda { Job.process { raise 'foo' }}.should raise_error('foo')
       @foo.reload.status.should == :failure
       @bar.reload.status.should == :failure
       @foo.message.should == 'foo'
