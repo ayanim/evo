@@ -109,20 +109,22 @@
 =button-secondary
   :padding 6px 20px
   :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ddd))
-  :color #333
   :text-decoration none
   :cursor pointer
   :text-align center
   :text-shadow 0px 1px 1px #fff
   :line-height 1
   :-webkit-box-shadow 0 1px 2px rgba(0,0,0,0.6)
-  +rounded-more
+  :-moz-box-shadow 0 1px 2px rgba(0,0,0,0.6)
+  :color #333
+  +rounded
   :border "solid" 1px #fff
   &:hover
     :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E2E1E1), to(#fff))
   &:active
     :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c4c4c4), to(#e7e7e7))
     :-webkit-box-shadow 0 0 2px rgba(0,0,0,0.9)
+    :-moz-box-shadow 0 0 2px rgba(0,0,0,0.9)
     
 // --- Tags
 
