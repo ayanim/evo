@@ -1,8 +1,11 @@
 
 before do
   javascripts.add '/user/javascripts/user.js'
-  javascripts.add 'evo.roles = ' + Role.all.to_json
-  javascripts.add 'evo.currentUser = ' + current_user.to_json
+  before :rendering_layout do
+    javascripts.add 'evo.roles = ' + Role.all.to_json
+    javascripts.add 'evo.currentUser = ' + current_user.to_json
+    content_for :javascripts, javascripts.to_html
+  end
 end
 
 before do
