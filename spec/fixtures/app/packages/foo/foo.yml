@@ -4,7 +4,7 @@
     - administer foo
   dependencies:
     -
-      name: visionmedia-user-agent
-      require: user-agent
+      name: rext
+      require: rext/all
       version: >= 0.0.1
-      description: Required to parse user agent strings
+      description: Ruby extensions

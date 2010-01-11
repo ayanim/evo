@@ -85,7 +85,7 @@ class Evo
         rescue ::Gem::LoadError
           begin
             require dependency['require']
-          rescue ::Gem::LoadError => e
+          rescue ::LoadError
             raise DependencyError, 'Could not find dependency %s (%s). %s' % [dependency['name'], dependency['version'], dependency['description']]
           end
         end

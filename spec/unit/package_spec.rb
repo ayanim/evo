@@ -38,13 +38,13 @@ describe Evo::Package do
   
   describe "#require_dependencies" do
     it "should require the library" do
-      @package.require_dependencies
-      lambda { require 'user-agent' }.should_not raise_error
+      lambda { @package.require_dependencies }.should_not raise_error
     end
     
     it "should raise an error when a dependency is not met" do
-      @package.dependencies[0]['name'] = 'visionmedia-user-agents'
-      lambda { @package.require_dependencies }.should raise_error(Evo::Package::DependencyError, /dependency visionmedia-user-agents \(>= 0.0.1\)\. Required to parse/)
+      @package.dependencies[0]['name'] = 'foobar'
+      @package.dependencies[0]['require'] = 'foobar'
+      lambda { @package.require_dependencies }.should raise_error(Evo::Package::DependencyError, /dependency foobar \(>= 0.0.1\)\. Ruby extensions/)
     end
   end
   
