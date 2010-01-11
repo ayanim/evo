@@ -63,10 +63,6 @@ class Evo
     load_packages
     load_themes
     load_theme
-    if run?
-      parse_options
-      run self and puts "== Evolution/#{VERSION}"
-    end
   end
   
   ##
@@ -118,21 +114,6 @@ class Evo
         ::Permission.create :name => permission
       end
     end
-  end
-  
-  ##
-  # Parse options from _args_.
-  
-  def self.parse_options args = ARGV.dup
-    return if args.empty?
-    require 'optparse'
-    OptionParser.new do |op|
-      op.on('-x')        {     set :lock, true }
-      op.on('-e env')    { |v| set :environment, v.to_sym }
-      op.on('-s server') { |v| set :server, v }
-      op.on('-p port')   { |v| set :port, v.to_i }
-      op.on('--help')    { abort "usage: application.rb [-x] [-e env] [-s server] [-p port]" }
-    end.parse! args
   end
   
   ##
