@@ -19,7 +19,7 @@ end
 
 command :init do |c|
   c.syntax = 'evo init [options]'
-  c.description = 'Initialize an application'
+  c.description = 'Initialize an application.'
   c.action do |args, options|
     dest = args.shift || '.'
     unless Dir[dest / '*'].empty?
@@ -35,7 +35,7 @@ end
 
 command :'package stats' do |c|
   c.syntax = 'evo package stats [options]'
-  c.description = 'Display package statistics'
+  c.description = 'Display package statistics.'
   c.option '-d', '--dependencies', 'Display package dependencies'
   c.option '-p', '--permissions', 'Display package permissions'
   c.option '-f', '--files', 'Display package file stats'
@@ -65,7 +65,7 @@ end
 
 command :console do |c|
   c.syntax = 'evo console [options]'
-  c.description = 'Start interactive evo shell'
+  c.description = 'Start interactive evo shell.'
   c.action do |args, options|
     # TODO: finish
   end
@@ -73,7 +73,7 @@ end
 
 command :setup do |c|
   c.syntax = 'evo setup [options]'
-  c.description = 'Auto-migrates and seeds database'
+  c.description = 'Auto-migrates and seeds database.'
   c.action do |args, options|
     require_app
     Evo.setup! and say "Setup complete"
@@ -82,7 +82,7 @@ end
 
 command :'db migrate' do |c|
   c.syntax = 'evo db migrate [options]'
-  c.description = 'Auto-migrate the database (destroys data)'
+  c.description = 'Auto-migrate the database (destroys data).'
   c.action do |args, options|
     require_app
     DataMapper.auto_migrate! and say "Migrated database"
@@ -91,7 +91,7 @@ end
 
 command :'db upgrade' do |c|
   c.syntax = 'evo db upgrade [options]'
-  c.description = 'Auto-upgrade the database (preserves data)'
+  c.description = 'Auto-upgrade the database (preserves data).'
   c.action do |args, options|
     require_app
     DataMapper.auto_upgrade! and say "Upgraded database"
