@@ -16,7 +16,7 @@ Echoe.new 'evo', Evo::VERSION do |p|
   p.runtime_dependencies << 'moneta'
   p.runtime_dependencies << 'daemon-spawn'
   p.runtime_dependencies << 'tilt'
-  p.runtime_dependencies << 'rext >=0.6.1'
+  p.runtime_dependencies << 'rext >=0.7.0'
   p.runtime_dependencies << 'formz >=0.1.0'
   p.runtime_dependencies << 'sinatra >=0.9.4'
   p.runtime_dependencies << 'dm-core >=0.10.2'
